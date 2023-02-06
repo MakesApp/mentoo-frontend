@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 @import "./styles/base.css";
 @import "./styles/colors.css";
 @import "./styles//fonts.css";
 @import "./styles/reset.css";
+=======
+@import "./styles/reset.css";
+@import "./styles/base.css";
+@import "./styles/colors.css";
+@import "./styles/fonts.css";
+>>>>>>> d1670db29abfc9f7cce6b519394d018099d58b34
