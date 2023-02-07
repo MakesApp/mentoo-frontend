@@ -31,11 +31,11 @@ const LogIn = styled.div`
   align-items: center;
 `;
 function HomePage() {
-  console.log(useAuthContext());
+  console.log("useAuthContext: ", useAuthContext());
   const { role, setRole, dummyUser } = useAuthContext();
-  setRole("place");
-  console.log(role);
-  console.log(dummyUser);
+  // setRole("place");
+  console.log("role: ", role);
+  console.log("dummyUser: ", dummyUser);
 
   // // State for the role selection - volenteer or place
   // const [role, setRole] = useState("");
@@ -68,8 +68,17 @@ function HomePage() {
       {/* THIS IS CURRENTLY DISPLAYING BOTH WELCOME AND LOGIN FOR DEV PURPUSES... THIS WILL BE HANDLED LATER*/}
       <LogIn>
         <p>התחברות לחשבון המנטו שלך</p>
-        <input type="text" placeholder="שם משתמש" />
-        <input type="password" placeholder="סיסמא" />
+
+        <form>
+          <input type="text" placeholder="שם משתמש" autoComplete="name" />
+          <br />
+          <input
+            type="password"
+            placeholder="סיסמא"
+            autoComplete="current-password"
+          />
+        </form>
+
         <div>
           <button>התחבר</button>
           <button>שכחתי סיסמא</button>
