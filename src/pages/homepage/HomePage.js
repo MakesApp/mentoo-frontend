@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import place from "./images/place.png";
 import volenteer from "./images/voloenteer.png";
-import { useState } from "react";
+// import { useState } from "react";
+import useAuthContext from "./hooks/useAuthContext";
+// Styled Components
 const Header = styled.header`
   display: flex;
   flex-direction: column;
@@ -29,13 +31,18 @@ const LogIn = styled.div`
   align-items: center;
 `;
 function HomePage() {
-  const [role, setRole] = useState("volenteer");
-  const [roleSelected, setRoleSelected] = useState(false);
+  console.log(useAuthContext());
+  const { role, setRole, dummyUser } = useAuthContext();
+  setRole("place");
+  console.log(role);
+  console.log(dummyUser);
 
-  const selectionHandler = (role) => {
-    setRole(role);
-    setRoleSelected(true);
-  };
+  // // State for the role selection - volenteer or place
+  // const [role, setRole] = useState("");
+
+  // const selectionHandler = (role) => {
+  //   setRole(role);
+  // };
   return (
     <div>
       <Header>
@@ -58,17 +65,12 @@ function HomePage() {
           </div>
         </Selection>
       </WelcomeContent>
+      {/* THIS IS CURRENTLY DISPLAYING BOTH WELCOME AND LOGIN FOR DEV PURPUSES... THIS WILL BE HANDLED LATER*/}
       <LogIn>
         <p>התחברות לחשבון המנטו שלך</p>
         <input type="text" placeholder="שם משתמש" />
         <input type="password" placeholder="סיסמא" />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "space-between",
-          }}
-        >
+        <div>
           <button>התחבר</button>
           <button>שכחתי סיסמא</button>
         </div>
