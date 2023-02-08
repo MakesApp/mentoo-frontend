@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import IndexRoutes from "./components/IndexRoutes";
+import VolunteerPage from "./pages/volunteer page/components/VolunteerPage";
+import { Routes, Route, Link, useParams } from "react-router-dom";
+import ConfigRoutes from "./routes/ConfigRoutes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <IndexRoutes /> */}
+      <ConfigRoutes />
+      <nav className="">
+        <li className="">
+          <Link to="/volunteers">volunteers</Link>
+        </li>
+      </nav>
     </div>
   );
 }
