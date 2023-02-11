@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
+import Regions from "./Filter/Regions";
+import PlaceCard from "./PlaceCard";
 
 function VolunteerPage() {
+  const [isClicked, setIsClicked] = useState(false);
+
   const [currentUser, setCurrentUser] = useState({
     id: 1,
     fullName: "Lord Voldermot",
@@ -33,28 +37,20 @@ function VolunteerPage() {
 
   return (
     <div>
+      <Regions />
       <p>Hello {currentUser.fullName}</p>
       <p>your volunteering hours : {currentUser.volunteeringTime}</p>
       <br></br>
       {places.map((place) => {
         return (
-          <div>
-            <Link to={`/places/${place.id}`}>
-              <img src={place.pic} style={{ height: "100px" }}></img>
-            </Link>
-            <button>X</button>
-            <button
-              onClick={() => {
-                navigate("/chat");
-              }}
-            >
-              V
-            </button>
-
-            <p>Name : {place.fullName}</p>
-            <p>Address : {place.address}</p>
-            <p>City : {place.city}</p>
-          </div>
+          <PlaceCard
+            placeId={place.id}
+            key={place.id}
+            placePic={place.pic}
+            placeFullName={place.fullName}
+            placeAddress={place.address}
+            placeCity={place.city}
+          />
         );
       })}
     </div>

@@ -1,0 +1,29 @@
+.list-container {
+  background-color: aqua;
+  /* width: 30vw;
+  height: 20vh; */
+}
+
+ul {
+  font-weight: bold;
+  font-family: sans-serif;
+  /* text-align: center; */
+  list-style: none;
+  text-align: right;
+  padding: 0 10px;
+}
+
+li {
+  margin: 10px 0px;
+
+}
+
+input {
+  text-align: right;
+  margin-left: 10px;
+}
+li ul {
+font-weight: normal;
+}
+
+
