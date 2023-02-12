@@ -25,7 +25,7 @@ const Selection = styled.div`
   cursor: pointer;
 `;
 
-const LogIn = styled.div`
+const UserDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,28 +44,67 @@ const A = styled.a`
   }
 `;
 function HomePage() {
+  // State for the name input field
   const [username, setUsername] = useState("");
+  // State for the password input field
   const [password, setPassword] = useState("");
+  // State for the sign up / log in mode
+  const [signUp, setSignUp] = useState(false);
+  // State for the join mail-list checkbox
+  const [mailSign, setMailSign] = useState(false);
   //
   const { role, setRole, dummyUser, isAuthenticated } = useAuthContext();
   // console.log("useAuthContext: ", useAuthContext());
   // console.log("role: ", role);
   // console.log("dummyUser: ", dummyUser);
-  // Setting the role of volenteer or place
+  //
+  //? Setting the role of volenteer or place
   const handleRoleSelection = (role) => {
     setRole(role);
   };
-
+  //? Two way binding for the name input fields
   const handleNameChange = (e) => {
     console.log("NAME e.target.value: ", e.target.value);
     setUsername(e.target.value);
   };
-
+  //? Two way binding for the password input fields
   const handlePasswordChange = (e) => {
     console.log("PASSWORD e.target.value: ", e.target.value);
     setPassword(e.target.value);
   };
-
+  //? Handle sign in / log in functionality
+  const handleSignMode = () => {
+    console.log("signUp: ", signUp);
+    setSignUp(!signUp);
+  };
+  //? Handle mail sign in checkbox
+  const handleMailSign = () => {
+    setMailSign(!mailSign);
+    console.log("mailSign: ", mailSign);
+  };
+  //? Handle sign in / log in Actions
+  const handleSignIn = () => {
+    // console.log("username: ", username);
+    // console.log("password: ", password);
+    // console.log("signUp: ", signUp);
+    // console.log("mailSign: ", mailSign);
+    // Chaking if the username is a valid email
+    if (!username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
+      console.log("EMAIL username: NOT VALID EMAIL! ", username);
+    } else if (username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
+      console.log("EMAIL username: VALID! ", username);
+    }
+    // Checking if the username (email) and the password matches
+    if (username === dummyUser.email && password === dummyUser.password) {
+      console.log(
+        "username and paswword are matching, authentication is successful"
+      );
+    } else {
+      console.log(
+        "username and paswword are NOT matching, authentication FAILD"
+      );
+    }
+  };
   return (
     <div>
       <Header>
@@ -99,7 +138,7 @@ function HomePage() {
         </WelcomeContent>
       )}
       {!isAuthenticated && role && (
-        <LogIn>
+        <UserDetails>
           <Selection>
             <div
               onClick={() => {
@@ -107,14 +146,14 @@ function HomePage() {
               }}
             >
               <img src={role === "volenteer" ? volenteer : place} alt={role} />
-              <h3>מקום התנדבות</h3>
+              <h3>{role === "volenteer" ? "מתנדב" : "מקום התנדבות"}</h3>
             </div>
           </Selection>
-          <p>התחברות לחשבון המנטו שלך</p>
+          <p>{!signUp ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}</p>
           <form>
             <Input
               type="text"
-              placeholder="שם משתמש"
+              placeholder="כתובת דואר אלקטרוני"
               autoComplete="name"
               value={username}
               onChange={handleNameChange}
@@ -127,16 +166,35 @@ function HomePage() {
               value={password}
               onChange={handlePasswordChange}
             />
+            <br />
+            {signUp && (
+              <>
+                <label htmlFor="addToMailingList">
+                  מאשר קבלת מיילים מהאפליקציה
+                </label>
+                <Input
+                  type="checkbox"
+                  id="addToMailingList"
+                  name="addToMailingList"
+                  value={mailSign}
+                  onChange={handleMailSign}
+                ></Input>
+              </>
+            )}
           </form>
+          <div style={{ opacity: "0" }}>
+            <p>המייל לא קיים במאגר המתנדבים</p>
+            <A href="#">הרשמה למאגר המתנדבים</A>
+          </div>
           <div>
             <button>שכחתי סיסמא</button>
-            <button>התחבר</button>
+            <button onClick={handleSignIn}>התחבר</button>
           </div>
           <div style={{ textAlign: "center" }}>
             <p>אין לך חשבון?</p>
-            <A href="#">פתיחת חשבון מנטו</A>
+            <button onClick={handleSignMode}>פתיחת חשבון מנטו</button>
           </div>
-        </LogIn>
+        </UserDetails>
       )}
     </div>
   );
