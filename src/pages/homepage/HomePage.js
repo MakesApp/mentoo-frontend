@@ -54,7 +54,9 @@ function HomePage() {
   // State for the join mail-list checkbox
   const [mailSign, setMailSign] = useState(false);
   // State for the valid email
-  const [isValidMail, setIsValidMail] = useState(false);
+  const [isValidMail, setIsValidMail] = useState(true);
+  // Show / Hide why we ask for the email
+  const [showWhyMail, setShowWhyMail] = useState(false);
   // Importing the context
   const { role, setRole, dummyUser, isAuthenticated } = useAuthContext();
   // console.log("useAuthContext: ", useAuthContext());
@@ -180,8 +182,12 @@ function HomePage() {
             />
             <br />{" "}
             <div style={isValidMail ? { opacity: "0" } : { opacity: "1" }}>
-              <p>המייל לא קיים במאגר המתנדבים</p>
-              <A href="#">הרשמה למאגר</A>
+              {!isValidMail && (
+                <>
+                  <p>המייל לא קיים במאגר המתנדבים</p>
+                  <A href="#">הרשמה למאגר</A>
+                </>
+              )}
             </div>
             {signUp && (
               <>
@@ -195,6 +201,13 @@ function HomePage() {
                   value={mailSign}
                   onChange={handleMailSign}
                 ></Input>
+                <br />
+                <A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
+                  מדוע אנו מבקשים זאת?
+                </A>
+                {showWhyMail && (
+                  <p>לשלוח הודעות עדכון כאשר ישנה פניה או הודעה חדשה</p>
+                )}
               </>
             )}
           </form>
@@ -204,7 +217,7 @@ function HomePage() {
             <button onClick={handleSignIn}>{signUp ? "הרשמה" : "התחבר"}</button>
           </div>
           <div style={{ textAlign: "center" }}>
-            <p>אין לך חשבון?</p>
+            {!signUp && <p>אין לך חשבון?</p>}
             <button onClick={handleSignMode}>
               {signUp ? "כבר יש לך חשבון מנטו" : "פתיחת חשבון מנטו"}
             </button>
