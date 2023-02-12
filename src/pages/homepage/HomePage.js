@@ -44,6 +44,7 @@ const A = styled.a`
   }
 `;
 function HomePage() {
+  //! ---=== States ===---
   // State for the name input field
   const [username, setUsername] = useState("");
   // State for the password input field
@@ -52,49 +53,60 @@ function HomePage() {
   const [signUp, setSignUp] = useState(false);
   // State for the join mail-list checkbox
   const [mailSign, setMailSign] = useState(false);
-  //
+  // State for the valid email
+  const [isValidMail, setIsValidMail] = useState(false);
+  // Importing the context
   const { role, setRole, dummyUser, isAuthenticated } = useAuthContext();
   // console.log("useAuthContext: ", useAuthContext());
   // console.log("role: ", role);
   // console.log("dummyUser: ", dummyUser);
-  //
-  //? Setting the role of volenteer or place
+  //! ---=== Functions (Updating states) ===---
+  //? Setting the role of volenteer or place (role value is passsed by clicking on the selection div)
   const handleRoleSelection = (role) => {
     setRole(role);
   };
-  //? Two way binding for the name input fields
+  //? Two way binding for the name input field, (updating the state and assigning the value to the input field)
   const handleNameChange = (e) => {
     console.log("NAME e.target.value: ", e.target.value);
     setUsername(e.target.value);
   };
-  //? Two way binding for the password input fields
+  //? Two way binding for the password input field, (updating the state and assigning the value to the input field)
   const handlePasswordChange = (e) => {
     console.log("PASSWORD e.target.value: ", e.target.value);
     setPassword(e.target.value);
   };
-  //? Handle sign in / log in functionality
+  //? Handle sign in / log in functionality (switching between sign up and log in)
   const handleSignMode = () => {
     console.log("signUp: ", signUp);
     setSignUp(!signUp);
   };
-  //? Handle mail sign in checkbox
+  //? Handle mail sign in checkbox (switching between true and false if user wants to join the mail list)
   const handleMailSign = () => {
     setMailSign(!mailSign);
     console.log("mailSign: ", mailSign);
   };
+  //! ---=== Functions (Handleing events) ===---
   //? Handle sign in / log in Actions
   const handleSignIn = () => {
-    // console.log("username: ", username);
-    // console.log("password: ", password);
-    // console.log("signUp: ", signUp);
-    // console.log("mailSign: ", mailSign);
-    // Chaking if the username is a valid email
+    console.log(
+      "username: ",
+      username,
+      "password: ",
+      password,
+      "signUp: ",
+      signUp,
+      "mailSign: ",
+      mailSign
+    );
+    //? Chaking if the username is a valid email
     if (!username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
       console.log("EMAIL username: NOT VALID EMAIL! ", username);
+      setIsValidMail(false);
     } else if (username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
       console.log("EMAIL username: VALID! ", username);
+      setIsValidMail(true);
     }
-    // Checking if the username (email) and the password matches
+    //? Checking if the username (email) and the password matches
     if (username === dummyUser.email && password === dummyUser.password) {
       console.log(
         "username and paswword are matching, authentication is successful"
@@ -166,7 +178,11 @@ function HomePage() {
               value={password}
               onChange={handlePasswordChange}
             />
-            <br />
+            <br />{" "}
+            <div style={isValidMail ? { opacity: "0" } : { opacity: "1" }}>
+              <p>המייל לא קיים במאגר המתנדבים</p>
+              <A href="#">הרשמה למאגר</A>
+            </div>
             {signUp && (
               <>
                 <label htmlFor="addToMailingList">
@@ -182,17 +198,16 @@ function HomePage() {
               </>
             )}
           </form>
-          <div style={{ opacity: "0" }}>
-            <p>המייל לא קיים במאגר המתנדבים</p>
-            <A href="#">הרשמה למאגר המתנדבים</A>
-          </div>
+
           <div>
-            <button>שכחתי סיסמא</button>
-            <button onClick={handleSignIn}>התחבר</button>
+            {!signUp && <button>שכחתי סיסמא</button>}
+            <button onClick={handleSignIn}>{signUp ? "הרשמה" : "התחבר"}</button>
           </div>
           <div style={{ textAlign: "center" }}>
             <p>אין לך חשבון?</p>
-            <button onClick={handleSignMode}>פתיחת חשבון מנטו</button>
+            <button onClick={handleSignMode}>
+              {signUp ? "כבר יש לך חשבון מנטו" : "פתיחת חשבון מנטו"}
+            </button>
           </div>
         </UserDetails>
       )}
