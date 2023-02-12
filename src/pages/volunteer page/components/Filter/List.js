@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from "./Checkbox";
 import { status } from "./constants";
 
 export default function List({ items, compute }) {
+  const [userChoice, setUserChoice] = useState("");
   return (
     <div className="list-container">
       <ul>
@@ -20,6 +21,7 @@ export default function List({ items, compute }) {
                 checked={item.status === status.checked}
                 indeterminate={item.status === status.indeterminate}
                 compute={compute}
+                setUserChoice={setUserChoice}
               />
 
               {childList}
@@ -27,6 +29,7 @@ export default function List({ items, compute }) {
           );
         })}
       </ul>
+      {console.log(userChoice)}
     </div>
   );
 }

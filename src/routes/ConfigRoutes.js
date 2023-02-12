@@ -9,6 +9,8 @@ function configRoutes() {
     <Routes>
       <Route path={constants.VOLUNTEERS} element={<VolunteerPage />} />
       <Route path={constants.PLACE} element={<PlacePage />} />
+      <Route path={constants.CHAT} element={<VolunteerPage />} />
+      {/* <Route path={constants.CHAT} element={<Chat />} /> */}
     </Routes>
   );
 }

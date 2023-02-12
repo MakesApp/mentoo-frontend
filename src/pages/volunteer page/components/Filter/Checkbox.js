@@ -1,15 +1,24 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { status } from "./constants";
+import { data } from "./regionsData";
 
 export default function Checkbox({
   indeterminate,
   checked,
   id,
   compute,
+  setUserChoice,
   ...rest
 }) {
+  const updateRegionsInState = (data, inputReference) => {
+    if (inputReference == "צפון") {
+      data[0].items.forEach((item) => {
+        setUserChoice((prev) => [...prev, item.name]);
+      });
+    }
+  };
   const inputRef = useRef(null);
-  const [userChoice, setUserChoice] = useState("");
+  // const [userChoice, setUserChoice] = useState("");
 
   useLayoutEffect(() => {
     if (inputRef.current) {
@@ -24,14 +33,29 @@ export default function Checkbox({
       ref={inputRef}
       type="checkbox"
       onChange={() => {
-        console.log(id);
-
-        setUserChoice((prev) => {
-          return [prev, inputRef.current];
-        });
         const newStatus = inputRef.current.checked
           ? status.checked
           : status.unchecked;
+
+        if (newStatus === status.checked) {
+          updateRegionsInState(
+            data,
+            inputRef.current.attributes.name.nodeValue
+          );
+          setUserChoice((prev) => [
+            ...prev,
+            inputRef.current.attributes.name.nodeValue,
+          ]);
+        }
+        if (newStatus === status.unchecked) {
+          // setUserChoice((prev) =>
+          //   prev.filter(
+          //     (item) => item != inputRef.current.attributes.name.nodeValue
+          //   )
+          // );
+          setUserChoice("2");
+        }
+
         compute(id, newStatus);
       }}
     />
