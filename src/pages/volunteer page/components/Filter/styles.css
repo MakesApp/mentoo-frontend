@@ -1,12 +1,12 @@
+
 .list-container {
-  background-color: aqua;
   /* width: 30vw;
   height: 20vh; */
 }
 
 ul {
+  font-family: "pauza";
   font-weight: bold;
-  font-family: sans-serif;
   /* text-align: center; */
   list-style: none;
   text-align: right;

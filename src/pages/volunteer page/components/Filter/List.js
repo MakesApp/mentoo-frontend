@@ -3,7 +3,7 @@ import Checkbox from "./Checkbox";
 import { status } from "./constants";
 
 export default function List({ items, compute }) {
-  const [userChoice, setUserChoice] = useState("");
+  const [userChoice, setUserChoice] = useState([]);
   return (
     <div className="list-container">
       <ul>

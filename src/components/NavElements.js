@@ -1,79 +1,60 @@
 import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
-import { useState } from "react";
 
-// function NavElements() {
-//   const [notification, setNotification] = useState(false);
-
-//   const PrimaryNav = styled.nav`
-//     z-index: 14;
-//     height: 90px;
-//     display: flex;
-//     background: #8bc34a;
-//     justify-content: space-between;
-//     padding: 0.18rem calc((100vw - 1000px) / 2);
-//   `;
-
-//   const MenuLink = styled(Link)`
-//     color: #fff;
-//     background: ${(props) => (props.notification ? "red" : "palevioletred")};
-//     display: flex;
-//     cursor: pointer;
-//     align-items: center;
-//     text-decoration: none;
-//     padding: 0 1.2rem;
-//     height: 100%;
-//     &.active {
-//       color: #000000;
-//     }
-//   `;
-//   const Menu = styled.div`
-//     display: flex;
-//     align-items: center;
-//     margin-right: -25px;
-//     @media screen and (max-width: 768px) {
-//       display: none;
-//     }
-//   `;
-// }
 export const PrimaryNav = styled.nav`
-  z-index: 14;
   height: 90px;
   display: flex;
-  background: #e1e1e1;
-  justify-content: center;
-  padding: 0.18rem calc((100vw - 1000px) / 2);
-`;
-export const MenuLink = styled(Link)`
-  color: #fff;
-  border: ${(props) => (props.notification ? "1px solid red" : "none")};
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  text-decoration: none;
-  padding: 0 1.2rem;
-  height: 100%;
-
-  &.before,
- {
-    content: '${(props) => (props.notification ? "•" : "")}'
-    color: #b83b3b;  
-    text-shadow: #b83b3b 0 0 5px;
-    margin: 0 10px;
-  }
-  
-  &.active {
-    color: #000000;
-  }
+  justify-content: space-between;
 `;
 
 export const Menu = styled.div`
   display: flex;
-  align-items: center;
-  margin-right: -25px;
+  justify-content: center;
   @media screen and (max-width: 768px) {
-    display: none;
   }
 `;
+export const MenuLink = styled(Link)`
+  position: relative;
+  color: #313131;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0 2.3rem;
+  height: 100%;
+  font-family: "kopik";
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: -1px;
 
-// export default NavElements;
+  &::after {
+    content: ${(props) => (props.notification == "true" ? `"•"` : "")};
+    position: absolute;
+    color: #de1e1e;
+    top: 15%;
+    right: 35%;
+  }
+
+  &.active {
+    color: #000000;
+  }
+  & span {
+    color: #7030a0;
+  }
+  & span img {
+    width: 50%;
+    border-radius: 50%;
+    margin-bottom: -15%;
+  }
+
+  &.logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .subtitle {
+    color: #313131;
+    font-size: 6px;
+    letter-spacing: normal;
+  }
+`;
