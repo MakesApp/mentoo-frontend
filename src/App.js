@@ -6,12 +6,8 @@ function App() {
   return (
     <div>
       <Nav />
+
       <ConfigRoutes />
-      <nav className="">
-        <li className="">
-          <Link to="/volunteers">volunteers</Link>
-        </li>
-      </nav>
     </div>
   );
 }
