@@ -1,10 +1,16 @@
 import "./App.css";
-import HomePage from "./pages/homepage/HomePage";
+import { Routes, Route, Link, useParams } from "react-router-dom";
+import ConfigRoutes from "./routes/ConfigRoutes";
 
 function App() {
   return (
     <div>
-      <HomePage />
+      <ConfigRoutes />
+      <nav className="">
+        <li className="">
+          <Link to="/volunteers">volunteers</Link>
+        </li>
+      </nav>
     </div>
   );
 }
