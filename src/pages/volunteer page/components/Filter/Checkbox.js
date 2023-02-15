@@ -14,8 +14,9 @@ export default function Checkbox({
   const updateRegionsInState = (data, inputReference) => {
     if (inputReference == "צפון") {
       data[0].items.forEach((item) => {
-        // setUserChoice((prev) => [...prev, item.name]);
-        setCheckboxState((prev) => [...prev, item.name]);
+        setUserChoice((prev) => [...prev, item.name]);
+        // setCheckboxState((prev) => [...prev, item.name]);
+        // setUserChoice(checkboxState);
         console.log(checkboxState);
       });
     }
@@ -40,34 +41,34 @@ export default function Checkbox({
           : status.unchecked;
 
         if (newStatus === status.checked) {
-          // updateRegionsInState(
-          //   data,
-          //   inputRef.current.attributes.name.nodeValue
-          // );
-          setCheckboxState((prev) => [
-            ...prev,
-            inputRef.current.attributes.name.nodeValue,
-          ]);
-          // setUserChoice(checkboxState);
-          console.log(checkboxState);
-          // setUserChoice((prev) => [
+          updateRegionsInState(
+            data,
+            inputRef.current.attributes.name.nodeValue
+          );
+          // setCheckboxState((prev) => [
           //   ...prev,
           //   inputRef.current.attributes.name.nodeValue,
           // ]);
+          console.log(checkboxState);
+          // setUserChoice(checkboxState);
+          setUserChoice((prev) => [
+            ...prev,
+            inputRef.current.attributes.name.nodeValue,
+          ]);
         }
         if (newStatus === status.unchecked) {
-          setCheckboxState((prev) =>
-            prev.filter(
-              (item) => item != inputRef.current.attributes.name.nodeValue
-            )
-          );
-          console.log(checkboxState);
-
-          // setUserChoice((prev) =>
+          // setCheckboxState((prev) =>
           //   prev.filter(
           //     (item) => item != inputRef.current.attributes.name.nodeValue
           //   )
           // );
+          console.log(checkboxState);
+
+          setUserChoice((prev) =>
+            prev.filter(
+              (item) => item != inputRef.current.attributes.name.nodeValue
+            )
+          );
         }
 
         compute(id, newStatus);
