@@ -35,7 +35,7 @@ export const H3Tag = styled.h3`
   min-width: 10rem;
 `;
 
-export const WelcomeContent = styled.div`
+export const SelectRoleContainer = styled.div`
   display: flex;
   align-items: center;
 `;

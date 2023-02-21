@@ -3,6 +3,7 @@ import place from "./images/Place.svg";
 import volenteer from "./images/Volenteer.svg";
 import useAuthContext from "./hooks/useAuthContext";
 import * as S from "./HomePage.Style";
+import * as Header from "./components/Headers";
 import GlobalStyle from "./Global.Style";
 function HomePage() {
   //! ---=== States ===---
@@ -83,23 +84,9 @@ function HomePage() {
   return (
     <div>
       <GlobalStyle />
-      {!role ? (
-        <S.HeaderMain>
-          <S.H1>
-            ment<span style={{ color: "purple" }}>oo</span>
-          </S.H1>
-          <h4>BY APPLESEEDS</h4>
-        </S.HeaderMain>
-      ) : (
-        <S.HeaderPage>
-          <S.H1>
-            ment<span style={{ color: "purple" }}>oo</span>
-          </S.H1>
-          <h4>BY APPLESEEDS</h4>
-        </S.HeaderPage>
-      )}
+      {!role ? <Header.Main /> : <Header.Page />}
       {!isAuthenticated && !role && (
-        <S.WelcomeContent>
+        <S.SelectRoleContainer>
           <S.Selection>
             <div
               onClick={() => {
@@ -120,7 +107,7 @@ function HomePage() {
               <S.H3Tag>מתנדב</S.H3Tag>
             </div>
           </S.Selection>
-        </S.WelcomeContent>
+        </S.SelectRoleContainer>
       )}
       {!isAuthenticated && role && (
         <S.UserDetails>

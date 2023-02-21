@@ -7,9 +7,7 @@ function App() {
     <div>
       <ConfigRoutes />
       <nav className="">
-        <li className="">
-          <Link to="/volunteers">volunteers</Link>
-        </li>
+        <li className=""></li>
       </nav>
     </div>
   );
