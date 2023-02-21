@@ -1,63 +1,24 @@
 import { useState } from "react";
-import styled from "styled-components";
-import place from "./images/place.png";
-import volenteer from "./images/voloenteer.png";
+import place from "./images/Place.svg";
+import volenteer from "./images/Volenteer.svg";
 import useAuthContext from "./hooks/useAuthContext";
-// Styled Components
-const Header = styled.header`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-`;
-
-const WelcomeContent = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Selection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 2rem auto;
-  cursor: pointer;
-`;
-
-const UserDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  margin: 0.5rem auto;
-  padding: 0.5rem;
-`;
-const A = styled.a`
-  text-decoration: none;
-  color: blue;
-  display: block;
-  &:hover {
-    color: CornflowerBlue;
-  }
-`;
+import * as S from "./HomePage.Style";
+import GlobalStyle from "./Global.Style";
 function HomePage() {
   //! ---=== States ===---
-  // State for the name input field
+  //? State for the name input field
   const [username, setUsername] = useState("");
-  // State for the password input field
+  //? State for the password input field
   const [password, setPassword] = useState("");
-  // State for the sign up / log in mode
+  //? State for the sign up / log in mode
   const [signUp, setSignUp] = useState(false);
-  // State for the join mail-list checkbox
+  //? State for the join mail-list checkbox
   const [mailSign, setMailSign] = useState(false);
-  // State for the valid email
+  //? State for the valid email
   const [isValidMail, setIsValidMail] = useState(true);
-  // Show / Hide why we ask for the email
+  //? Show / Hide why we ask for the email
   const [showWhyMail, setShowWhyMail] = useState(false);
-  // Importing the context
+  //? Importing the context
   const { role, setRole, dummyUser, isAuthenticated } = useAuthContext();
   // console.log("useAuthContext: ", useAuthContext());
   // console.log("role: ", role);
@@ -121,59 +82,74 @@ function HomePage() {
   };
   return (
     <div>
-      <Header>
-        <h1>
-          MENT<span style={{ color: "purple" }}>OO</span>
-        </h1>
-        <h4>BY APPLESEEDS</h4>
-      </Header>
+      <GlobalStyle />
+      {!role ? (
+        <S.HeaderMain>
+          <S.H1>
+            ment<span style={{ color: "purple" }}>oo</span>
+          </S.H1>
+          <h4>BY APPLESEEDS</h4>
+        </S.HeaderMain>
+      ) : (
+        <S.HeaderPage>
+          <S.H1>
+            ment<span style={{ color: "purple" }}>oo</span>
+          </S.H1>
+          <h4>BY APPLESEEDS</h4>
+        </S.HeaderPage>
+      )}
       {!isAuthenticated && !role && (
-        <WelcomeContent>
-          <Selection>
+        <S.WelcomeContent>
+          <S.Selection>
             <div
               onClick={() => {
                 handleRoleSelection("place");
               }}
             >
               <img src={place} alt="place" />
-              <h3>מקום התנדבות</h3>
+              <S.H3Tag>מקום התנדבות</S.H3Tag>
             </div>
-          </Selection>
-          <Selection>
+          </S.Selection>
+          <S.Selection>
             <div
               onClick={() => {
                 handleRoleSelection("volenteer");
               }}
             >
               <img src={volenteer} alt="volenteer" />
-              <h3>מתנדב</h3>
+              <S.H3Tag>מתנדב</S.H3Tag>
             </div>
-          </Selection>
-        </WelcomeContent>
+          </S.Selection>
+        </S.WelcomeContent>
       )}
       {!isAuthenticated && role && (
-        <UserDetails>
-          <Selection>
+        <S.UserDetails>
+          <S.Selection>
             <div
               onClick={() => {
                 handleRoleSelection("place");
               }}
             >
-              <img src={role === "volenteer" ? volenteer : place} alt={role} />
-              <h3>{role === "volenteer" ? "מתנדב" : "מקום התנדבות"}</h3>
+              <img
+                src={role === "volenteer" ? volenteer : place}
+                alt={role}
+                style={{ width: "225px" }}
+              />
             </div>
-          </Selection>
-          <p>{!signUp ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}</p>
+          </S.Selection>
           <form>
-            <Input
+            <S.PTag>
+              {!signUp ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}
+            </S.PTag>
+            <S.Input
               type="text"
-              placeholder="כתובת דואר אלקטרוני"
+              placeholder='כתובת דוא"ל'
               autoComplete="name"
               value={username}
               onChange={handleNameChange}
             />
             <br />
-            <Input
+            <S.Input
               type="password"
               placeholder="סיסמא"
               autoComplete="current-password"
@@ -185,7 +161,7 @@ function HomePage() {
               {!isValidMail && (
                 <>
                   <p>המייל לא קיים במאגר המתנדבים</p>
-                  <A href="#">הרשמה למאגר</A>
+                  <S.A href="#">הרשמה למאגר</S.A>
                 </>
               )}
             </div>
@@ -194,17 +170,17 @@ function HomePage() {
                 <label htmlFor="addToMailingList">
                   מאשר קבלת מיילים מהאפליקציה
                 </label>
-                <Input
+                <S.Input
                   type="checkbox"
                   id="addToMailingList"
                   name="addToMailingList"
                   value={mailSign}
                   onChange={handleMailSign}
-                ></Input>
+                ></S.Input>
                 <br />
-                <A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
+                <S.A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
                   מדוע אנו מבקשים זאת?
-                </A>
+                </S.A>
                 {showWhyMail && (
                   <p>לשלוח הודעות עדכון כאשר ישנה פניה או הודעה חדשה</p>
                 )}
@@ -222,7 +198,7 @@ function HomePage() {
               {signUp ? "כבר יש לך חשבון מנטו" : "פתיחת חשבון מנטו"}
             </button>
           </div>
-        </UserDetails>
+        </S.UserDetails>
       )}
     </div>
   );
