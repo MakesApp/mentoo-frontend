@@ -28,7 +28,7 @@ export const MenuLink = styled(Link)`
   letter-spacing: -1px;
 
   &::after {
-    content: ${(props) => (props.notification == "true" ? `"•"` : "")};
+    content: ${(props) => (props.notification === "true" ? `"•"` : "")};
     position: absolute;
     color: #de1e1e;
     top: 15%;

@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
-// import Regions from "./Filter/Regions";
+import React, { useState } from "react";
+import styled from "styled-components";
+import CheckboxesTree from "./Filter/CheckboxesTree";
 import PersonalData from "./PersonalData";
 import PlaceCard from "./PlaceCard";
+import PreferencesBar from "./Preferences bar/PreferencesDaysBar";
 
+const VolunteerData = styled.div`
+  .days-and-regions {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-around;
+  }
+`;
 function VolunteerPage() {
-  const [isClicked, setIsClicked] = useState(false);
-
-  //     id: 1,
-  //     fullName: "Lord Voldermot",
-  //     volunteeringTime: 5,
-  //     project: "Hogwarts",
-  //   });
   const [places, setPlaces] = useState([
     {
       id: 1,
@@ -35,25 +36,29 @@ function VolunteerPage() {
       address: "some address",
     },
   ]);
-  const navigate = useNavigate();
-  const params = useParams();
 
   return (
     <div>
-      <PersonalData />
-      {/* <Regions /> */}
+      <VolunteerData>
+        <PersonalData />
+        <div className="days-and-regions">
+          <PreferencesBar />
+          <PreferencesBar />
+        </div>
+        <CheckboxesTree />
 
-      {places.map((place) => {
-        return (
-          <PlaceCard
-            placeId={place.id}
-            key={place.id}
-            placePic={place.pic}
-            placeFullName={place.fullName}
-            placeDetails={place.details}
-          />
-        );
-      })}
+        {places.map((place) => {
+          return (
+            <PlaceCard
+              placeId={place.id}
+              key={place.id}
+              placePic={place.pic}
+              placeFullName={place.fullName}
+              placeDetails={place.details}
+            />
+          );
+        })}
+      </VolunteerData>
     </div>
   );
 }

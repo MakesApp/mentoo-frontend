@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const DataContainer = styled.div`
