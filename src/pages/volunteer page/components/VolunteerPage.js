@@ -3,7 +3,8 @@ import styled from "styled-components";
 import CheckboxesTree from "./Filter/CheckboxesTree";
 import PersonalData from "./PersonalData";
 import PlaceCard from "./PlaceCard";
-import PreferencesBar from "./Preferences bar/PreferencesDaysBar";
+import PreferencesDaysBar from "./Preferences bar/PreferencesDaysBar";
+import PreferncesRegionsBar from "./Preferences bar/PreferncesRegionsBar";
 
 const VolunteerData = styled.div`
   .days-and-regions {
@@ -42,10 +43,10 @@ function VolunteerPage() {
       <VolunteerData>
         <PersonalData />
         <div className="days-and-regions">
-          <PreferencesBar />
-          <PreferencesBar />
+          <PreferencesDaysBar />
+          <PreferncesRegionsBar />
         </div>
-        <CheckboxesTree />
+        {/* <CheckboxesTree /> */}
 
         {places.map((place) => {
           return (
