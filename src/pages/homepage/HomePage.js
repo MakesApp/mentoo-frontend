@@ -4,7 +4,7 @@ import volenteer from "./images/Volenteer.svg";
 import useAuthContext from "./hooks/useAuthContext";
 import * as S from "./HomePage.Style";
 import * as Header from "./components/Headers";
-import GlobalStyle from "./Global.Style";
+
 function HomePage() {
   //! ---=== States ===---
   //? State for the name input field
@@ -83,7 +83,6 @@ function HomePage() {
   };
   return (
     <div>
-      <GlobalStyle />
       {!role ? <Header.Main /> : <Header.Page />}
       {!isAuthenticated && !role && (
         <S.SelectRoleContainer>
