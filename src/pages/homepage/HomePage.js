@@ -3,20 +3,21 @@ import place from "./images/Place.svg";
 import volenteer from "./images/Volenteer.svg";
 import useAuthContext from "./hooks/useAuthContext";
 import * as S from "./HomePage.Style";
-import * as Header from "./components/Headers";
-
+import AppleseedsHeader from "./components/Headers";
+import SelectRoleContainer from "./components/RoleSelect";
 function HomePage() {
   //! ---=== States ===---
-  //? State for the name input field
-  const [username, setUsername] = useState("");
-  //? State for the password input field
-  const [password, setPassword] = useState("");
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   //? State for the sign up / log in mode
-  const [signUp, setSignUp] = useState(false);
+  const [joinMailList, setJoinMailList] = useState(false);
   //? State for the join mail-list checkbox
   const [mailSign, setMailSign] = useState(false);
   //? State for the valid email
-  const [isValidMail, setIsValidMail] = useState(true);
+  const [isEmailVaild, setIsEmailValid] = useState(true);
   //? Show / Hide why we ask for the email
   const [showWhyMail, setShowWhyMail] = useState(false);
   //? Importing the context
@@ -24,54 +25,53 @@ function HomePage() {
   // console.log("useAuthContext: ", useAuthContext());
   // console.log("role: ", role);
   // console.log("dummyUser: ", dummyUser);
+
   //! ---=== Functions (Updating states) ===---
   //? Setting the role of volenteer or place (role value is passsed by clicking on the selection div)
   const handleRoleSelection = (role) => {
     setRole(role);
   };
-  //? Two way binding for the name input field, (updating the state and assigning the value to the input field)
-  const handleNameChange = (e) => {
-    console.log("NAME e.target.value: ", e.target.value);
-    setUsername(e.target.value);
-  };
-  //? Two way binding for the password input field, (updating the state and assigning the value to the input field)
-  const handlePasswordChange = (e) => {
-    console.log("PASSWORD e.target.value: ", e.target.value);
-    setPassword(e.target.value);
+  const handleOnInputChange = (e) => {
+    console.log(`${e.target.name} e.target.value: `, e.target.value);
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
   //? Handle sign in / log in functionality (switching between sign up and log in)
   const handleSignMode = () => {
-    console.log("signUp: ", signUp);
-    setSignUp(!signUp);
+    console.log("signUp: ", joinMailList);
+    setJoinMailList(!joinMailList);
   };
   //? Handle mail sign in checkbox (switching between true and false if user wants to join the mail list)
   const handleMailSign = () => {
     setMailSign(!mailSign);
     console.log("mailSign: ", mailSign);
   };
+
   //! ---=== Functions (Handleing events) ===---
   //? Handle sign in / log in Actions
   const handleSignIn = () => {
     console.log(
       "username: ",
-      username,
+      formValues.email,
       "password: ",
-      password,
-      "signUp: ",
-      signUp,
+      formValues.password,
+      "joinMailList: ",
+      joinMailList,
       "mailSign: ",
       mailSign
     );
     //? Chaking if the username is a valid email
-    if (!username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
-      console.log("EMAIL username: NOT VALID EMAIL! ", username);
-      setIsValidMail(false);
-    } else if (username.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
-      console.log("EMAIL username: VALID! ", username);
-      setIsValidMail(true);
+    if (!formValues.email.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
+      console.log("EMAIL username: NOT VALID EMAIL! ", formValues.email);
+      setIsEmailValid(false);
+    } else if (formValues.email.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
+      console.log("EMAIL username: VALID! ", formValues.email);
+      setIsEmailValid(true);
     }
     //? Checking if the username (email) and the password matches
-    if (username === dummyUser.email && password === dummyUser.password) {
+    if (
+      formValues.email === dummyUser.email &&
+      formValues.password === dummyUser.password
+    ) {
       console.log(
         "username and paswword are matching, authentication is successful"
       );
@@ -83,30 +83,13 @@ function HomePage() {
   };
   return (
     <div>
-      {!role ? <Header.Main /> : <Header.Page />}
+      <AppleseedsHeader headerType={!role ? "main" : "page"} />{" "}
       {!isAuthenticated && !role && (
-        <S.SelectRoleContainer>
-          <S.Selection>
-            <div
-              onClick={() => {
-                handleRoleSelection("place");
-              }}
-            >
-              <img src={place} alt="place" />
-              <S.H3Tag>מקום התנדבות</S.H3Tag>
-            </div>
-          </S.Selection>
-          <S.Selection>
-            <div
-              onClick={() => {
-                handleRoleSelection("volenteer");
-              }}
-            >
-              <img src={volenteer} alt="volenteer" />
-              <S.H3Tag>מתנדב</S.H3Tag>
-            </div>
-          </S.Selection>
-        </S.SelectRoleContainer>
+        <SelectRoleContainer
+          place={place}
+          volenteer={volenteer}
+          handleRoleSelection={handleRoleSelection}
+        />
       )}
       {!isAuthenticated && role && (
         <S.UserDetails>
@@ -122,67 +105,76 @@ function HomePage() {
                 style={{ width: "225px" }}
               />
             </div>
-          </S.Selection>
-          <form>
-            <S.PTag>
-              {!signUp ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}
-            </S.PTag>
-            <S.Input
-              type="text"
-              placeholder='כתובת דוא"ל'
-              autoComplete="name"
-              value={username}
-              onChange={handleNameChange}
-            />
-            <br />
-            <S.Input
-              type="password"
-              placeholder="סיסמא"
-              autoComplete="current-password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <br />{" "}
-            <div style={isValidMail ? { opacity: "0" } : { opacity: "1" }}>
-              {!isValidMail && (
+            <S.FormContainer>
+              <S.signupInputTitle>
+                {!joinMailList ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}
+              </S.signupInputTitle>
+              <S.Input
+                name="email"
+                type="text"
+                placeholder='כתובת דוא"ל'
+                autoComplete="name"
+                value={formValues.email}
+                onChange={handleOnInputChange}
+              />
+              <br />
+              <S.Input
+                name="password"
+                type="password"
+                placeholder="סיסמא"
+                autoComplete="current-password"
+                value={formValues.password}
+                onChange={handleOnInputChange}
+              />
+              <br />
+              <div style={isEmailVaild ? { opacity: "0" } : { opacity: "1" }}>
+                {!isEmailVaild && (
+                  <>
+                    <p>המייל לא קיים במאגר המתנדבים</p>
+                    <S.A href="#">הרשמה למאגר</S.A>
+                  </>
+                )}
+              </div>
+              {joinMailList && (
                 <>
-                  <p>המייל לא קיים במאגר המתנדבים</p>
-                  <S.A href="#">הרשמה למאגר</S.A>
+                  <S.FlexRow>
+                    <label htmlFor="addToMailingList">
+                      מאשר קבלת מיילים מהאפליקציה
+                    </label>
+                    <S.Checkbox
+                      type="checkbox"
+                      id="addToMailingList"
+                      name="addToMailingList"
+                      value={mailSign}
+                      onChange={handleMailSign}
+                    ></S.Checkbox>
+                  </S.FlexRow>
+
+                  <br />
+                  <S.A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
+                    מדוע אנו מבקשים זאת?
+                  </S.A>
+                  {showWhyMail && (
+                    <p>לשלוח הודעות עדכון כאשר ישנה פניה או הודעה חדשה</p>
+                  )}
                 </>
               )}
-            </div>
-            {signUp && (
-              <>
-                <label htmlFor="addToMailingList">
-                  מאשר קבלת מיילים מהאפליקציה
-                </label>
-                <S.Input
-                  type="checkbox"
-                  id="addToMailingList"
-                  name="addToMailingList"
-                  value={mailSign}
-                  onChange={handleMailSign}
-                ></S.Input>
-                <br />
-                <S.A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
-                  מדוע אנו מבקשים זאת?
-                </S.A>
-                {showWhyMail && (
-                  <p>לשלוח הודעות עדכון כאשר ישנה פניה או הודעה חדשה</p>
-                )}
-              </>
-            )}
-          </form>
+            </S.FormContainer>
+            <S.FlexRow>
+              {!joinMailList && (
+                <S.UnstyledButton>שכחתי סיסמא</S.UnstyledButton>
+              )}
+              <S.StyledButton onClick={handleSignIn}>
+                {joinMailList ? "הרשמה" : "התחבר"}
+              </S.StyledButton>
+            </S.FlexRow>
+          </S.Selection>
 
-          <div>
-            {!signUp && <button>שכחתי סיסמא</button>}
-            <button onClick={handleSignIn}>{signUp ? "הרשמה" : "התחבר"}</button>
-          </div>
           <div style={{ textAlign: "center" }}>
-            {!signUp && <p>אין לך חשבון?</p>}
-            <button onClick={handleSignMode}>
-              {signUp ? "כבר יש לך חשבון מנטו" : "פתיחת חשבון מנטו"}
-            </button>
+            {!joinMailList && <p>אין לך חשבון?</p>}
+            <S.UnstyledButton onClick={handleSignMode}>
+              {joinMailList ? "כבר יש לך חשבון מנטו" : "פתיחת חשבון מנטו"}
+            </S.UnstyledButton>
           </div>
         </S.UserDetails>
       )}

@@ -1,22 +1,16 @@
 import styled from "styled-components/macro";
-
 // Purple color: #7030a0
 
-// Styled Components
-export const HeaderMain = styled.header`
+export const HeadLogo = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10rem auto 12rem;
-`;
-export const HeaderPage = styled.header`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
+
+  margin: ${(props) =>
+    props.headerType === "main" ? "10rem auto 12rem" : "2rem auto"};
 `;
 
-export const H1 = styled.h1`
+export const MainHeaderMentoo = styled.h1`
   font-size: 5rem;
   letter-spacing: -0.425rem;
   font-weight: 700;
@@ -25,7 +19,7 @@ export const H1 = styled.h1`
   padding: 0;
 `;
 
-export const H3Tag = styled.h3`
+export const RoleSelectTag = styled.h3`
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
@@ -34,6 +28,15 @@ export const H3Tag = styled.h3`
   border-radius: 4rem;
   min-width: 10rem;
 `;
+
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  }`;
 
 export const SelectRoleContainer = styled.div`
   display: flex;
@@ -47,6 +50,10 @@ export const Selection = styled.div`
   text-align: center;
   margin: 2rem auto;
   cursor: pointer;
+
+  form {
+    width: 100%;
+  }
 `;
 
 export const UserDetails = styled.div`
@@ -55,12 +62,48 @@ export const UserDetails = styled.div`
   align-items: center;
 `;
 
-export const PTag = styled.p`
+export const signupInputTitle = styled.p`
   font-size: 1rem;
   font-weight: 700;
   text-align: right;
   width: 100%;
   padding-right: 0.5rem;
+`;
+
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+export const UnstyledButton = styled.button`
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  border: 0;
+  background: none;
+  background-color: #aaa;
+  padding: 0.8rem 1.2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+   
+  &:hover, &:focus, &:active {
+    background: none;
+    background-color: inherit;
+    border-radius: 0;
+`;
+
+export const StyledButton = styled.button`
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
 `;
 export const Input = styled.input`
   margin: 0.5rem auto;
@@ -77,6 +120,25 @@ export const Input = styled.input`
   &:focus {
     outline: none;
   }
+`;
+export const Checkbox = styled.input`
+  margin: 0 0.5rem;
+  padding: 1rem 1rem;
+  border: 1px solid #7030a099;
+  outline: 1px solid #7030a0;
+  border-radius: 40px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  &:placeholder-shown {
+    text-align: right;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const CheckboxLabel = styled.label`
+  text-align: right;
 `;
 export const A = styled.a`
   text-decoration: none;
