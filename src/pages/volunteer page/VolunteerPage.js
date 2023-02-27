@@ -1,25 +1,17 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import CheckboxesTree from "./Filter/CheckboxesTree";
-import PersonalData from "./PersonalData";
-import PlaceCard from "./PlaceCard";
-import PreferencesDaysBar from "./Preferences bar/PreferencesDaysBar";
-import PreferncesRegionsBar from "./Preferences bar/PreferncesRegionsBar";
 
-const VolunteerData = styled.div`
-  .days-and-regions {
-    display: flex;
-    align-items: space-between;
-    justify-content: space-around;
-  }
-`;
+import PersonalData from "./components/PersonalData/PersonalData";
+import PlaceCard from "./components/PlaceCard/PlaceCard";
+import PreferencesDaysBar from "./components/Preferences bar/Days/PreferencesDaysBar";
+import PreferncesRegionsBar from "./components/Preferences bar/Regions/PreferncesRegionsBar";
+import * as S from "./VolunteerPage.style";
+
 function VolunteerPage() {
   const [places, setPlaces] = useState([
     {
       id: 1,
       fullName: "מרכז שקר כלשהו",
-      pic:
-        "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg",
+      pic: "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg",
       details: "לא עושים כאן כלום בדוק",
       days: "need to think how to store that",
       city: "Netivot",
@@ -29,8 +21,7 @@ function VolunteerPage() {
     {
       id: 2,
       fullName: "מרכז שקר אחר",
-      pic:
-        "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg",
+      pic: "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg",
       details: "עושים כאן כלום בדוק",
       days: "need to think how to store that",
       city: "Netivot",
@@ -40,13 +31,13 @@ function VolunteerPage() {
 
   return (
     <div>
-      <VolunteerData>
+      <div>
         <PersonalData />
-        <div className="days-and-regions">
+
+        <S.DaysAndRegions>
           <PreferencesDaysBar />
           <PreferncesRegionsBar />
-        </div>
-        {/* <CheckboxesTree /> */}
+        </S.DaysAndRegions>
 
         {places.map((place) => {
           return (
@@ -59,7 +50,7 @@ function VolunteerPage() {
             />
           );
         })}
-      </VolunteerData>
+      </div>
     </div>
   );
 }

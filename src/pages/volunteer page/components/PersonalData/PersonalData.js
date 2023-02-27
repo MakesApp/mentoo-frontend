@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import * as S from "./PersonalData.style";
 
 const DataContainer = styled.div`
   display: flex;
@@ -39,19 +40,19 @@ function PersonalData() {
 
   return (
     <div>
-      <DataContainer>
-        <div className={"personal-info"}>
-          <p className={"volunteering-hours"}>{currentUser.volunteeringTime}</p>
+      <S.DataContainer>
+        <S.PersonalInfo>
+          <S.VolHours>{currentUser.volunteeringTime}</S.VolHours>
           <p>
             שעות <br />
             ההתנדבות <br />
             שלי
           </p>
-        </div>
+        </S.PersonalInfo>
         <div>
           <p>"{currentUser.project}"#</p>
         </div>
-      </DataContainer>
+      </S.DataContainer>
     </div>
   );
 }
