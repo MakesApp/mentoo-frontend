@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import * as S from "./PersonalData.style";
 
 const DataContainer = styled.div`
