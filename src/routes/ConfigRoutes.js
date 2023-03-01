@@ -16,7 +16,7 @@ function ConfigRoutes() {
           </Protected>
         }
       />
-      <Route path={constants.VOLUNTEERS} element={<VolunteerPage />} />
+
       <Route path={constants.PLACE} element={<PlacePage />} />
     </Routes>
   );
