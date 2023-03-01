@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
+  font-family: "pauza", sans-serif;
+  font-weight: bold;
+
   margin-top: 5%;
   background-color: transparent;
   color: #7030a0;

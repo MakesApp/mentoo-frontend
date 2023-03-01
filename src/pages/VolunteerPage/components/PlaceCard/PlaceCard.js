@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import chatIcon from "../../../../assets/imgs/chat-icon.png";
 import vIcon from "../../../../assets/imgs/Vicon.png";
 import xIcon from "../../../../assets/imgs/Xicon.png";

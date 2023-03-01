@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { PrimaryNav, MenuLink, Menu } from "./NavElements";
-import { constants } from "../routes/constants";
-import chatIcon from "../assets/imgs/chat-icon.png";
+import { PrimaryNav, MenuLink, Menu } from "./Nav.style";
+import { constants } from "../../routes/constants";
+import chatIcon from "../../assets/imgs/chat-icon.png";
 function Nav() {
   const [userPicture, setUserPicture] = useState(
     "https://www.w3schools.com/howto/img_avatar.png"
   );
   return (
     <>
+      {/* change menulink pattern to arr of objects  */}
       <PrimaryNav>
         <Menu>
           <MenuLink notification="true" to={constants.CHAT}>

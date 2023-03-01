@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import VolunteerPage from "../pages/volunteer page/VolunteerPage";
-import PlacePage from "../components/PlacePage";
+import VolunteerPage from "../pages/VolunteerPage/VolunteerPage";
+import PlacePage from "../pages/PlacePage/PlacePage";
 import { constants } from "./constants";
 
 function configRoutes() {
