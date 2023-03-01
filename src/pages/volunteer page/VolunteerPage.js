@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import PersonalData from "./components/PersonalData/PersonalData";
 import PlaceCard from "./components/PlaceCard/PlaceCard";
-import PreferencesDaysBar from "./components/Preferences bar/Days/PreferencesDaysBar";
-import PreferncesRegionsBar from "./components/Preferences bar/Regions/PreferncesRegionsBar";
+import PreferencesDaysBar from "./components/PreferencesDaysBar/PreferencesDaysBar";
+import PreferencesRegionsBar from "./components/PreferencesRegionsBar/PreferencesRegionsBar";
 import * as S from "./VolunteerPage.style";
 
 function VolunteerPage() {
@@ -36,7 +36,7 @@ function VolunteerPage() {
 
         <S.DaysAndRegions>
           <PreferencesDaysBar />
-          <PreferncesRegionsBar />
+          <PreferencesRegionsBar />
         </S.DaysAndRegions>
 
         {places.map((place) => {

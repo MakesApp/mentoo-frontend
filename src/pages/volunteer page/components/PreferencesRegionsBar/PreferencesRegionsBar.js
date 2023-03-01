@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import downArrow from "../../../../../assets/imgs/downArrow.png";
-import CheckboxesTree from "../../CheckboxesTree/CheckboxesTree";
-import * as S from "./PreferncesRegionsBar.style";
+import downArrow from "../../../../assets/imgs/downArrow.png";
+import CheckboxesTree from "../CheckboxesTree/CheckboxesTree";
+import * as S from "./PreferencesRegionsBar.style";
 
 function PreferencesRegionsBar() {
   return (

@@ -17,7 +17,6 @@ function CheckboxesTree() {
         onCheck={(checked) => setChecked(checked)}
         showNodeIcon={false}
       />
-      {console.log(`check: ${checked}`)}
     </>
   );
 }

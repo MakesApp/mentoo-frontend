@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import chatIcon from "../../../../assets/imgs/chat-icon.png";
 import vIcon from "../../../../assets/imgs/Vicon.png";
 import xIcon from "../../../../assets/imgs/Xicon.png";
 import * as S from "./PlaceCard.style";
-
-function PlaceCard(props) {
+import { constants } from "../../../../routes/constants";
+function PlaceCard({ placeId, placePic, placeFullName, placeDetails }) {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
 
   return (
     <div>
-      <Link to={`/places/${props.placeId}`}>
+      <Link to={`/places/${placeId}`}>
         <S.ImageContainer>
-          <S.MainImg src={props.placePic} alt="" />
+          <S.MainImg src={placePic} alt="" />
         </S.ImageContainer>
       </Link>
       <S.BtnsContainer>
@@ -24,7 +23,7 @@ function PlaceCard(props) {
         <S.Btns
           onClick={() => {
             if (isClicked) {
-              navigate("/chat");
+              navigate(`${constants.CHAT}`);
             }
             setIsClicked(true);
           }}
@@ -43,8 +42,8 @@ function PlaceCard(props) {
         />
 
         <div>
-          <p> {props.placeFullName}</p>
-          <p> {props.placeDetails}</p>
+          <p> {placeFullName}</p>
+          <p> {placeDetails}</p>
         </div>
       </S.PlaceInfo>
     </div>
