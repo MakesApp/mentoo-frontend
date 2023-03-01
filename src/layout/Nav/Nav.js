@@ -8,8 +8,9 @@ function Nav() {
   );
   return (
     <>
-      {/* change menulink pattern to arr of objects  */}
       <PrimaryNav>
+        {/* change menulink pattern to arr of objects  */}
+
         <Menu>
           <MenuLink notification="true" to={constants.CHAT}>
             <div>

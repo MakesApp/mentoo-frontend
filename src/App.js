@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./layouts/Nav/Nav";
+import Nav from "./layout/Nav/Nav";
 import ConfigRoutes from "./routes/ConfigRoutes";
 
 function App() {

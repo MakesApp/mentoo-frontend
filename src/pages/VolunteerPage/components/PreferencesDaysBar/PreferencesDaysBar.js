@@ -1,9 +1,8 @@
 import React from "react";
 import * as S from "./PreferencesDaysBar.style";
 import { useState } from "react";
-import styled from "styled-components";
 import { days } from "./constants";
-import downArrow from "../../../../../assets/imgs/downArrow.png";
+import downArrow from "../../../../assets/imgs/downArrow.png";
 
 function PreferencesDaysBar() {
   const [checkedState, setCheckedState] = useState(
