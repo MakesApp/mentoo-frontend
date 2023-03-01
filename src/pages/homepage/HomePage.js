@@ -151,9 +151,7 @@ function HomePage() {
             </S.FormContainer>
             <S.FlexColumn>
               {!joinMailList && (
-                <S.UnstyledButton alignRight={true}>
-                  שכחתי סיסמא
-                </S.UnstyledButton>
+                <S.UnstyledButton sideText={true}>שכחתי סיסמא</S.UnstyledButton>
               )}
               <S.StyledButton onClick={handleSignIn}>
                 {joinMailList ? "הרשמה" : "התחבר"}

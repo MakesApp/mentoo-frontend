@@ -98,8 +98,7 @@ export const UnstyledButton = styled.button`
   background: none;
   padding: 0.8rem 1.2rem;
 
-  ${(props) =>
-    props.alignRight && "align-self: flex-end; margin-top: -0.5rem;"};
+  ${(props) => props.sideText && "align-self: flex-end; margin-top: -0.5rem;"};
   color: #7030a0;
   font-size: 1.2rem;
   font-weight: 700;
