@@ -47,7 +47,6 @@ function HomePage() {
   };
 
   //! ---=== Functions (Handleing events) ===---
-  //? Handle sign in / log in Actions
   const handleSignIn = () => {
     console.log(
       "username: ",
@@ -59,7 +58,7 @@ function HomePage() {
       "mailSign: ",
       mailSign
     );
-    //? Chaking if the username is a valid email
+    //? Chaking if the username is a valid email pattern with regex
     if (!formValues.email.match(/[^\s@]+@[^\s@]+\.[^\s@]+/gi)) {
       console.log("EMAIL username: NOT VALID EMAIL! ", formValues.email);
       setIsEmailValid(false);
@@ -67,18 +66,14 @@ function HomePage() {
       console.log("EMAIL username: VALID! ", formValues.email);
       setIsEmailValid(true);
     }
-    //? Checking if the username (email) and the password matches
+    //? Checking if the email and the password matches
     if (
       formValues.email === dummyUser.email &&
       formValues.password === dummyUser.password
     ) {
-      console.log(
-        "username and paswword are matching, authentication is successful"
-      );
+      console.log("mail and pass are matching, auth Successful");
     } else {
-      console.log(
-        "username and paswword are NOT matching, authentication FAILD"
-      );
+      console.log("mail and pass are NOT matching, auth FAILD");
     }
   };
   return (
@@ -94,17 +89,11 @@ function HomePage() {
       {!isAuthenticated && role && (
         <S.UserDetails>
           <S.Selection>
-            <div
-              onClick={() => {
-                handleRoleSelection("place");
-              }}
-            >
-              <img
-                src={role === "volenteer" ? volenteer : place}
-                alt={role}
-                style={{ width: "225px" }}
-              />
-            </div>
+            <img
+              src={role === "volenteer" ? volenteer : place}
+              alt={role}
+              style={{ width: "225px" }}
+            />
             <S.FormContainer>
               <S.signupInputTitle>
                 {!joinMailList ? "התחברות לחשבון המנטו שלך" : "הרשמה למנטו"}
@@ -160,14 +149,16 @@ function HomePage() {
                 </>
               )}
             </S.FormContainer>
-            <S.FlexRow>
+            <S.FlexColumn>
               {!joinMailList && (
-                <S.UnstyledButton>שכחתי סיסמא</S.UnstyledButton>
+                <S.UnstyledButton alignRight={true}>
+                  שכחתי סיסמא
+                </S.UnstyledButton>
               )}
               <S.StyledButton onClick={handleSignIn}>
                 {joinMailList ? "הרשמה" : "התחבר"}
               </S.StyledButton>
-            </S.FlexRow>
+            </S.FlexColumn>
           </S.Selection>
 
           <div style={{ textAlign: "center" }}>

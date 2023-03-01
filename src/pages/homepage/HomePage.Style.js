@@ -38,6 +38,15 @@ export const FlexRow = styled.div`
   margin: 0 auto;
   }`;
 
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  }`;
+
 export const SelectRoleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -87,8 +96,13 @@ export const UnstyledButton = styled.button`
   -webkit-appearance: button;
   border: 0;
   background: none;
-  background-color: #aaa;
   padding: 0.8rem 1.2rem;
+
+  ${(props) =>
+    props.alignRight && "align-self: flex-end; margin-top: -0.5rem;"};
+  color: #7030a0;
+  font-size: 1.2rem;
+  font-weight: 700;
 
   &:hover {
     cursor: pointer;
@@ -104,6 +118,18 @@ export const StyledButton = styled.button`
   font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+  background-color: #7030a0;
+  padding: 0.6rem calc(50% - 3rem);
+  border-radius: 1.35rem;
+  border: none;
+  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+
+  &:active {
+    box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.2);
+  }
 `;
 export const Input = styled.input`
   margin: 0.5rem auto;
