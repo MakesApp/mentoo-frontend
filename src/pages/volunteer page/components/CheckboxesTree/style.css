@@ -1,0 +1,5 @@
+.rct-icons-fa4 .rct-icon-check::before {
+    content: "\f046";
+    color: PURPLE;
+
+}
