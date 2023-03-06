@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import chatIcon from "../../../../assets/imgs/chat-icon.png";
+import WhiteChatIcon from "../../../../assets/imgs/chat-icon-white.png";
 import vIcon from "../../../../assets/imgs/Vicon.png";
 import xIcon from "../../../../assets/imgs/Xicon.png";
 import * as S from "./PlaceCard.style";
@@ -29,7 +29,7 @@ function PlaceCard({ placeId, placePic, placeFullName, placeDetails }) {
           }}
         >
           {isClicked ? (
-            <S.ButtonsImg src={chatIcon} alt="chat icon" />
+            <S.ChatButtonImg src={WhiteChatIcon} alt="chat icon" />
           ) : (
             <S.ButtonsImg src={vIcon} alt="V icon" />
           )}

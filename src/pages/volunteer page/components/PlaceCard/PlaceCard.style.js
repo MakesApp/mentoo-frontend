@@ -14,6 +14,12 @@ export const ButtonsImg = styled.img`
   height: 20px;
   width: 20px;
 `;
+export const ChatButtonImg = styled.img`
+  padding: 13px 11px;
+
+  background: #30a041;
+  z-index: 1;
+`;
 
 export const BtnsContainer = styled.div`
   display: flex;
