@@ -4,10 +4,12 @@ import VolunteerPage from "../pages/volunteer page/VolunteerPage";
 import PlacePage from "../components/PlacePage";
 import { constants } from "./constants";
 import Protected from "./ProtectedRoutes";
+import HomePage from "../pages/homepage/HomePage";
 function ConfigRoutes() {
   const [isSignedIn, setIsSignedIn] = useState(true);
   return (
     <Routes>
+      <Route path={constants.HOME} element={<HomePage />} />
       <Route
         path={constants.VOLUNTEERS}
         element={
