@@ -120,7 +120,7 @@ function HomePage() {
                 {!isEmailVaild && (
                   <>
                     <p>המייל לא קיים במאגר המתנדבים</p>
-                    <S.A href="#">הרשמה למאגר</S.A>
+                    <S.Link href="#">הרשמה למאגר</S.Link>
                   </>
                 )}
               </div>
@@ -140,9 +140,9 @@ function HomePage() {
                   </S.FlexRow>
 
                   <br />
-                  <S.A href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
+                  <S.Link href="#" onClick={() => setShowWhyMail(!showWhyMail)}>
                     מדוע אנו מבקשים זאת?
-                  </S.A>
+                  </S.Link>
                   {showWhyMail && (
                     <p>לשלוח הודעות עדכון כאשר ישנה פניה או הודעה חדשה</p>
                   )}
