@@ -134,8 +134,8 @@ export const Input = styled.input`
   margin: 0.5rem auto;
   padding: 0.5rem 1rem;
   min-width: 320px;
-  border: 1px solid #7030a099;
-  outline: 1px solid #7030a0;
+  border: 2px solid #7030a099;
+  outline: none;
   border-radius: 40px;
   font-size: 1.2rem;
   font-weight: 500;
@@ -143,7 +143,7 @@ export const Input = styled.input`
     text-align: right;
   }
   &:focus {
-    outline: none;
+    border: 1px solid #7030a0;
   }
 `;
 export const Checkbox = styled.input`
