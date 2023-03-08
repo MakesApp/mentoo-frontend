@@ -4,4 +4,5 @@ export const constants = Object.freeze({
   HOME: "/",
   VOLUNTEERS: "/volunteers",
   PLACE: "/places/:placeId",
+  CHAT: "/chat",
 });

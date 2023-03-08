@@ -165,7 +165,7 @@ export const Checkbox = styled.input`
 export const CheckboxLabel = styled.label`
   text-align: right;
 `;
-export const A = styled.a`
+export const Link = styled.a`
   text-decoration: none;
   color: blue;
   display: block;
