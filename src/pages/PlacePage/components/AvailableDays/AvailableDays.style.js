@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Title = styled.h2`
+  font-family: "pauza", sans-serif;
   direction: rtl;
   color: #7030a0;
   font-size: 22px;
@@ -8,6 +9,8 @@ export const Title = styled.h2`
 `;
 
 export const DaysBar = styled.div`
+  font-family: "pauza", sans-serif;
+
   direction: rtl;
   margin: 15px;
   margin-right: -5px;
@@ -24,6 +27,7 @@ export const DaysBar = styled.div`
 `;
 
 export const AvailableDayItem = styled.div`
+  font-family: "pauza", sans-serif;
   font-size: 20px;
   font-weight: bold;
   background: #7030a0;
@@ -33,6 +37,7 @@ export const AvailableDayItem = styled.div`
   border: 1px solid white;
 `;
 export const NotAvailableDayItem = styled.div`
+  font-family: "pauza", sans-serif;
   color: #ffffff;
   background: #cbcbcb;
   font-size: 20px;

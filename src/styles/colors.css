@@ -1,4 +1,5 @@
- :root {
-
-      --primary-color:black;
- }
+:root {
+  --color-primary: #f00;
+  --color-secondary: #0f0;
+  --color-tertiary: #00f;
+}

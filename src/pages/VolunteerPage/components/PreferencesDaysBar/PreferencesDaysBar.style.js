@@ -8,8 +8,9 @@ export const Button = styled.button`
   color: #7030a0;
   padding: 6px 25px;
   font-size: 16px;
-  border: 2px solid #7060a0;
-  border-radius: 13px;
+  font-weight: bold;
+  border: 2px solid #7030a0;
+  border-radius: 16px;
   cursor: pointer;
 `;
 
@@ -18,6 +19,7 @@ export const downArrowImg = styled.img`
 `;
 export const UlContent = styled.ul`
   display: none;
+  direction: rtl;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -29,6 +31,9 @@ export const UlContent = styled.ul`
     padding: 16px 10px;
     text-decoration: none;
     display: block;
+  }
+  input {
+    margin-left: 5px;
   }
 `;
 export const Dropdown = styled.div`
