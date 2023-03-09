@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+export const DataContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 10vh;
+  background: #7030a0;
+  color: #ffffff;
+  font-family: "pauza", sans-serif;
+  font-weight: bold;
+
+  div p:first-child {
+    font-style: oblique;
+    font-size: 20px;
+  }
+`;
 export const PersonalInfo = styled.div`
   direction: rtl;
   display: flex;
@@ -14,16 +30,4 @@ export const VolHours = styled.p`
   background: #ffffff;
   border-radius: 50%;
   padding: 0.7rem 0.5rem;
-`;
-
-export const DataContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100vw;
-  height: 10vh;
-  background: #7030a0;
-  color: #ffffff;
-  font-family: "pauza", sans-serif;
-  font-wight: bold;
 `;

@@ -35,6 +35,7 @@ export const PlaceInfo = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  font-family: "pauza", sans-serif;
 
   p:first-child {
     color: #7030a0;

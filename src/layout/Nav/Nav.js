@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { PrimaryNav, MenuLink, Menu } from "./NavElements";
+import { PrimaryNav, MenuLink, Menu } from "./Nav.style";
 import { constants } from "../../routes/constants";
 import chatIcon from "../../assets/imgs/chat-icon.png";
 function Nav() {
   const [userPicture, setUserPicture] = useState(
     "https://www.w3schools.com/howto/img_avatar.png"
   );
+
   return (
     <>
       <PrimaryNav>
@@ -15,7 +16,7 @@ function Nav() {
               <img src={chatIcon} alt="chat icon" />
             </div>
           </MenuLink>
-          <MenuLink to={constants.HOME} className={"logo"}>
+          <MenuLink to={constants.HOME} className="logo">
             <p>
               ment<span>oo</span>
             </p>

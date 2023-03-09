@@ -26,7 +26,6 @@ export const MenuLink = styled(Link)`
   font-weight: 900;
   font-size: 30px;
   letter-spacing: -1px;
-
   &::after {
     content: ${(props) => (props.notification === "true" ? `"•"` : "")};
     position: absolute;
@@ -34,7 +33,6 @@ export const MenuLink = styled(Link)`
     top: 15%;
     right: 35%;
   }
-
   &.active {
     color: #000000;
   }
@@ -46,7 +44,6 @@ export const MenuLink = styled(Link)`
     border-radius: 50%;
     margin-bottom: -15%;
   }
-
   &.logo {
     display: flex;
     justify-content: center;

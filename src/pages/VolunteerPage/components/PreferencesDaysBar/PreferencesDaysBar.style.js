@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  margin-top: 8%;
+  font-family: "pauza", sans-serif;
+  font-weight: bold;
+  margin-top: 5%;
   background-color: transparent;
   color: #7030a0;
   padding: 6px 25px;
   font-size: 16px;
   font-weight: bold;
-
   border: 2px solid #7030a0;
   border-radius: 16px;
   cursor: pointer;
@@ -30,7 +31,9 @@ export const UlContent = styled.ul`
     padding: 16px 10px;
     text-decoration: none;
     display: block;
-    margin-right: 8px;
+  }
+  input {
+    margin-left: 5px;
   }
 `;
 export const Dropdown = styled.div`
