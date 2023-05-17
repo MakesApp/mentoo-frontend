@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import FullPlaceDetails from "./components/FullPlaceDetails/FullPlaceDetails";
 
-function Places() {
+function PlacePage() {
   const [places, setPlaces] = useState([
     {
       id: 1,
@@ -49,4 +49,4 @@ function Places() {
   );
 }
 
-export default Places;
+export default PlacePage;

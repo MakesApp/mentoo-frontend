@@ -4,7 +4,7 @@ import WhiteChatIcon from "../../../../assets/imgs/chat-icon-white.png";
 import vIcon from "../../../../assets/imgs/Vicon.png";
 import xIcon from "../../../../assets/imgs/Xicon.png";
 import * as S from "./PlaceCard.style";
-import { constants } from "../../../../routes/constants";
+import { routes } from "../../../../routes/constants";
 function PlaceCard({ placeId, placePic, placeFullName, placeDetails }) {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function PlaceCard({ placeId, placePic, placeFullName, placeDetails }) {
         <S.Btns
           onClick={() => {
             if (isClicked) {
-              navigate(`${constants.CHAT}`);
+              navigate(`${routes.CHAT}`);
             }
             setIsClicked(true);
           }}

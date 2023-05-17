@@ -1,25 +1,26 @@
+import HomePage from "pages/homepage/HomePage";
+import Login from "pages/Login/Login";
+import PlacePage from "pages/PlacePage/PlacePage";
+import VolunteerPage from "pages/VolunteerPage/VolunteerPage";
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import VolunteerPage from "../pages/VolunteerPage/VolunteerPage";
-import PlacePage from "../pages/PlacePage/PlacePage";
-import { constants } from "./constants";
-import Protected from "./ProtectedRoutes";
-import HomePage from "../pages/homepage/HomePage";
+import { routes } from "./constants";
+import ProtectedRoute from "./ProtectedRoute";
 function ConfigRoutes() {
-  const [isSignedIn, setIsSignedIn] = useState(true);
   return (
     <Routes>
-      <Route path={constants.HOME} element={<HomePage />} />
+      <Route path={routes.LOGIN} element={<Login />} />
+      <Route path={routes.HOME} element={<HomePage />} />
       <Route
-        path={constants.VOLUNTEERS}
+        path={routes.VOLUNTEERS}
         element={
-          <Protected isSignedIn={isSignedIn}>
-            <VolunteerPage />
-          </Protected>
+          <ProtectedRoute element={<VolunteerPage />} roles={["volunteer"]} />
         }
       />
-
-      <Route path={constants.PLACE} element={<PlacePage />} />
+      <Route
+        path={routes.PLACE}
+        element={<ProtectedRoute element={<PlacePage />} roles={["place"]} />}
+      />
     </Routes>
   );
 }

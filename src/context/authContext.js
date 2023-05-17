@@ -11,13 +11,13 @@ function Provider({ children }) {
   const [role, setRole] = useState("");
 
   const dummyUser = {
-    name: "John Doe",
+    name: "ameer",
     email: "abc@example.com",
     password: "123456",
     role: "volenteer",
   };
 
-  const selectionHandler = (role) => {
+  const handleRoleSelection = (role) => {
     setRole(role);
   };
 
@@ -28,7 +28,7 @@ function Provider({ children }) {
     setIsAuthenticated,
     role,
     setRole,
-    selectionHandler,
+    handleRoleSelection,
     dummyUser,
   };
 
