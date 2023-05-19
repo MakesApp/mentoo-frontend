@@ -1,0 +1,41 @@
+.container {
+  padding: 15%;
+  width: 100%;
+  height: 100%;
+}
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  outline: none;
+}
+
+.mail-confirmation {
+  margin: 10% 0 2.5% 0;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+.checkbox:checked {
+  background-color: blue; /* Add a background color to indicate checked state */
+  border: 3px solid white; /* Change the border color when checkbox is checked */
+  box-shadow: 0 0 0 1px black; /* Add box shadow to create space between border and inner color */
+}
+.label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.link {
+  font-size: 13px;
+  font-weight: bold;
+  padding-right: 20px;
+  width: 100%;
+  color: var(--color-primary);
+  margin-bottom: 2.5%;
+}

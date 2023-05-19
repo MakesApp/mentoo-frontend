@@ -1,0 +1,59 @@
+.primary-nav {
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.menu-link {
+  position: relative;
+  color: #313131;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0 2.3rem;
+  height: 100%;
+  font-family: "kopik";
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.menu-link::after {
+  content: attr(data-notification, "•");
+  position: absolute;
+  color: #de1e1e;
+  top: 15%;
+  right: 35%;
+}
+
+.menu-link.active {
+  color: #000000;
+}
+
+.menu-link span {
+  color: #7030a0;
+}
+
+.menu-link span img {
+  width: 50%;
+  border-radius: 50%;
+  margin-bottom: -15%;
+}
+
+.menu-link.logo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.subtitle {
+  color: #313131;
+  font-size: 6px;
+  letter-spacing: normal;
+}
