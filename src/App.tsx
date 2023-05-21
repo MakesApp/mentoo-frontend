@@ -4,6 +4,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import RoutesConfig from './routes/Routes';
+import Volunteer from './pages/Volunteer/Volunteer'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <Nav/> */}
       {/* <RoutesConfig/> */}
       {/* <Login/> */}
-      <Home />
+      {/* <Home /> */}
+      <Volunteer/>
       {/* <Register /> */}
     </BrowserRouter>
   );

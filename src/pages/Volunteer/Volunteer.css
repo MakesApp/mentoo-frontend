@@ -1,0 +1,15 @@
+.content {
+  padding: 0 5%;
+}
+.days-region-container {
+  display: flex;
+  align-items: space-between;
+  justify-content: space-around;
+}
+
+.card-list {
+  padding: 5% 0;
+}
+.card {
+  margin-bottom: 15px;
+}

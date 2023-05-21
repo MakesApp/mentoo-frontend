@@ -1,0 +1,41 @@
+/* PersonalData.css */
+
+.data-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  background: #7030a0;
+  color: #ffffff;
+  padding: 5% 0;
+  font-size: 14px;
+  font-family: 'pauza', sans-serif;
+  font-weight: bold;
+}
+
+.data-container div p:first-child {
+  font-style: oblique;
+}
+
+.personal-info {
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  flex-direction: row;
+}
+
+.vol-hours {
+  color: #8323ac;
+  font-weight: bold;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 0.7rem 0.5rem;
+}
+
+.project {
+}
+.project::before {
+  content: '#';
+}
