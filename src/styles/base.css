@@ -3,14 +3,17 @@
   margin: 0;
   padding: 0;
 }
-html {
-  height: 100%;
-}
+
 body {
   background-color: #fafafa;
   padding: 0;
-  max-height: calc(100vh - 60px);
   max-width: 480px;
   margin: 0 auto;
   direction: rtl;
+  min-height: 100vh;
+  display: flex;
+}
+
+#root {
+  flex: 1;
 }

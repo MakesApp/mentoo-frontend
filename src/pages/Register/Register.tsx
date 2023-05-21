@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthForm from '../../components/Auth/Auth';
 import './Register.css';
 const Register = () => {
-  const [isChecked,setIsChecked]=useState(true)
+  const [isChecked, setIsChecked] = useState(true);
   const handleOnRegister = () => {};
   return (
     <div className="container">
@@ -13,7 +13,7 @@ const Register = () => {
             type="checkbox"
             name="checkbox"
             checked={isChecked}
-            onChange={()=>setIsChecked(!isChecked)}
+            onChange={() => setIsChecked(!isChecked)}
             className="checkbox"
           />
           <label htmlFor="checkbox" className="label">

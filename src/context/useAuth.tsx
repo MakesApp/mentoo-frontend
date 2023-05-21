@@ -10,6 +10,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
 
   const login = () => {
     setIsAuthenticated(true);
@@ -21,6 +22,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const value: AuthContextType = {
     isAuthenticated,
+    setIsAuthenticated,
     login,
     logout,
   };

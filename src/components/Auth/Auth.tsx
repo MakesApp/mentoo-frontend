@@ -13,7 +13,7 @@ const validationSchema = Yup.object({
 interface AuthFormProps {
   onSubmit: (email: string, password: string) => void;
   buttonValue: string;
-  children:ReactNode;
+  children: ReactNode;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({

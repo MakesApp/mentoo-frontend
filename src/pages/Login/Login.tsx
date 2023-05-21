@@ -1,13 +1,30 @@
 import { Link } from 'react-router-dom';
+import { useLoginMutation } from '../../api/services/api';
 import AuthForm from '../../components/Auth/Auth';
+import { useAuthContext } from '../../context/useAuth';
+import { extractTokenFromSetCookie, getCookieValue } from '../../utils/utils';
 import './Login.css';
-
 const Login = () => {
-  const handleLogin = (email: string, password: string) => {
-    // Login logic here
-    //we need to compare the credentials with user in our mongodb database
-    console.log(email, password);
+  const { mutateAsync } = useLoginMutation();
+  const { setIsAuthenticated } = useAuthContext();
+
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const response = await mutateAsync({ email, password });
+      const { status, data } = response;
+
+      if (status === 200) {
+        setIsAuthenticated(true);
+        localStorage.setItem('token', data.token);
+      }
+
+      // Handle successful login
+    } catch (error) {
+      // Handle login error
+      console.error(error);
+    }
   };
+
   return (
     <div className="container">
       <AuthForm onSubmit={handleLogin} buttonValue={'להתחבר'} />
