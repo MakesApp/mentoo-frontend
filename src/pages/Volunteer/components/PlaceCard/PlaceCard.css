@@ -16,12 +16,7 @@
 .buttons-img {
   height: 20px;
   width: 20px;
-}
-
-.chat-button-img {
-  padding: 13px 11px;
-  background: #30a041;
-  z-index: 1;
+  cursor: pointer;
 }
 
 .btns-container {
@@ -63,4 +58,7 @@
   width: 50px;
   margin-right: 5px;
   border-radius: 5%;
+}
+.bg-green {
+  background: #30a041;
 }

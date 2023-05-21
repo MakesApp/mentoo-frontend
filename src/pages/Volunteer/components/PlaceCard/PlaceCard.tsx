@@ -20,11 +20,13 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName,
           <img className="main-img" src={placePic} alt="" />
         </div>
         <div className="btns-container">
-        <button className="action-button">
+        <button className="action-button" onClick={()=>{
+          if(isClicked){setIsClicked(false)}
+        }}>
           <img className="buttons-img" src={xIcon} alt="X icon" />
         </button>
         <button
-          className="action-button"
+          className={`action-button ${isClicked ? 'bg-green':''}`}
           onClick={() => {
             if (isClicked) {
               navigate('');
@@ -32,11 +34,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName,
             setIsClicked(true);
           }}
         >
-          {isClicked ? (
-            <img className="chat-button-img" src={WhiteChatIcon} alt="chat icon" />
-          ) : (
-            <img className="buttons-img" src={vIcon} alt="V icon" />
-          )}
+            <img className={`chat-button-img`} src={isClicked?WhiteChatIcon:vIcon} alt="chat icon" />
         </button>
       </div>
       </button>
