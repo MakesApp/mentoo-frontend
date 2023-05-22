@@ -21,10 +21,10 @@ const PersonalData: React.FC = () => {
       <div className="data-container">
         <div className="personal-info">
           <p className="vol-hours">{currentUser.volunteeringTime}</p>
-          <p>
-            שעות 
-            ההתנדבות 
-            שלי
+          <p className="text">
+           <span> שעות </span>
+            <span>    ההתנדבות </span>
+           <span> שלי</span>
           </p>
         </div>
         <div>

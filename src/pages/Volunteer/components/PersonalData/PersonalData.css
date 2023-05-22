@@ -39,3 +39,8 @@
 .project::before {
   content: '#';
 }
+
+.text {
+  display: flex;
+  flex-direction: column;
+}

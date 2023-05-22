@@ -1,12 +1,10 @@
-import React, { useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
-import "react-checkbox-tree/lib/react-checkbox-tree.css";
+// import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { regionsData } from "./constants";
-import "./style.css";
+// import "./style.css";
 
-function CheckboxesTree() {
-  const [checked, setChecked] = useState([]);
-  const [expanded, setExpanded] = useState([]);
+function CheckboxesTree({regions,setRegions,expanded,setExpanded}) {
+  
 
   return (
     <>
@@ -14,8 +12,8 @@ function CheckboxesTree() {
         nodes={regionsData}
         expanded={expanded}
         onExpand={(expanded) => setExpanded(expanded)}
-        checked={checked}
-        onCheck={(checked) => setChecked(checked)}
+        checked={regions}
+        onCheck={(regions) => setRegions(regions)}
         showNodeIcon={false}
       />
     </>

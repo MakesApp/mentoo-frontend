@@ -1,10 +1,10 @@
 .content {
-  padding: 0 5%;
+  padding: 5%;
 }
 .days-region-container {
   display: flex;
-  align-items: space-between;
-  justify-content: space-around;
+  align-items: center;
+  column-gap: 10px;
 }
 
 .card-list {
@@ -12,4 +12,10 @@
 }
 .card {
   margin-bottom: 15px;
+}
+.result {
+  display: block;
+  padding-right: 15px;
+  font-weight: bold;
+  margin: 15px 0;
 }
