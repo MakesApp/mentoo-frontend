@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import WhiteChatIcon from "../../../../assets/images/chat-icon-white.png";
 import vIcon from "../../../../assets/images/Vicon.png";
@@ -8,7 +8,7 @@ import "./PlaceCard.css";
 
 const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName, placeDetails }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useHistory();
 
   const handleCardClick=(e)=>{
     e.stopPropagation();

@@ -1,6 +1,6 @@
-import { useAuthContext } from 'context/useAuth';
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
+import { useAuthContext } from '../context/useAuth';
 
 interface RestrictedRouteProps {
   path: string;
@@ -16,11 +16,22 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
   component: Component,
 }) => {
   const { userRole, isAuthenticated } = useAuthContext();
-  if (isAuthenticated && allowedRoles.includes(userRole)) {
-    return <Route path={path} element={<Component />} />;
-  } else {
-    return <Navigate to={fallbackPath} />;
-  }
+  const navigate = useHistory();
+
+  // If user is authenticated and has allowed role, render the Component, 
+  // else navigate to fallback path.
+  React.useEffect(() => {
+    console.log('aa');
+    
+    if (!(isAuthenticated && allowedRoles.includes(userRole))) {
+      console.log('ss');
+      
+      navigate(fallbackPath);
+    }
+  }, [isAuthenticated, userRole, allowedRoles, navigate, fallbackPath]);
+
+  // Always return a Route component.
+  return <Route path={path} element={isAuthenticated && allowedRoles.includes(userRole) ? <Component /> : null} />;
 };
 
 export default RestrictedRoute;

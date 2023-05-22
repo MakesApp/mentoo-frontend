@@ -10,10 +10,10 @@ function App() {
   return (
     <BrowserRouter>
       {/* <Nav/> */}
-      {/* <RoutesConfig/> */}
+      <RoutesConfig/>
       {/* <Login/> */}
       {/* <Home /> */}
-      <Volunteer/>
+      {/* <Volunteer/> */}
       {/* <Register /> */}
     </BrowserRouter>
   );

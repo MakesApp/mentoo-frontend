@@ -4,7 +4,6 @@ import PersonalData from './components/PersonalData/PersonalData';
 import PlaceCard from './components/PlaceCard/PlaceCard';
 import PreferencesDaysBar from './components/PreferencesDaysBar/PreferencesDaysBar';
 import PreferencesRegionsBar from './components/PreferencesRegionsBar/PreferencesRegionsBar';
-import { days } from './constants';
 import './Volunteer.css'
 // Define your interface
 interface Place {

@@ -1,6 +1,6 @@
-import { useAuthContext } from 'context/useAuth';
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
+import { useAuthContext } from '../context/useAuth';
 
 interface PublicRouteProps {
   path: string;
@@ -14,12 +14,16 @@ const PublicRoute: React.FC<PublicRouteProps> = ({
   component: Component,
 }) => {
   const { isAuthenticated } = useAuthContext();
+  const navigate = useHistory();
 
-  if (!isAuthenticated) {
-    return <Route path={path} element={<Component />} />;
-  } else {
-    return <Navigate to={fallbackPath} />;
-  }
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigate(fallbackPath);
+    }
+  }, [isAuthenticated, navigate, fallbackPath]);
+
+  // Always return a Route component.
+  return <Route path={path} element={!isAuthenticated ? <Component /> : null} />;
 };
 
 export default PublicRoute;

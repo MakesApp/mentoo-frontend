@@ -9,7 +9,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const [userRole, setUserRole] = useState(null);
 
   const login = () => {
@@ -23,6 +23,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   const value: AuthContextType = {
     isAuthenticated,
     setIsAuthenticated,
+    setUserRole,
+    userRole,
     login,
     logout,
   };

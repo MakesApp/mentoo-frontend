@@ -2,18 +2,20 @@ import './Home.css';
 import place from '../../assets/images/place.png';
 import volunteer from '../../assets/images/volunteer.png';
 import { useAuthContext } from '../../context/useAuth';
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LOGIN_PAGE } from '../../routes/routePath';
 
 const Home = () => {
   const { setUserRole} = useAuthContext();
-  const navigate = useNavigate();
+  const history = useHistory();
   const handleRoleSelection = (role: string) => {
+      console.log(role);
+      
     setUserRole(role);
-    navigate(LOGIN_PAGE)
+    history.push(LOGIN_PAGE)
   };
   return (
-    <div className="container">
+    <div className="home-container">
       {/* logo */}
       <div>
         logdssdhsd<span>sag</span>o
