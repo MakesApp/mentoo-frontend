@@ -1,0 +1,84 @@
+.authContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  row-gap: 25px;
+  flex-direction: column;
+}
+
+.formControl {
+  width: 100%;
+  margin: 10px 0;
+}
+.formTitle {
+  font-size: 19px;
+  text-align: right;
+  width: 100%;
+  padding-right: 1rem;
+}
+.inputField {
+  border-radius: 25px;
+  border: 1px solid blue;
+  padding: 10px 10px;
+  outline: none;
+  font-size: 19px;
+  width: 100%;
+}
+.inputField::placeholder {
+  font-size: 19px;
+}
+.inputAlert {
+  border: 1px solid red;
+  color: red;
+}
+.submit {
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 5%;
+  font-size: 24px;
+  color: white;
+  border: none;
+  background-color: rgb(98, 39, 206);
+}
+
+.invalidMsg {
+  color: red;
+  font-size: 14px;
+  padding: 0.25rem 1rem;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo img:first-child {
+  width: 200px;
+}
+
+.logo img:last-child {
+  width: 150px;
+}
+
+.roleImg {
+  margin: 30px 0;
+}
+
+.alertMsg {
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 0 1rem;
+  overflow-wrap: break-word;
+  display: block;
+  width: 100%;
+}
+.submit:disabled {
+  opacity: 0.2;
+}

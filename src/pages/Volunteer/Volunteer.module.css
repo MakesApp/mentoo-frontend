@@ -1,14 +1,17 @@
 .content {
   padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: none;
 }
-.days-region-container {
+.daysRegionContainer {
   display: flex;
   align-items: center;
   column-gap: 10px;
 }
 
-.card-list {
-  padding: 5% 0;
+.cardList {
+  padding: 0;
 }
 .card {
   margin-bottom: 15px;

@@ -1,4 +1,237 @@
+.react-checkbox-tree {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+  -ms-flex-direction: row-reverse !important;
+  flex-direction: row-reverse !important;
+  font-size: 16px !important;
+}
+.react-checkbox-tree > ol {
+  -webkit-box-flex: 1 !important;
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+}
+.react-checkbox-tree ol {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  list-style-type: none !important;
+}
+.react-checkbox-tree ol ol {
+  padding-left: 24px !important;
+}
+.react-checkbox-tree button {
+  line-height: normal !important;
+  color: inherit !important;
+}
+.react-checkbox-tree button:disabled {
+  cursor: not-allowed !important;
+}
+.react-checkbox-tree .rct-bare-label {
+  cursor: default !important;
+}
+.react-checkbox-tree label {
+  margin-bottom: 0 !important;
+  cursor: pointer !important;
+}
+.react-checkbox-tree label:hover {
+  background: rgba(51, 51, 204, 0.1) !important;
+}
+.react-checkbox-tree label:active,
+.react-checkbox-tree label:focus {
+  background: rgba(51, 51, 204, 0.15) !important;
+}
+.react-checkbox-tree:not(.rct-native-display) input {
+  display: none !important;
+}
+.react-checkbox-tree.rct-native-display input {
+  margin: 0 5px !important;
+}
+.react-checkbox-tree .rct-icon {
+  display: inline-block !important;
+  text-align: center !important;
+  text-rendering: auto !important;
+  font-family: 'Font Awesome 5 Free', 'FontAwesome', sans-serif !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  font-style: normal !important;
+}
+
+.rct-disabled > .rct-text > label {
+  opacity: 0.75 !important;
+  cursor: not-allowed !important;
+}
+.rct-disabled > .rct-text > label:hover {
+  background: transparent !important;
+}
+.rct-disabled > .rct-text > label:active {
+  background: transparent !important;
+}
+
+.rct-text {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+.rct-options {
+  -webkit-box-flex: 0 !important;
+  -ms-flex: 0 0 auto !important;
+  flex: 0 0 auto !important;
+  margin-left: 0.5rem !important;
+  text-align: right !important;
+}
+
+.rct-option {
+  opacity: 0.75 !important;
+  border: 0 !important;
+  background: none !important;
+  cursor: pointer !important;
+  padding: 0 4px !important;
+  font-size: 18px !important;
+}
+.rct-option:hover {
+  opacity: 1 !important;
+}
+.rct-option + .rct-option {
+  margin-left: 2px !important;
+}
+
+.rct-collapse,
+.rct-checkbox,
+.rct-node-icon {
+  padding: 0 5px !important;
+}
+.rct-collapse *,
+.rct-checkbox *,
+.rct-node-icon * {
+  display: inline-block !important;
+  margin: 0 !important;
+  width: 14px !important;
+}
+
+.rct-collapse {
+  -ms-flex-item-align: stretch !important;
+  align-self: stretch !important;
+  border: 0 !important;
+  background: none !important;
+  line-height: normal !important;
+  color: inherit !important;
+  font-size: 12px !important;
+}
+.rct-collapse.rct-collapse-btn {
+  cursor: pointer !important;
+}
+.rct-collapse > .rct-icon-expand-close {
+  opacity: 0.5 !important;
+}
+.rct-collapse > .rct-icon-expand-close:hover {
+  opacity: 1 !important;
+}
+
+.rct-native-display .rct-checkbox {
+  display: none !important;
+}
+
+.rct-node-clickable {
+  cursor: pointer !important;
+}
+.rct-node-clickable:hover {
+  background: rgba(51, 51, 204, 0.1) !important;
+}
+.rct-node-clickable:focus {
+  outline: 0 !important;
+  background: rgba(51, 51, 204, 0.2) !important;
+}
+
+.rct-node-icon {
+  color: #33c !important;
+}
+
+.rct-title {
+  padding: 0 5px !important;
+}
+
+.rct-icons-fa4 .rct-icon-expand-close::before {
+  content: '\f054' !important;
+}
+.rct-icons-fa4 .rct-icon-expand-open::before {
+  content: '\f078' !important;
+}
+.rct-icons-fa4 .rct-icon-uncheck::before {
+  content: '\f096' !important;
+}
 .rct-icons-fa4 .rct-icon-check::before {
-  content: '\f046';
-  color: PURPLE;
+  content: '\f046' !important;
+}
+.rct-icons-fa4 .rct-icon-half-check::before {
+  opacity: 0.5 !important;
+  content: '\f046' !important;
+}
+.rct-icons-fa4 .rct-icon-leaf::before {
+  content: '\f016' !important;
+}
+.rct-icons-fa4 .rct-icon-parent-open::before {
+  content: '\f115' !important;
+}
+.rct-icons-fa4 .rct-icon-parent-close::before {
+  content: '\f114' !important;
+}
+.rct-icons-fa4 .rct-icon-expand-all::before {
+  content: '\f0fe' !important;
+}
+.rct-icons-fa4 .rct-icon-collapse-all::before {
+  content: '\f146' !important;
+}
+
+.rct-icons-fa5 .rct-icon-expand-close::before {
+  font-weight: 900 !important;
+  content: '\f054' !important;
+}
+.rct-icons-fa5 .rct-icon-expand-open::before {
+  font-weight: 900 !important;
+  content: '\f078' !important;
+}
+.rct-icons-fa5 .rct-icon-uncheck::before {
+  content: '\f0c8' !important;
+}
+.rct-icons-fa5 .rct-icon-check::before {
+  content: '\f14a' !important;
+}
+.rct-icons-fa5 .rct-icon-half-check::before {
+  opacity: 0.5 !important;
+  content: '\f14a' !important;
+}
+.rct-icons-fa5 .rct-icon-leaf::before {
+  content: '\f15b' !important;
+}
+.rct-icons-fa5 .rct-icon-parent-open::before {
+  content: '\f07c' !important;
+}
+.rct-icons-fa5 .rct-icon-parent-close::before {
+  content: '\f07b' !important;
+}
+.rct-icons-fa5 .rct-icon-expand-all::before {
+  content: '\f0fe' !important;
+}
+.rct-icons-fa5 .rct-icon-collapse-all::before {
+  content: '\f146' !important;
+}
+
+.rct-direction-rtl {
+  direction: rtl !important;
+}
+.rct-direction-rtl ol ol {
+  padding-right: 24px !important;
+  padding-left: 0 !important;
+}
+.rct-direction-rtl.rct-icons-fa4 .rct-icon-expand-close::before {
+  content: '\f105' !important;
+}
+.rct-direction-rtl.rct-icons-fa5 .rct-icon-expand-close::before {
+  content: '\f053' !important;
 }

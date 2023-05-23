@@ -1,21 +1,16 @@
 /* PreferencesDaysBar.css */
-.container {
+.daysContainer {
   width: 100%;
 }
 
-.dropdown-btn {
-  font-family: 'pauza', sans-serif;
-  font-weight: bold;
+.dropdownBtn {
   background-color: transparent;
   color: #7030a0;
-  align-items: center;
-  position: relative;
   padding: 6px 25px;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 20px;
   width: 100%;
-  border: 2px solid #7030a0;
-  border-radius: 16px;
+  border: 2px solid #7060a0;
+  border-radius: 13px;
   cursor: pointer;
 }
 
@@ -25,32 +20,31 @@
   transform: translateY(50%);
 }
 
-.ul-content {
+.ulContent {
   display: none;
+  width: 100%;
   direction: rtl;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-.ul-content li {
+.ulContent li {
   color: black;
   padding: 16px 10px;
   text-decoration: none;
   display: block;
 }
 
-.ul-content input {
-  margin-left: 5px;
+.ulContent input {
+  margin-left: 1rem;
 }
 
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
-.dropdown:hover .ul-content {
+.dropdown:hover .ulContent {
   display: block;
 }

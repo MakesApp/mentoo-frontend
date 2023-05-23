@@ -8,16 +8,20 @@ type User = {
 
 type LoginResponse = User & { message: string };
 
-type LoginPayload = {
-  email: string;
-  password: string;
-  token: string;
-};
+
 
 export const useLoginMutation = () => {
-  const loginMutation = useMutation<LoginResponse, Error, LoginPayload>(
+  const loginMutation = useMutation<LoginResponse, Error>(
     (payload) => api.post('/user/login', payload)
   );
 
   return loginMutation;
+};
+
+export const useRegisterMutation = () => {
+  const registerMutation = useMutation<LoginResponse, Error>(
+    (payload) => api.post('/user/register', payload)
+  );
+
+  return registerMutation;
 };

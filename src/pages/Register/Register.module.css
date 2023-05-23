@@ -1,5 +1,5 @@
 .container {
-  padding: 0 15%;
+  padding: 15% 10%;
   width: 100%;
   height: 100%;
 }
@@ -14,8 +14,8 @@
   outline: none;
 }
 
-.mail-confirmation {
-  margin: 10% 0 2.5% 0;
+.mailConfirmation {
+  margin: 15px 0 5px 0;
   display: flex;
   column-gap: 10px;
   align-items: center;
@@ -27,12 +27,12 @@
   box-shadow: 0 0 0 1px black; /* Add box shadow to create space between border and inner color */
 }
 .label {
-  font-size: 12px;
+  font-size: 19px;
   font-weight: bold;
 }
 
 .link {
-  font-size: 13px;
+  font-size: 19px;
   font-weight: bold;
   padding-right: 20px;
   width: 100%;

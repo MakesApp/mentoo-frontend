@@ -10,7 +10,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
-  const [userRole, setUserRole] = useState(null);
+  const [userRole, setUserRole] = useState(localStorage.getItem('role'));
+console.log(isAuthenticated);
 
   const login = () => {
     setIsAuthenticated(true);

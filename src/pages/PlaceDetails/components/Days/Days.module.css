@@ -1,0 +1,50 @@
+.title {
+  font-family: 'pauza', sans-serif;
+  direction: rtl;
+  color: #7030a0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.daysList {
+  font-family: 'pauza', sans-serif;
+  direction: rtl;
+  margin: 15px;
+  list-style-type: none;
+  margin-right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.daysBar > div:first-child {
+  border-radius: 0px 15px 15px 0px;
+}
+
+.daysBar > div:last-child {
+  border-radius: 15px 0px 0px 15px;
+}
+
+.availableDayItem {
+  font-family: 'pauza', sans-serif;
+  color: #ffffff;
+  height: 100%;
+  background: #7030a0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border: 1px solid white;
+}
+
+.notAvailableDayItem {
+  font-family: 'pauza', sans-serif;
+  color: #ffffff;
+  height: 100%;
+  background: #cbcbcb;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  border: 1px solid white;
+}

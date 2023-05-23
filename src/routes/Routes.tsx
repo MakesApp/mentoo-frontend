@@ -7,11 +7,13 @@ import {
   PLACE_PAGE,
   LOGIN_PAGE,
   HOME_PAGE,
+  REGISTER_PAGE,
 } from './routePath';
-import VolunteerPage from '../pages/Volunteer/Volunteer';
 import Home from '../pages/Home/Home';
 import RestrictedRoute from './RestrictedRoute';
 import PublicRoute from './PublicRoute';
+import Volunteer from '../pages/Volunteer/Volunteer';
+import Register from '../pages/Register/Register';
 
 const RoutesConfig: React.FC = () => {
   return (
@@ -20,7 +22,7 @@ const RoutesConfig: React.FC = () => {
           path={VOLUNTEER_PAGE}
           allowedRoles={['volunteer']}
           fallbackPath={LOGIN_PAGE}
-          component={VolunteerPage}
+          component={Volunteer}
         /> 
       {/* <RestrictedRoute
           path={PLACE_PAGE}
@@ -28,9 +30,9 @@ const RoutesConfig: React.FC = () => {
           fallbackPath={LOGIN_PAGE}
           component={PlacePage}
         />  */}
-    
-       <UnauthenticatedOnlyRoute path={LOGIN_PAGE} element={<Login/>} exact/>
-       <Route path={HOME_PAGE} component={Home} exact />
+      <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/>
+       <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login}/>
+       <UnauthenticatedOnlyRoute path={HOME_PAGE} component={Home}  />
        {/* Remove the duplicate LOGIN_PAGE route */}
     </Switch>
   );

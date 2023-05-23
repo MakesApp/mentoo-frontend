@@ -1,15 +1,20 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useLoginMutation } from '../../api/services/api';
 import AuthForm from '../../components/Auth/Auth';
 import { useAuthContext } from '../../context/useAuth';
-import './Login.css';
+import { REGISTER_PAGE, VOLUNTEER_PAGE } from '../../routes/routePath';
+import style from './Login.module.css';
+
 const Login = () => {
   const { mutateAsync } = useLoginMutation();
-  const { setIsAuthenticated } = useAuthContext();
+  const { setIsAuthenticated, userRole } = useAuthContext();
+  const [error,setError]=useState()
+  const history = useHistory();
 
-  console.log('assa');
-  
   const handleLogin = async (email: string, password: string) => {
+    console.log(email,password);
+    
     try {
       const response = await mutateAsync({ email, password });
       const { status, data } = response;
@@ -17,24 +22,30 @@ const Login = () => {
       if (status === 200) {
         setIsAuthenticated(true);
         localStorage.setItem('token', data.token);
+        const path = userRole === 'volunteer' ? VOLUNTEER_PAGE : '/';
+        history.push(path);
+        return;
       }
+      
 
       // Handle successful login
     } catch (error) {
       // Handle login error
-      console.error(error);
+      setError(error.response.data.message)
     }
   };
 
   return (
-    <div className="login-container">
-      <AuthForm onSubmit={handleLogin} buttonValue={'להתחבר'} />
-      <Link className="forgot-password" to={''}>
-        שכחתי סיסמה
-      </Link>
-      <div className="redirect-container">
-        <span>?אין לך חשבון</span>
-        <Link to={''}>פתיחת חשבון מנטו</Link>
+    <div className={style.loginContainer}>
+      <AuthForm onSubmit={handleLogin} buttonValue={'להתחבר'} error={error}>
+        <Link className={style.forgotPassword} to={''}>
+          שכחתי סיסמה
+        </Link>
+      </AuthForm>
+
+      <div className={style.redirectContainer}>
+        <span >אין לך חשבון ?</span>
+        <Link className={style.redirectLink} to={REGISTER_PAGE}>פתיחת חשבון מנטו</Link>
       </div>
     </div>
   );

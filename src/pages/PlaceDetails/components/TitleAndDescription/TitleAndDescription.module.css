@@ -1,0 +1,17 @@
+.container {
+  direction: rtl;
+  margin: 15px;
+}
+
+.title {
+  font-family: 'pauza', sans-serif;
+  color: #7030a0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.description {
+  font-family: 'pauza', sans-serif;
+  font-size: 18px;
+  color: #313131;
+}

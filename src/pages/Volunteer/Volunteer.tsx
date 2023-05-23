@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../../components/Header/Header';
 
 import PersonalData from './components/PersonalData/PersonalData';
 import PlaceCard from './components/PlaceCard/PlaceCard';
 import PreferencesDaysBar from './components/PreferencesDaysBar/PreferencesDaysBar';
 import PreferencesRegionsBar from './components/PreferencesRegionsBar/PreferencesRegionsBar';
-import './Volunteer.css'
-// Define your interface
+import style from './Volunteer.module.css';
+
 interface Place {
   id: number;
   fullName: string;
   pic: string;
   details: string;
-  days?: Array;
+  days?: string[];
   city?: string;
   address?: string;
   icon?: string;
 }
 
-const VolunteerPage: React.FC = () => {
+const Volunteer: React.FC = () => {
   const [places, setPlaces] = useState<Place[]>([
     {
       id: 1,
       fullName: 'מרכז שקר כלשהו',
       pic: 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg',
       details: 'לא עושים כאן כלום בדוק',
-      days: ['ראשון','שלישי'],
+      days: ['ראשון', 'שלישי'],
       city: 'Netivot',
       address: 'אזור השפלה',
       icon: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -34,61 +35,62 @@ const VolunteerPage: React.FC = () => {
       fullName: 'מרכז שקר אחר',
       pic: 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg',
       details: 'עושים כאן כלום בדוק',
-      days: ['ראשון','שני'],
+      days: ['ראשון', 'שני'],
       city: 'Netivot',
       address: 'אזור חיפה',
-    },  ]);
-    const [expanded, setExpanded] = useState([]);
-    const [filteredPlaces,setFilteredPlaces]=useState<Place[]>([])
-    const [regions, setRegions] = useState([]);
-    const [selectedDays, setSelectedDays] = useState([]);
+    },
+  ]);
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
+  const [regions, setRegions] = useState<string[]>([]);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
 
-         
   useEffect(() => {
     let newFilteredPlaces = [...places];
     if (regions.length > 0) {
-      newFilteredPlaces = newFilteredPlaces.filter(place => regions.includes(place.address));
+      newFilteredPlaces = newFilteredPlaces.filter((place) => regions.includes(place.address));
     }
-     
-    if (selectedDays.length > 0) { 
-      newFilteredPlaces = newFilteredPlaces.filter(place => 
-        selectedDays.every(day => place.days.includes(day))
+
+    if (selectedDays.length > 0) {
+      newFilteredPlaces = newFilteredPlaces.filter((place) =>
+        selectedDays.every((day) => place.days?.includes(day))
       );
     }
     setFilteredPlaces(newFilteredPlaces);
-
-  }, [regions, selectedDays,places]);
-
+  }, [regions, selectedDays, places]);
 
   return (
     <div>
-        <PersonalData />
-      <div className="content">
-        <div className="days-region-container">
-          <PreferencesRegionsBar regions={regions} setRegions={setRegions} expanded={expanded} setExpanded={setExpanded} places={places} setPlaces={setPlaces}/>
-          <PreferencesDaysBar selectedDays={selectedDays} setSelectedDays={setSelectedDays}/>
+      <Header avatarUrl=""/>
+      <PersonalData />
+      <div className={style.content}>
+        <div className={style.daysRegionContainer}>
+          <PreferencesRegionsBar
+            regions={regions}
+            setRegions={setRegions}
+            expanded={expanded}
+            setExpanded={setExpanded}
+          />
+          <PreferencesDaysBar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
         </div>
-          <span className="result">{`${filteredPlaces.length} תוצאות`}</span>
-         <ul className="card-list">
-        {filteredPlaces.map((place) => {
-          return (
-              <li 
-              className="card"
-              key={place.id}
-              >
-            <PlaceCard
-              placeId={place.id}
-              placePic={place.pic}
-              placeFullName={place.fullName}
-              placeDetails={place.details}
-            />
-            </li>
-          );
-        })}
+        <span className={style.result}>{`${filteredPlaces.length} תוצאות`}</span>
+        <ul className={style.cardList}>
+          {filteredPlaces.map((place) => {
+            return (
+              <li className={style.card} key={place.id}>
+                <PlaceCard
+                  placeId={place.id}
+                  placePic={place.pic}
+                  placeFullName={place.fullName}
+                  placeDetails={place.details}
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
   );
-}
+};
 
-export default VolunteerPage;
+export default Volunteer;

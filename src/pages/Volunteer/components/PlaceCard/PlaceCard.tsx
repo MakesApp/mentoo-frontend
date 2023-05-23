@@ -1,32 +1,30 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-
-import WhiteChatIcon from "../../../../assets/images/chat-icon-white.png";
-import vIcon from "../../../../assets/images/Vicon.png";
-import xIcon from "../../../../assets/images/Xicon.png";
-import "./PlaceCard.css";
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import WhiteChatIcon from '../../../../assets/images/chat-icon-white.png';
+import vIcon from '../../../../assets/images/Vicon.png';
+import xIcon from '../../../../assets/images/Xicon.png';
+import style from './PlaceCard.module.css';
 
 const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName, placeDetails }) => {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useHistory();
 
-  const handleCardClick=(e)=>{
+  const handleCardClick = (e) => {
     e.stopPropagation();
-  }
+  };
+
   return (
-    <div className="container">
-      <button onClick={handleCardClick} className="place">
-        <div className="image-container">
-          <img className="main-img" src={placePic} alt="" />
+    <div className={style.placeContainer}>
+      <button onClick={handleCardClick} className={style.place}>
+        <div className={style.imageContainer}>
+          <img className={style.mainImg} src={placePic} alt="" />
         </div>
-        <div className="btns-container">
-        <button className="action-button" onClick={()=>{
-          if(isClicked){setIsClicked(false)}
-        }}>
-          <img className="buttons-img" src={xIcon} alt="X icon" />
-        </button>
+      </button>
+
+      <div className={style.btnsContainer}>
+    
         <button
-          className={`action-button ${isClicked ? 'bg-green':''}`}
+          className={`${style.actionButton} ${isClicked ? style.bgGreen : ''}`}
           onClick={() => {
             if (isClicked) {
               navigate('');
@@ -34,24 +32,33 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName,
             setIsClicked(true);
           }}
         >
-            <img className={`chat-button-img`} src={isClicked?WhiteChatIcon:vIcon} alt="chat icon" />
+          <img className={style.chatButtonImg} src={isClicked ? WhiteChatIcon : vIcon} alt="chat icon" />
+        </button>
+            <button
+          className={style.actionButton}
+          onClick={() => {
+            if (isClicked) {
+              setIsClicked(false);
+            }
+          }}
+        >
+          <img className={style.buttonsImg} src={xIcon} alt="X icon" />
         </button>
       </div>
-      </button>
-      
-      <div className="place-info">
+
+      <div className={style.placeInfo}>
         <img
-          className="place-info-avatar"
-          src={"https://www.w3schools.com/howto/img_avatar.png"}
+          className={style.placeInfoAvatar}
+          src={'https://www.w3schools.com/howto/img_avatar.png'}
           alt="place icon"
         />
         <div>
-          <p> {placeFullName}</p>
-          <p> {placeDetails}</p>
+          <p>{placeFullName}</p>
+          <p>{placeDetails}</p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PlaceCard;

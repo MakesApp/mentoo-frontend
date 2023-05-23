@@ -1,32 +1,33 @@
 /* PlaceCard.css */
-.image-container {
+.imageContainer {
 }
 .place {
-  position: relative;
   border: none;
 }
-
-.main-img {
+.placeContainer {
+  position: relative;
+}
+.mainImg {
   width: 100%;
   aspect-ratio: 1/1;
   height: 100%;
   border-radius: 15px;
 }
 
-.buttons-img {
+.buttonsImg {
   height: 20px;
   width: 20px;
   cursor: pointer;
 }
 
-.btns-container {
+.btnsContainer {
   display: flex;
   position: absolute;
-  bottom: 5%;
+  bottom: 15%;
   right: 2.5%;
 }
 
-.place-info {
+.placeInfo {
   direction: rtl;
   display: flex;
   align-items: flex-start;
@@ -35,23 +36,23 @@
   column-gap: 5px;
 }
 
-.place-info p:first-child {
+.placeInfo p:first-child {
   color: #7030a0;
   font-size: 16px;
   font-weight: bold;
 }
 
-.place-info p:last-child {
+.placeInfo p:last-child {
   color: #313131;
   line-height: 0.7;
 }
 
-.place-info-avatar {
+.placeInfoAvatar {
   width: 10%;
   border-radius: 50%;
 }
 
-.action-button {
+.actionButton {
   border: none;
   background: #7030a0;
   height: 50px;
@@ -59,6 +60,6 @@
   margin-right: 5px;
   border-radius: 5%;
 }
-.bg-green {
+.bgGreen {
   background: #30a041;
 }

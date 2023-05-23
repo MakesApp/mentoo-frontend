@@ -1,32 +1,28 @@
-import React, { useState } from "react";
-import { days } from "../../constants";
-import downArrow from "../../../../assets/images/downArrow.png";
-import "./PreferencesDaysBar.css";
+import React, { useState } from 'react';
+import { days } from '../../constants';
+import downArrow from '../../../../assets/images/downArrow.png';
+import style from './PreferencesDaysBar.module.css';
 
-const PreferencesDaysBar: React.FC = ({selectedDays,setSelectedDays}) => {
- 
-//   const [availableDays, setAvailableDays] = useState([]);
-
+const PreferencesDaysBar: React.FC = ({ selectedDays, setSelectedDays }) => {
   const handleOnChange = (day: string): void => {
-  
-    if(selectedDays.includes(day)){
-      const filteredDays= selectedDays.filter(selectedDay => selectedDay !== day);
-      setSelectedDays(filteredDays)
-        return;
+    if (selectedDays.includes(day)) {
+      const filteredDays = selectedDays.filter((selectedDay) => selectedDay !== day);
+      setSelectedDays(filteredDays);
+      return;
     }
- 
-    setSelectedDays([...selectedDays,day]);
+
+    setSelectedDays([...selectedDays, day]);
   };
 
   return (
-    <div className="container">
-      <div className="dropdown">
-        <button className="dropdown-btn">
-          <img className="downArrowImg" src={downArrow} alt="down arrow" />
-       <span>   ימי התנדבות</span>
+    <div className={style.daysContainer}>
+      <div className={style.dropdown}>
+        <button className={style.dropdownBtn}>
+          <img className={style.downArrowImg} src={downArrow} alt="down arrow" />
+          <span> ימי התנדבות</span>
         </button>
 
-        <ul className="ul-content">
+        <ul className={style.ulContent}>
           {days.map(({ name }, index) => {
             return (
               <li key={name}>
@@ -37,7 +33,7 @@ const PreferencesDaysBar: React.FC = ({selectedDays,setSelectedDays}) => {
                       id={`custom-checkbox-${name}`}
                       name={name}
                       value={name}
-                      checked={selectedDays[name]}
+                      checked={selectedDays.includes(name)}
                       onChange={() => handleOnChange(name)}
                     />
                     <label htmlFor={`custom-checkbox-${name}`}>{name}</label>
@@ -50,6 +46,6 @@ const PreferencesDaysBar: React.FC = ({selectedDays,setSelectedDays}) => {
       </div>
     </div>
   );
-}
+};
 
 export default PreferencesDaysBar;

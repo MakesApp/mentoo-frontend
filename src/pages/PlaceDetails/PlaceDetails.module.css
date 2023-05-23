@@ -1,0 +1,19 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+.placeImg {
+  height: 40%;
+  object-fit: cover;
+  width: 100%;
+}
+.mentoBtn {
+  width: 100%;
+  padding: 4%;
+  background: #7030a0;
+  border: none;
+  font-family: 'pauza';
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+}

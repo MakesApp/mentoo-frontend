@@ -1,6 +1,6 @@
 /* PersonalData.css */
 
-.data-container {
+.dataContainer {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -13,11 +13,11 @@
   font-weight: bold;
 }
 
-.data-container div p:first-child {
+.dataContainer div p:first-child {
   font-style: oblique;
 }
 
-.personal-info {
+.personalInfo {
   direction: rtl;
   display: flex;
   align-items: center;
@@ -26,21 +26,28 @@
   flex-direction: row;
 }
 
-.vol-hours {
+.volHours {
   color: #8323ac;
   font-weight: bold;
   background: #ffffff;
   border-radius: 50%;
-  padding: 0.7rem 0.5rem;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  height: 50px;
 }
 
 .project {
+  font-size: 19px;
 }
 .project::before {
   content: '#';
 }
 
-.text {
+.personalDataText {
+  font-size: 18px;
   display: flex;
   flex-direction: column;
 }

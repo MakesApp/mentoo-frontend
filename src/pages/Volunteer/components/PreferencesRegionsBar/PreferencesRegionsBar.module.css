@@ -1,12 +1,12 @@
 /* PreferencesRegionsBar.css */
-.container {
+.regionsContainer {
   width: 100%;
 }
-.dropdown-btn {
+.dropdownBtn {
   background-color: transparent;
   color: #7030a0;
   padding: 6px 25px;
-  font-size: 16px;
+  font-size: 20px;
   width: 100%;
   border: 2px solid #7060a0;
   border-radius: 13px;
@@ -14,19 +14,20 @@
 }
 
 .downArrowImg {
-  padding-right: 10px;
+  position: absolute;
+  left: 5%;
+  transform: translateY(50%);
 }
 
-.ul-content {
+.ulContent {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-.ul-content li {
+.ulContent li {
   color: black;
   padding: 16px 10px;
   text-decoration: none;
@@ -39,6 +40,6 @@
   display: block;
 }
 
-.dropdown:hover .ul-content {
+.dropdown:hover .ulContent {
   display: block;
 }
