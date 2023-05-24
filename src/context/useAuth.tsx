@@ -1,32 +1,17 @@
 import React, { createContext, useState } from 'react';
 
-type AuthContextType = {
-  isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
-};
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+const AuthContext = createContext(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
-  const [userRole, setUserRole] = useState(localStorage.getItem('role'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
-  const login = () => {
-    setIsAuthenticated(true);
-  };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-  };
 
-  const value: AuthContextType = {
-    isAuthenticated,
-    setIsAuthenticated,
-    setUserRole,
-    userRole,
-    login,
-    logout,
+  const value = {
+    setUser,
+    user,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

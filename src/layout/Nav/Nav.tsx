@@ -3,7 +3,7 @@ import './Nav.css'; // Replace with the actual file path to your Nav CSS file
 import { Link } from 'react-router-dom';
 // import { Link } from "react-router-dom";
 import chatIcon from 'assets/images/chat-icon.svg';
-import { HOME_PAGE, VOLUNTEER_PAGE } from '../../routes/routePath';
+import {  VOLUNTEER_PAGE } from '../../routes/routePath';
 
 const Nav=()=> {
   const [userPicture, setUserPicture] = useState(
@@ -24,7 +24,7 @@ const Nav=()=> {
               <img src={''} alt="chat icon" />
             </div>
           </a> */}
-          <Link className="menu-link logo" to={HOME_PAGE}>
+          <Link className="menu-link logo" to={''}>
             <p>
               ment<span>oo</span>
             </p>

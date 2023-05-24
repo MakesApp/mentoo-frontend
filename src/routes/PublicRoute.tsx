@@ -13,17 +13,17 @@ const PublicRoute: React.FC<PublicRouteProps> = ({
   fallbackPath,
   component: Component,
 }) => {
-  const { isAuthenticated } = useAuthContext();
+  const { user } = useAuthContext();
   const history = useHistory();
 
   React.useEffect(() => {
-    if (isAuthenticated) {
+    if (user) {
       history.push(fallbackPath);
     }
-  }, [isAuthenticated, fallbackPath]);
+  }, [user, fallbackPath]);
 
   // Always return a Route component.
-  return <Route path={path} element={!isAuthenticated ? <Component /> : null} />;
+  return <Component/>;
 };
 
 export default PublicRoute;

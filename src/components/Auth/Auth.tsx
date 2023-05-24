@@ -3,7 +3,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useAuthContext } from '../../context/useAuth';
 import volunteerImg from '../../assets/images/volunteer.svg';
-import placeImg from '../../assets/images/place.svg';
 import style from './Auth.module.css';
 import Logo from '../Logo/Logo';
 
@@ -28,7 +27,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   children,
   error
 }) => {
-  const { userRole } = useAuthContext();
 
   const initialValues = {
     email: '',
@@ -42,8 +40,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
     actions: any,
     event: React.FormEvent<HTMLFormElement>
   ) => {
-    console.log(values);
-    
     onSubmit(values.email, values.password);
     actions.setSubmitting(false); // Manually set submitting state to false
   };
@@ -63,7 +59,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <div>
             <img
               className={style.roleImg}
-              src={userRole === 'volunteer' ? volunteerImg : placeImg}
+              src={ volunteerImg}
               alt={'סוג משתמש'}
             />
           </div>

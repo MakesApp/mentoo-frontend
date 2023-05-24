@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import Nav from './layout/Nav/Nav';
-import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import RoutesConfig from './routes/Routes';
@@ -22,7 +21,6 @@ const App=()=> {
       <RoutesConfig/>
       {/* <PlaceDetails {...randomPlace} /> */}
       {/* <Login/> */}
-      {/* <Home /> */}
       {/* <Volunteer/> */}
       {/* <Register /> */}
     </BrowserRouter>

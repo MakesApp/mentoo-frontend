@@ -28,6 +28,7 @@ const Volunteer: React.FC = () => {
       days: ['ראשון', 'שלישי'],
       city: 'Netivot',
       address: 'אזור השפלה',
+      looksFor:'lo yodea',
       icon: 'https://www.w3schools.com/howto/img_avatar.png',
     },
     {
@@ -35,9 +36,11 @@ const Volunteer: React.FC = () => {
       fullName: 'מרכז שקר אחר',
       pic: 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg',
       details: 'עושים כאן כלום בדוק',
+      looksFor:'lo yodea',
       days: ['ראשון', 'שני'],
       city: 'Netivot',
       address: 'אזור חיפה',
+      
     },
   ]);
   const [expanded, setExpanded] = useState<string[]>([]);
@@ -80,10 +83,7 @@ console.log(regions);
             return (
               <li className={style.card} key={place.id}>
                 <PlaceCard
-                  placeId={place.id}
-                  placePic={place.pic}
-                  placeFullName={place.fullName}
-                  placeDetails={place.details}
+                 place={place}
                 />
               </li>
             );

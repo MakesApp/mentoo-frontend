@@ -9,7 +9,7 @@ import style from './Register.module.css';
 const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [error,setError]=useState()
-  const {setIsAuthenticated,userRole}=useAuthContext()
+  const {setUser}=useAuthContext()
   const { mutateAsync } = useRegisterMutation();
   const history=useHistory();
 
@@ -17,11 +17,12 @@ const Register = () => {
  try {
       const response = await mutateAsync({ email, password });
       const { status, data } = response;
-
+  console.log(data);
+  
       if (status === 200) {
-        setIsAuthenticated(true);
-        localStorage.setItem('token', data.token);
-        const path = userRole === 'volunteer' ? VOLUNTEER_PAGE : '/';
+        setUser(data.user)
+        localStorage.setItem('user',JSON.stringify( data.user));
+        const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
         history.push(path);
         return;
       }

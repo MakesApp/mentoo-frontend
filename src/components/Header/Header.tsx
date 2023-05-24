@@ -6,7 +6,7 @@ import chatIcon from '../../assets/images/chat-icon.svg'
 interface HeaderProps{
     avatarUrl:string
 }
-const Header: React.FC<HeaderProps> = ({ avatarUrl}) => {
+const Header: React.FC<HeaderProps> = ({ children}) => {
   return (
     <header className={style.headerContainer}>
       <div className={style.headerRight}>
@@ -17,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({ avatarUrl}) => {
       </div>
       <div className={style.headerLeft}>
         <img src={chatIcon} alt="chat icon" />
+          {children}
       </div>
     </header>
   );

@@ -15,6 +15,8 @@
 
 .headerLeft {
   justify-content: flex-end;
+  display: flex;
+  column-gap: 25px;
 }
 
 .avatarIcon {

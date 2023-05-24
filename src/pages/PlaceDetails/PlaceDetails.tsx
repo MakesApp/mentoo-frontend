@@ -3,40 +3,51 @@ import TitleAndDescription from "./components/TitleAndDescription/TitleAndDescri
 import Days from "./components/Days/Days";
 import chatIcon from '../../assets/images/chat-icon-white.svg'
 import Header from "../../components/Header/Header";
+import arrowLeft from '../../assets/images/arrow-left.svg'
 interface PlaceDetailsProps {
-  placeDetails: string;
-  placeImage: string;
-  placeLooksFor: string;
-  placeFullName: string;
-  placeAvailableDays: string[];
-  placeAddress: string;
+  id: number;
+  fullName: string;
+  pic: string;
+  details: string;
+  days: string[];
+  city: string;
+  address: string;
+  looksFor: string;
+  icon: string;
 }
 
 const PlaceDetails: React.FC<PlaceDetailsProps>=({
-  placeDetails,
-  placeImage,
-  placeLooksFor,
-  placeFullName,
-  placeAvailableDays,
-  placeAddress,
+place
 }) =>{
-    console.log(placeAvailableDays);
     
+const {
+      id= 1,
+      fullName= 'מרכז שקר כלשהו',
+      pic= 'https://www.w3schools.com/howto/img_avatar.png',
+      details= 'לא עושים כאן כלום בדוק',
+      days= ['ראשון', 'שלישי'],
+      city= 'Netivot',
+      address= 'אזור השפלה',
+      looksFor='lo yodea',
+      icon= 'https=//www.w3schools.com/howto/img_avatar.png',
+    } = place={};
   return (
     <div className={style.container}>
-        <Header/>
-      <img className={style.placeImg} src={placeImage} alt="" />
+        <Header>
+            <img src={arrowLeft} alt="arrow left"/>
+        </Header>
+      <img className={style.placeImg} src={pic} alt="" />
       <div className={style.titleAndDescriptionContainer}>
-      <TitleAndDescription title={placeFullName} description={placeDetails} />
+      <TitleAndDescription title={fullName} description={details} />
       <TitleAndDescription
         title={"מה אנחנו מחפשים?"}
-        description={placeLooksFor}
+        description={looksFor}
       />
       <TitleAndDescription
         title={"ימים פעילים בשבוע"}
-        description={<Days days={placeAvailableDays} />}
+        description={<Days days={days} />}
       />
-      <TitleAndDescription title={"כתובת"} description={placeAddress} />
+      <TitleAndDescription title={"כתובת"} description={address} />
       </div>
       <button className={style.mentooBtn}>
         <span>

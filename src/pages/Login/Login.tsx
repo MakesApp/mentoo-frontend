@@ -8,21 +8,18 @@ import style from './Login.module.css';
 
 const Login = () => {
   const { mutateAsync } = useLoginMutation();
-  const { setIsAuthenticated, userRole } = useAuthContext();
+  const { setUser } = useAuthContext();
   const [error,setError]=useState()
   const history = useHistory();
-
   const handleLogin = async (email: string, password: string) => {
-    console.log(email,password);
-    
     try {
       const response = await mutateAsync({ email, password });
       const { status, data } = response;
 
       if (status === 200) {
-        setIsAuthenticated(true);
-        localStorage.setItem('token', data.token);
-        const path = userRole === 'volunteer' ? VOLUNTEER_PAGE : '/';
+        setUser(data.user)
+        localStorage.setItem('user', JSON.stringify(data.user));
+        const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
         history.push(path);
         return;
       }

@@ -4,22 +4,33 @@ import WhiteChatIcon from '../../../../assets/images/chat-icon-white.svg';
 import vIcon from '../../../../assets/images/Vicon.png';
 import xIcon from '../../../../assets/images/Xicon.png';
 import style from './PlaceCard.module.css';
+interface PlaceCardProps {
+  id: number;
+  fullName: string;
+  pic: string;
+  details: string;
+  days: string[];
+  city: string;
+  address: string;
+  looksFor: string;
+  icon: string;
+}
 
-const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName, placeDetails }) => {
+const PlaceCard: React.FC<PlaceCardProps> = ({ place}) => {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useHistory();
-
+const { pic, fullName, details ,id:placeId}=place;
   const handleCardClick = (e) => {
     e.stopPropagation();
   };
 
   return (
     <div className={style.placeContainer}>
-      <button onClick={handleCardClick} className={style.place}>
+      <Link to={{pathname:`/place/${placeId}/details`}} className={style.place}>
         <div className={style.imageContainer}>
-          <img className={style.mainImg} src={placePic} alt="" />
+          <img className={style.mainImg} src={pic} alt="" />
         </div>
-      </button>
+      </Link>
 
       <div className={style.btnsContainer}>
     
@@ -53,8 +64,8 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ placeId, placePic, placeFullName,
           alt="place icon"
         />
         <div>
-          <p>{placeFullName}</p>
-          <p>{placeDetails}</p>
+          <p>{fullName}</p>
+          <p>{details}</p>
         </div>
       </div>
     </div>
