@@ -1,7 +1,9 @@
 import style from "./PlaceDetails.module.css";
 import TitleAndDescription from "./components/TitleAndDescription/TitleAndDescription";
 import Days from "./components/Days/Days";
-interface Place {
+import chatIcon from '../../assets/images/chat-icon-white.svg'
+import Header from "../../components/Header/Header";
+interface PlaceDetailsProps {
   placeDetails: string;
   placeImage: string;
   placeLooksFor: string;
@@ -10,7 +12,7 @@ interface Place {
   placeAddress: string;
 }
 
-const PlaceDetails: React.FC<PlaceCardProps>=({
+const PlaceDetails: React.FC<PlaceDetailsProps>=({
   placeDetails,
   placeImage,
   placeLooksFor,
@@ -22,7 +24,9 @@ const PlaceDetails: React.FC<PlaceCardProps>=({
     
   return (
     <div className={style.container}>
+        <Header/>
       <img className={style.placeImg} src={placeImage} alt="" />
+      <div className={style.titleAndDescriptionContainer}>
       <TitleAndDescription title={placeFullName} description={placeDetails} />
       <TitleAndDescription
         title={"מה אנחנו מחפשים?"}
@@ -33,11 +37,12 @@ const PlaceDetails: React.FC<PlaceCardProps>=({
         description={<Days days={placeAvailableDays} />}
       />
       <TitleAndDescription title={"כתובת"} description={placeAddress} />
+      </div>
       <button className={style.mentooBtn}>
         <span>
-          <img src={''} />
           יש מצב שזה מנטו
         </span>
+        <img src={chatIcon} alt="chat" />
       </button>
     </div>
   );

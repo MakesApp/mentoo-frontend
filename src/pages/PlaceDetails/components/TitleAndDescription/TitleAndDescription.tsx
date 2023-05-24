@@ -10,7 +10,7 @@ const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({ title, descri
   return (
     <div className={style.container}>
       <h2 className={style.title}>{title}</h2>
-      <div className={style.descrdivption}>{description}</div>
+      <div className={style.description}>{description}</div>
     </div>
   );
 };

@@ -15,12 +15,12 @@ const randomPlace = {
   placeAddress: "123 Main St, City, Country",
 };
 
-function App() {
+const App=()=> {
   return (
     <BrowserRouter>
       {/* <Nav/> */}
-      {/* <RoutesConfig/> */}
-      <PlaceDetails {...randomPlace} />
+      <RoutesConfig/>
+      {/* <PlaceDetails {...randomPlace} /> */}
       {/* <Login/> */}
       {/* <Home /> */}
       {/* <Volunteer/> */}

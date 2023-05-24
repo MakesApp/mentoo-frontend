@@ -17,11 +17,11 @@
   justify-content: space-between;
 }
 
-.daysBar > div:first-child {
+.daysList > li:first-child {
   border-radius: 0px 15px 15px 0px;
 }
 
-.daysBar > div:last-child {
+.daysList > li:last-child {
   border-radius: 15px 0px 0px 15px;
 }
 

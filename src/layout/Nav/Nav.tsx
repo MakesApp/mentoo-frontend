@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import chatIcon from 'assets/images/chat-icon.svg';
 import { HOME_PAGE, VOLUNTEER_PAGE } from '../../routes/routePath';
 
-function Nav() {
+const Nav=()=> {
   const [userPicture, setUserPicture] = useState(
     'https://www.w3schools.com/howto/img_avatar.png'
   );

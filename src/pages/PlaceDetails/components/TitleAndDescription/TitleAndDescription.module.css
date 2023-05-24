@@ -1,6 +1,5 @@
 .container {
-  direction: rtl;
-  margin: 15px;
+  padding: 0 5%;
 }
 
 .title {

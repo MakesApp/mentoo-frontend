@@ -7,10 +7,7 @@ interface DaysProps {
 }
 
 const Days: React.FC<DaysProps> = ({ days }) => {
-  function compareDays( ) {
-    console.log(days);
-    
-    
+  const compareDays=( )=> {
     const jsxArr: JSX.Element[] = [];
     for (let i = 0; i < Object.keys(weekDays).length; i++) { 
       console.log(Object.keys(weekDays)[i] ,days[i]);

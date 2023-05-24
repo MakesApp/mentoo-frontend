@@ -44,6 +44,7 @@ const Volunteer: React.FC = () => {
   const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
+console.log(regions);
 
   useEffect(() => {
     let newFilteredPlaces = [...places];
@@ -66,10 +67,10 @@ const Volunteer: React.FC = () => {
       <div className={style.content}>
         <div className={style.daysRegionContainer}>
           <PreferencesRegionsBar
-            regions={regions}
-            setRegions={setRegions}
-            expanded={expanded}
-            setExpanded={setExpanded}
+            checkedNodes={regions}
+            setCheckedNodes={setRegions}
+            expandedNodes={expanded}
+            setExpandedNodes={setExpanded}
           />
           <PreferencesDaysBar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
         </div>

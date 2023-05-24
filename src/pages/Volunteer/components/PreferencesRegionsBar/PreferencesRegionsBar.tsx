@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import downArrow from '../../../../assets/images/downArrow.png';
-import CheckboxesTree from '../CheckboxesTree/CheckboxesTree';
+import CheckboxTree from '../CheckboxeTree/CheckboxTree';
 import style from './PreferencesRegionsBar.module.css';
-
-const PreferencesRegionsBar: React.FC = ({ regions, setRegions, expanded, setExpanded }) => {
+interface PreferencesRegionsBarProps {
+  checkedNodes: number[];
+  setCheckedNodes: React.Dispatch<React.SetStateAction<number[]>>;
+  expandedNodes: number[];
+  setExpandedNodes: React.Dispatch<React.SetStateAction<number[]>>;
+}
+const PreferencesRegionsBar: React.FC<PreferencesRegionsBarProps> = ({ checkedNodes, setCheckedNodes, expandedNodes, setExpandedNodes }) => {
   return (
     <div className={style.regionsContainer}>
       <div className={style.dropdown}>
@@ -13,7 +18,7 @@ const PreferencesRegionsBar: React.FC = ({ regions, setRegions, expanded, setExp
         </button>
 
         <ul className={style.ulContent}>
-          <CheckboxesTree regions={regions} setRegions={setRegions} expanded={expanded} setExpanded={setExpanded} />
+          <CheckboxTree checkedNodes={checkedNodes} setCheckedNodes={setCheckedNodes} expandedNodes={expandedNodes} setExpandedNodes={setExpandedNodes} />
         </ul>
       </div>
     </div>
