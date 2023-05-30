@@ -3,12 +3,14 @@ import { Route, useHistory } from 'react-router-dom';
 import { useAuthContext } from '../context/useAuth';
 
 interface RestrictedRouteProps {
+  path: string;
   allowedRoles: string[];
   fallbackPath: string;
   component: React.ComponentType;
 }
 
 const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
+  path,
   allowedRoles,
   fallbackPath,
   component: Component,
@@ -19,14 +21,17 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
   // If user is authenticated and has allowed role, render the Component, 
   // else navigate to fallback path.
   React.useEffect(() => {
-    
     if (!(user && allowedRoles.includes(user.role))) {
       history.push(fallbackPath);
     }
   }, [user, allowedRoles, fallbackPath]);
 
   // Always return a Route component.
-  return <Component/>
+  return (
+    <Route path={path}>
+      <Component/>
+    </Route>
+  );
 };
 
 export default RestrictedRoute;

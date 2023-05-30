@@ -1,0 +1,12 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  color: white;
+  border: none;
+  row-gap: 7.5px;
+  font-size: 14px;
+  flex-direction: column;
+}

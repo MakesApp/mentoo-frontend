@@ -21,7 +21,6 @@ const Register = () => {
   
       if (status === 200) {
         setUser(data.user)
-        localStorage.setItem('user',JSON.stringify( data.user));
         const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
         history.push(path);
         return;

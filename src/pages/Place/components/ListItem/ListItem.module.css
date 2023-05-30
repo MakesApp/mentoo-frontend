@@ -1,0 +1,108 @@
+.listItem {
+  position: relative;
+}
+
+.userDetailsContainer {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  background-color: #fff;
+  z-index: 2;
+  align-items: center;
+  overflow: hidden;
+  column-gap: 25px;
+  padding: 5%;
+  transition: transform 0.5s ease;
+}
+
+.userName {
+  font-size: 20px;
+  color: #7030a0;
+}
+
+.profileImg {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+}
+
+.icons li {
+  background: none repeat scroll 0 0 black;
+  height: 7px;
+  width: 7px;
+  line-height: 0;
+  list-style: none outside none;
+  margin-right: 15px;
+  margin-top: 3px;
+  vertical-align: top;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.moveContainer {
+  animation-name: slideIn;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(0%); /* Change -100% to 100% */
+  }
+  to {
+    transform: translateX(-50%); /* Change -50% to the desired value */
+  }
+}
+.content {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  display: flex;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+}
+
+.closeIcon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.closeIcon.active {
+  animation-name: slideOut;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s; /* Add a delay to match the duration */
+}
+
+.closeIcon:before,
+.closeIcon:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background-color: #000;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.closeIcon:before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeIcon:after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.closeIcon.active:before {
+  transform: translate(-50%, -50%) rotate(0);
+}
+
+.closeIcon.active:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}

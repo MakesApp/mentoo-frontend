@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation,useQuery } from 'react-query';
 import api from '../../config/api';
 
 
@@ -9,6 +9,7 @@ export const useLoginMutation = () => {
 
   return loginMutation;
 };
+
 
 export const useRegisterMutation = () => {
   const registerMutation = useMutation(

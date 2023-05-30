@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useAuthContext } from '../../context/useAuth';
 import volunteerImg from '../../assets/images/volunteer.svg';
 import style from './Auth.module.css';
 import Logo from '../Logo/Logo';

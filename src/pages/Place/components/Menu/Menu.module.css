@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  background-color: #ededed;
+  justify-content: space-between;
+}
+.listItem {
+  height: 100%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+}
+
+.listItem:first-child {
+  padding-right: 5%;
+}
+.listItem:last-child {
+  padding-left: 5%;
+}
+.btn {
+  text-align: right;
+  border: none;
+  font-size: 16px;
+  height: 100%;
+  cursor: pointer;
+  width: 100%;
+  color: #313131;
+}
+.selected {
+  color: #792ba6;
+  border-bottom: 2px solid #792ba6;
+}

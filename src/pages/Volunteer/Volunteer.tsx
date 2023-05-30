@@ -47,7 +47,6 @@ const Volunteer: React.FC = () => {
   const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-console.log(regions);
 
   useEffect(() => {
     let newFilteredPlaces = [...places];

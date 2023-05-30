@@ -1,24 +1,30 @@
-
 import React from 'react';
-import {Route,useHistory} from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom';
 import { useAuthContext } from '../context/useAuth';
-import {  PLACE_PAGE, VOLUNTEER_PAGE } from './routePath';
+import { VOLUNTEER_PAGE } from './routePath';
+
 interface Props {
+  path: string | string[];
   component: React.ComponentType;
 }
-const UnauthenticatedOnlyRoute = ({ component:Component }:Props) => {
+
+const UnauthenticatedOnlyRoute = ({ path, component:Component }:Props) => {
   const { user } = useAuthContext();
   const history = useHistory();
-console.log('here');
 
-  // If user is authenticated and has allowed role, render the Component, 
-  // else navigate to fallback path.
+  // If user is authenticated, navigate to appropriate path.
   React.useEffect(() => {
-    if ((user )) {
-     return history.push(user.role==='volunteer'?VOLUNTEER_PAGE:'/blublu');
+    if (user) {
+      return history.push(user.role === 'volunteer' ? VOLUNTEER_PAGE : '/blublu');
     }
   }, [user]);
 
-  return <Component/>;
+  // Always return a Route component.
+  return (
+    <Route path={path}>
+      <Component/>
+    </Route>
+  );
 };
+
 export default UnauthenticatedOnlyRoute;

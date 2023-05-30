@@ -4,6 +4,8 @@ import Days from "./components/Days/Days";
 import chatIcon from '../../assets/images/chat-icon-white.svg'
 import Header from "../../components/Header/Header";
 import arrowLeft from '../../assets/images/arrow-left.svg'
+import { Link } from "react-router-dom";
+import { VOLUNTEER_PAGE } from "../../routes/routePath";
 interface PlaceDetailsProps {
   id: number;
   fullName: string;
@@ -34,7 +36,9 @@ const {
   return (
     <div className={style.container}>
         <Header>
+            <Link to={VOLUNTEER_PAGE}>
             <img src={arrowLeft} alt="arrow left"/>
+            </Link>
         </Header>
       <img className={style.placeImg} src={pic} alt="" />
       <div className={style.titleAndDescriptionContainer}>

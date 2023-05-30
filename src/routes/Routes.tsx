@@ -14,31 +14,30 @@ import PublicRoute from './PublicRoute';
 import Volunteer from '../pages/Volunteer/Volunteer';
 import Register from '../pages/Register/Register';
 import PlaceDetails from '../pages/PlaceDetails/PlaceDetails';
+import Place from '../pages/Place/Place';
 
 const RoutesConfig: React.FC = () => {
   return (
     <Switch>
       <RestrictedRoute
-          path={VOLUNTEER_PAGE}
-          allowedRoles={['volunteer']}
-          fallbackPath={LOGIN_PAGE}
-          component={Volunteer}
-        /> 
-        <RestrictedRoute
-          path={PLACE_DETAILS}
-          allowedRoles={['volunteer']}
-          fallbackPath={LOGIN_PAGE}
-          component={PlaceDetails}
-        /> 
-      {/* <RestrictedRoute
-          path={PLACE_PAGE}
-          allowedRoles={['place']}
-          fallbackPath={LOGIN_PAGE}
-          component={PlacePage}
-        />  */}
+        allowedRoles={['volunteer']}
+        fallbackPath={LOGIN_PAGE}
+        component={Place}
+      /> 
+      <UnauthenticatedOnlyRoute  path={['/', LOGIN_PAGE]} component={Login}/>
       <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/>
-       <UnauthenticatedOnlyRoute path={['/',LOGIN_PAGE]} component={Login}/>
-       {/* Remove the duplicate LOGIN_PAGE route */}
+      <RestrictedRoute
+        path={PLACE_DETAILS}
+        allowedRoles={['volunteer']}
+        fallbackPath={LOGIN_PAGE}
+        component={PlaceDetails}
+      /> 
+      <RestrictedRoute
+        allowedRoles={['volunteer']}
+        fallbackPath={LOGIN_PAGE}
+        component={Volunteer}
+      /> 
+      
     </Switch>
   );
 };

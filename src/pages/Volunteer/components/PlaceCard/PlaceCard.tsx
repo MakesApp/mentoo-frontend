@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import WhiteChatIcon from '../../../../assets/images/chat-icon-white.svg';
-import vIcon from '../../../../assets/images/Vicon.png';
+import vIcon from '../../../../assets/images/v-icon.svg';
 import xIcon from '../../../../assets/images/Xicon.png';
 import style from './PlaceCard.module.css';
 interface PlaceCardProps {

@@ -1,10 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import Nav from './layout/Nav/Nav';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
 import RoutesConfig from './routes/Routes';
-import Volunteer from './pages/Volunteer/Volunteer'
-import PlaceDetails from './pages/PlaceDetails/PlaceDetails';
 const randomPlace = {
   placeDetails: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   placeImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqeZ5mVbarupP8UWVic7UtumtbIyE0GY-ucQ&usqp=CAU",
@@ -14,15 +9,14 @@ const randomPlace = {
   placeAddress: "123 Main St, City, Country",
 };
 
+
+
+
+
 const App=()=> {
   return (
     <BrowserRouter>
-      {/* <Nav/> */}
       <RoutesConfig/>
-      {/* <PlaceDetails {...randomPlace} /> */}
-      {/* <Login/> */}
-      {/* <Volunteer/> */}
-      {/* <Register /> */}
     </BrowserRouter>
   );
 }

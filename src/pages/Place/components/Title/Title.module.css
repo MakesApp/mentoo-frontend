@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  background-color: #7030a0;
+  color: white;
+  padding: 5%;
+}
+.title {
+  font-size: 24px;
+}
+.title::before {
+  content: '#״';
+}
+.title::after {
+  content: '״';
+}
+.subTitle {
+  font-size: 20px;
+}
