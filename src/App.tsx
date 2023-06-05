@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
+import Chat from './pages/Chat/Chat';
 import RoutesConfig from './routes/Routes';
 const randomPlace = {
   placeDetails: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -17,6 +18,7 @@ const App=()=> {
   return (
     <BrowserRouter>
       <RoutesConfig/>
+      
     </BrowserRouter>
   );
 }

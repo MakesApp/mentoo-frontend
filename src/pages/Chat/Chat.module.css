@@ -1,0 +1,11 @@
+.messages {
+  list-style-type: none;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}

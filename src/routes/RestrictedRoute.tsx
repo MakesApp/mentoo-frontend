@@ -1,36 +1,30 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useAuthContext } from '../context/useAuth';
 
 interface RestrictedRouteProps {
   path: string;
   allowedRoles: string[];
   fallbackPath: string;
-  component: React.ComponentType;
+  component: React.ComponentType<any>;
 }
 
-const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
-  path,
-  allowedRoles,
-  fallbackPath,
-  component: Component,
-}) => {
-  const { user } = useAuthContext();
-  const history = useHistory();
+const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ path, allowedRoles, fallbackPath, component: Component }) => {
+  const { user, loading } = useAuthContext();
 
-  // If user is authenticated and has allowed role, render the Component, 
-  // else navigate to fallback path.
-  React.useEffect(() => {
-    if (!(user && allowedRoles.includes(user.role))) {
-      history.push(fallbackPath);
-    }
-  }, [user, allowedRoles, fallbackPath]);
+  if (loading) {
+    return <div>Loading...</div>; // or any loading spinner component
+  }
 
-  // Always return a Route component.
   return (
-    <Route path={path}>
-      <Component/>
-    </Route>
+    <Route 
+      path={path}
+      render={props =>
+        user && allowedRoles.includes(user.role)
+          ? <Component {...props} />
+          : <Redirect to={fallbackPath} />
+      }
+    />
   );
 };
 

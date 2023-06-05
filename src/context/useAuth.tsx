@@ -6,6 +6,7 @@ const AuthContext = createContext(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api.get('/user/auth')
@@ -14,13 +15,14 @@ export const AuthProvider: React.FC = ({ children }) => {
       })
       .catch(err => {
         setUser(null); // If the user is not authenticated, set the user to null
-      })
+      }).finally(()=>setLoading(false))
    
   }, []);
 
   const value = {
     setUser,
     user,
+    loading
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
