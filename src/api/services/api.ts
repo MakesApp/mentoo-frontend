@@ -18,3 +18,22 @@ export const useRegisterMutation = () => {
 
   return registerMutation;
 };
+
+export const getAllPlaces = async () => {
+  const response = await api.get('/place/getPlaces');
+  
+  return response.data;
+}
+export const getPlaceById = async ({ queryKey }) => {
+  const [_, placeId] = queryKey;
+  const response = await api.get(`/place/${placeId}`);
+  return response.data;
+};
+
+export const useLogoutMutation = () => {
+  const logoutMutation = useMutation(
+    () => api.get('/user/logout')
+  );
+
+  return logoutMutation;
+};

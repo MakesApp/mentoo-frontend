@@ -38,3 +38,28 @@
 .headerMiddle img:last-child {
   width: 75px;
 }
+
+.avatarContainer {
+  position: relative;
+}
+.logoutBtn {
+  padding: 5px 20px;
+  position: absolute;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.24);
+  right: 0;
+  bottom: -75%;
+  background-color: #e7e7e7; /* Use any color you prefer */
+  color: black; /* Text color */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Adds a transition effect */
+}
+
+.logoutBtn:hover {
+  background-color: #f7f7f7f7; /* Darker shade when hovered */
+  transform: scale(1.1); /* Scales the button size when hovered */
+}
+
+.logoutBtn:active {
+  transform: scale(1); /* Scales the button back to normal when clicked */
+}

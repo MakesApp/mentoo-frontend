@@ -23,32 +23,33 @@
 .btnsContainer {
   display: flex;
   position: absolute;
-  bottom: 15%;
+  bottom: 20%;
   right: 2.5%;
 }
 
 .placeInfo {
   direction: rtl;
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
   font-family: 'pauza', sans-serif;
   column-gap: 5px;
+  margin-top: 10px;
 }
 
-.placeInfo p:first-child {
-  color: #7030a0;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.placeInfo p:last-child {
+.description {
   color: #313131;
   line-height: 0.7;
+  font-size: 16px;
+  display: block;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .placeInfoAvatar {
-  width: 10%;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 
@@ -62,4 +63,8 @@
 }
 .bgGreen {
   background: #30a041;
+}
+.placeName {
+  color: #7030a0;
+  font-size: 20px;
 }

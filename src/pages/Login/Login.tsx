@@ -34,15 +34,15 @@ const Login = () => {
   return (
     <div className={style.loginContainer}>
       <AuthForm onSubmit={handleLogin} buttonValue={'להתחבר'} error={error}>
-        <Link className={style.forgotPassword} to={''}>
+        {/* <Link className={style.forgotPassword} to={''}>
           שכחתי סיסמה
-        </Link>
+        </Link> */}
       </AuthForm>
-
+{/* 
       <div className={style.redirectContainer}>
         <span >אין לך חשבון ?</span>
         <Link className={style.redirectLink} to={REGISTER_PAGE}>פתיחת חשבון מנטו</Link>
-      </div>
+      </div> */}
     </div>
   );
 };

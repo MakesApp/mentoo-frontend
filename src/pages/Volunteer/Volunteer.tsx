@@ -1,53 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
+import { IPlace } from '../../types/IPlace';
 
 import PersonalData from './components/PersonalData/PersonalData';
 import PlaceCard from './components/PlaceCard/PlaceCard';
 import PreferencesDaysBar from './components/PreferencesDaysBar/PreferencesDaysBar';
 import PreferencesRegionsBar from './components/PreferencesRegionsBar/PreferencesRegionsBar';
 import style from './Volunteer.module.css';
+import { useQuery } from 'react-query';
+import { getAllPlaces } from '../../api/services/api';
 
-interface Place {
-  id: number;
-  fullName: string;
-  pic: string;
-  details: string;
-  days?: string[];
-  city?: string;
-  address?: string;
-  icon?: string;
-}
 
 const Volunteer: React.FC = () => {
-  const [places, setPlaces] = useState<Place[]>([
-    {
-      id: 1,
-      fullName: 'מרכז שקר כלשהו',
-      pic: 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg',
-      details: 'לא עושים כאן כלום בדוק',
-      days: ['ראשון', 'שלישי'],
-      city: 'Netivot',
-      address: 'אזור השפלה',
-      looksFor:'lo yodea',
-      icon: 'https://www.w3schools.com/howto/img_avatar.png',
-    },
-    {
-      id: 2,
-      fullName: 'מרכז שקר אחר',
-      pic: 'https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2020/12/10/1321/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.jpg/Hyatt-Place-Paris-Charles-De-Gaulle-Airport-P001-Exterior.16x9.jpg',
-      details: 'עושים כאן כלום בדוק',
-      looksFor:'lo yodea',
-      days: ['ראשון', 'שני'],
-      city: 'Netivot',
-      address: 'אזור חיפה',
-      
-    },
-  ]);
+    const { data, status } = useQuery('places', getAllPlaces);
+
+     
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
+  const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [places,setPlaces]=useState<IPlace[]>([]);
 
+
+  useEffect(()=>{
+       if(data)
+       setPlaces(data.places)
+     },[data])
+
+    
   useEffect(() => {
     let newFilteredPlaces = [...places];
     if (regions.length > 0) {
@@ -56,11 +36,19 @@ const Volunteer: React.FC = () => {
 
     if (selectedDays.length > 0) {
       newFilteredPlaces = newFilteredPlaces.filter((place) =>
-        selectedDays.every((day) => place.days?.includes(day))
+        selectedDays.every((day) => place.availableDays?.includes(day))
       );
     }
     setFilteredPlaces(newFilteredPlaces);
   }, [regions, selectedDays, places]);
+
+   const moveToLast = useCallback((placeId: string) => {
+    setPlaces((prevPlaces) => {
+      const place = prevPlaces.find((place) => place._id === placeId);
+      const filteredPlaces = prevPlaces.filter((place) => place._id !== placeId);
+      return [...filteredPlaces, place];
+    });
+  }, [setPlaces]);
 
   return (
     <div>
@@ -80,9 +68,10 @@ const Volunteer: React.FC = () => {
         <ul className={style.cardList}>
           {filteredPlaces.map((place) => {
             return (
-              <li className={style.card} key={place.id}>
+              <li className={style.card} key={place._id}>
                 <PlaceCard
                  place={place}
+                 moveToLast={moveToLast}
                 />
               </li>
             );

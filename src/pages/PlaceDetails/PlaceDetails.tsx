@@ -4,35 +4,33 @@ import Days from "./components/Days/Days";
 import chatIcon from '../../assets/images/chat-icon-white.svg'
 import Header from "../../components/Header/Header";
 import arrowLeft from '../../assets/images/arrow-left.svg'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { VOLUNTEER_PAGE } from "../../routes/routePath";
-interface PlaceDetailsProps {
-  id: number;
-  fullName: string;
-  pic: string;
-  details: string;
-  days: string[];
-  city: string;
-  address: string;
-  looksFor: string;
-  icon: string;
+import { useQuery } from 'react-query';
+import { getPlaceById } from "../../api/services/api";
+import { useEffect, useState } from "react";
+interface MatchParams {
+  placeId: string;
 }
 
-const PlaceDetails: React.FC<PlaceDetailsProps>=({
-place
-}) =>{
+const PlaceDetails: React.FC=() =>{
+    const {placeId}=useParams<MatchParams>();
+  const {data, status} = useQuery(['places', placeId], getPlaceById);
+  const [place,setPlace]=useState({})
+  useEffect(()=>{
+    if(data)
+    setPlace(data.place)
+  },[data])
+
+  const {
+      fullName,
+      placeImage,
+      description,
+      availableDays,
+      address,
+      audience,
+    } = place;
     
-const {
-      id= 1,
-      fullName= 'מרכז שקר כלשהו',
-      pic= 'https://www.w3schools.com/howto/img_avatar.png',
-      details= 'לא עושים כאן כלום בדוק',
-      days= ['ראשון', 'שלישי'],
-      city= 'Netivot',
-      address= 'אזור השפלה',
-      looksFor='lo yodea',
-      icon= 'https=//www.w3schools.com/howto/img_avatar.png',
-    } = place={};
   return (
     <div className={style.container}>
         <Header>
@@ -40,16 +38,16 @@ const {
             <img src={arrowLeft} alt="arrow left"/>
             </Link>
         </Header>
-      <img className={style.placeImg} src={pic} alt="" />
+      <img className={style.placeImg} src={placeImage} alt="" />
       <div className={style.titleAndDescriptionContainer}>
-      <TitleAndDescription title={fullName} description={details} />
+      <TitleAndDescription title={fullName} description={description} />
       <TitleAndDescription
         title={"מה אנחנו מחפשים?"}
-        description={looksFor}
+        description={audience}
       />
       <TitleAndDescription
         title={"ימים פעילים בשבוע"}
-        description={<Days days={days} />}
+        description={<Days days={availableDays} />}
       />
       <TitleAndDescription title={"כתובת"} description={address} />
       </div>

@@ -10,7 +10,6 @@ const Days: React.FC<DaysProps> = ({ days }) => {
   const compareDays=( )=> {
     const jsxArr: JSX.Element[] = [];
     for (let i = 0; i < Object.keys(weekDays).length; i++) { 
-      console.log(Object.keys(weekDays)[i] ,days[i]);
            
       if (days.includes(Object.keys(weekDays)[i])) {
         jsxArr.push(<li className={styles.availableDayItem}>{Object.values(weekDays)[i]}</li>);

@@ -6,7 +6,7 @@ import {
   VOLUNTEER_PAGE,
   PLACE_PAGE,
   LOGIN_PAGE,
-  REGISTER_PAGE,
+  // REGISTER_PAGE,
   PLACE_DETAILS,
   CHAT_PAGE,
 } from './routePath';
@@ -21,6 +21,12 @@ import Chat from '../pages/Chat/Chat';
 const RoutesConfig: React.FC = () => {
   return (
     <Switch>
+      <RestrictedRoute
+    path={PLACE_DETAILS}
+    allowedRoles={['volunteer']}
+    fallbackPath={LOGIN_PAGE}
+    component={PlaceDetails}
+  /> 
   <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login}/>
   <RestrictedRoute
     path={CHAT_PAGE}
@@ -34,13 +40,8 @@ const RoutesConfig: React.FC = () => {
     fallbackPath={LOGIN_PAGE}
     component={Place}
   /> 
-  <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/>
-  <RestrictedRoute
-    path={PLACE_DETAILS}
-    allowedRoles={['volunteer']}
-    fallbackPath={LOGIN_PAGE}
-    component={PlaceDetails}
-  /> 
+  {/* <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/> */}
+  
   <RestrictedRoute
     path={VOLUNTEER_PAGE}
     allowedRoles={['volunteer']}

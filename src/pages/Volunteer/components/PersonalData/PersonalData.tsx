@@ -13,7 +13,6 @@ const PersonalData: React.FC = () => {
     id: 1,
     fullName: 'Lord Voldermot',
     volunteeringTime: 118,
-    project: 'מחוברים לחיים',
   });
 
   return (
@@ -28,7 +27,7 @@ const PersonalData: React.FC = () => {
           </p>
         </div>
         <div>
-          <p className={style.project}>{currentUser.project}</p>
+          <p className={style.project}>{'TEALS'}</p>
         </div>
       </div>
     </div>
