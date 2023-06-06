@@ -37,3 +37,15 @@ export const useLogoutMutation = () => {
 
   return logoutMutation;
 };
+
+export const useUpdateVolunteerListMutation = (): UseMutationResult<any, unknown, UpdateVolunteerPayload, unknown> => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ({ placeId, query }) => api.patch(`/place/${placeId}`, { query }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('place');
+      }
+    }
+  );
+};

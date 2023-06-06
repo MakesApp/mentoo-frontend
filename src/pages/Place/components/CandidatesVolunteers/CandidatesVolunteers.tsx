@@ -15,7 +15,8 @@ interface ListProps {
 const CandidatesVolunteers: React.FC<ListProps>  = ({users}) => {
   return (
     <List users={users}> 
-    <Button backgroundColor={"#792BA6"}>
+    {user=>
+  <>  <Button backgroundColor={"#792BA6"}>
              <img src={vIcon} alt={"v icon"}/>
              <span>זה מנטו</span>
          </Button>
@@ -23,6 +24,8 @@ const CandidatesVolunteers: React.FC<ListProps>  = ({users}) => {
              <img src={closeIcon} alt={"close icon"}/>
              <span>פעם אחרת</span>
          </Button>
+         </>
+         }
          </List>
   )
 }

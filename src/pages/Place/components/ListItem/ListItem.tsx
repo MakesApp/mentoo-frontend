@@ -1,6 +1,14 @@
 import { useState } from 'react';
+import React, { ReactNode } from 'react';
+
+import defaultAvatar from '../../../../assets/images/user-avatar.png'
+import { IUser } from '../../../../types/IUser';
 import style from './ListItem.module.css'
-const ListItem = ({user,children}) => {
+interface ListItemProps {
+  user: IUser;
+  children: (user: IUser) => ReactNode,
+}
+const ListItem: React.FC<ListItemProps>= ({user,children}) => {
         const [isContainerMoved, setIsContainerMoved] = useState(false);
 
   const handleIconClick = () => {
@@ -8,7 +16,7 @@ const ListItem = ({user,children}) => {
   };
   return (
   <li
-        key={user.id}
+        key={user._id}
         className={style.listItem}>
         <div
        className={`${style.userDetailsContainer} ${isContainerMoved ? style.moveContainer : ''}`} >
@@ -20,14 +28,13 @@ const ListItem = ({user,children}) => {
             </ul>
 }
 
-              <img className={style.profileImg} src={user.profileImage} alt="profile image" />
+          <img className={style.profileImg} src={user?.avatar?user.avatar:defaultAvatar} alt="user avatar" />
               <div>
                   <span className={style.userName}>{user.fullName}</span>
-                  <p className={style.idk}>idk</p>
               </div>
 
               </div>
-               <div className={style.content}>{children}</div>
+               <div className={`${style.content} ${isContainerMoved && style.isVisible} `}>{children(user)}</div>
               </li>  )
 }
 

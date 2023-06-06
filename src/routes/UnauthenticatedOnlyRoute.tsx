@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useAuthContext } from '../context/useAuth';
-import { VOLUNTEER_PAGE } from './routePath';
+import { PLACE_PAGE, VOLUNTEER_PAGE } from './routePath';
 
 interface Props {
   path: string | string[];
@@ -16,7 +16,7 @@ const UnauthenticatedOnlyRoute: React.FC<Props> = ({ path, component: Component 
       path={path}
       render={props =>
         user 
-          ? <Redirect to={user.role === 'volunteer' ? VOLUNTEER_PAGE : '/blublu'} />
+          ? <Redirect to={user.role === 'volunteer' ? VOLUNTEER_PAGE : PLACE_PAGE} />
           : <Component {...props} />
       }
     />

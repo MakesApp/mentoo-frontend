@@ -1,10 +1,10 @@
 import style from './Button.module.css'
-const Button = ({children,backgroundColor}) => {
+const Button = ({children,backgroundColor,handleOnClick}) => {
     const buttonStyle = {
     backgroundColor: backgroundColor
   };
   return (
-    <button className={style.button} style={buttonStyle}>{children}</button>
+    <button onClick={handleOnClick} className={style.button} style={buttonStyle}>{children}</button>
   )
 }
 

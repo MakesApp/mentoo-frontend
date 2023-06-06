@@ -3,7 +3,7 @@ import style from './Header.module.css';
 import Logo from '../Logo/Logo';
 import chatIcon from '../../assets/images/chat-icon.svg'
 import { useAuthContext } from '../../context/useAuth';
-import DefaultUserAvatar from '../DefaultUserAvatar/DefaultUserAvatar';
+import defaultAvatar from '../../assets/images/user-avatar.png'
 import { useLogoutMutation } from '../../api/services/api';
 
 interface HeaderProps{
@@ -31,7 +31,7 @@ catch(err){
     <header className={style.headerContainer}>
       <div className={style.headerRight}>
         <div className={style.avatarContainer}>
-      <button onClick={handleOnClick}>{user?.avatar ?  <img className={style.avatarIcon} src={user.avatar} alt="Avatar Icon" />:<DefaultUserAvatar handleOnClick={handleOnClick}/>}</button>
+      <button onClick={handleOnClick}>  <img className={style.avatarIcon} src={user?.avatar ?user.avatar:defaultAvatar} alt="Avatar Icon" /></button>
       {isLogoutVisible&&<button className={style.logoutBtn} onClick={handleLogout}>להתנתק</button>}
       </div>
       </div>

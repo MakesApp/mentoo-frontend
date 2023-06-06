@@ -9,16 +9,17 @@ interface User {
 
 interface ListProps {
   users: User[];
-  children:ReactNode,
+  children: ReactNode,
 }
 
 const List: React.FC<ListProps> = ({ users,children }) => {
+  
   
   return (
     <div className={style.container}>
     <ul className={style.list}>
       {users?.map(user => (
-      <ListItem key={user.id} user={user}>{children}</ListItem>
+      <ListItem key={user._id} user={user}>{children}</ListItem>
       ))}
 
     </ul>

@@ -1,13 +1,15 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Title from './components/Title/Title';
 import UserList from './components/List/List'
 import MyVolunteers from './components/MyVolunteers/MyVolunteers';
-import PotentialVolunteers from './components/CandidatesVolunteers/CandidatesVolunteers';
+import CandidateVolunteers from './components/CandidatesVolunteers/CandidatesVolunteers';
 import OldVolunteers from './components/OldVolunteers/OldVolunteers';
-
+import { useAuthContext } from '../../context/useAuth';
+import {useQuery} from 'react-query';
+import { getPlaceById } from '../../api/services/api';
 const userListData = [
   {
     id: '1',
@@ -24,12 +26,17 @@ const userListData = [
 const listTitles=['המתנדבים שלי','מועמדים','מנתדבים לשעבר']
 
 const Place = () => {
-    const [currentList,setCurrentList]=useState('המתנדבים שלי')
+  const {user}=useAuthContext();
+  const {placeId:place}=user;
+  
+  const [currentList,setCurrentList]=useState('המתנדבים שלי')
+
+ 
     const renderList=()=>{
         switch(currentList){
-            case 'המתנדבים שלי':return <MyVolunteers users={userListData}/>
-            case 'מועמדים':return <PotentialVolunteers users={userListData}/>
-            case 'מנתדבים לשעבר':return <OldVolunteers users={userListData}/>
+            case 'המתנדבים שלי':return <MyVolunteers users={place.myVolunteers}/>
+            case 'מועמדים':return <CandidateVolunteers users={place.candidateVolunteers}/>
+            case 'מנתדבים לשעבר':return <OldVolunteers users={place.oldVolunteers}/>
                 default:return null;
         }
     }
@@ -38,7 +45,7 @@ const Place = () => {
         <Header/>
         <Title title={'מחוברים לחיים'} subTitle={currentList}/>
         <Menu list={listTitles} currentItem={currentList} setCurrentItem={setCurrentList}/>
-         {renderList()   }
+         {place&&renderList()   }
         </div>
   )
 }
