@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import WhiteChatIcon from '../../../../assets/images/chat-icon-white.svg';
 import vIcon from '../../../../assets/images/v-icon.svg';
 import xIcon from '../../../../assets/images/Xicon.png';
+import { useAuthContext } from '../../../../context/useAuth';
 import { IPlace } from '../../../../types/IPlace';
 import style from './PlaceCard.module.css';
 
@@ -12,9 +13,10 @@ interface PlaceCardProps {
 }
 
 const PlaceCard: React.FC<PlaceCardProps> = ({place, moveToLast}) => {
+  const {user}=useAuthContext()
   const [isClicked, setIsClicked] = useState(false);
-  const navigate = useHistory();
-  const { placeImage, placeName ,_id:placeId , description }=place;
+  const history = useHistory();
+  const { placeImage, placeName ,_id:placeId , description ,userId:placeUserId}=place;
   
   return (
     <div className={style.placeContainer}>
@@ -29,7 +31,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({place, moveToLast}) => {
           className={`${style.actionButton} ${isClicked ? style.bgGreen : ''}`}
           onClick={() => {
             if (isClicked) {
-              navigate('');
+              history.push(`/chat/${user._id}/${placeUserId}`);
             }
             setIsClicked(true);
           }}

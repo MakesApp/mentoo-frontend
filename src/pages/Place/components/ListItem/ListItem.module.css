@@ -1,7 +1,12 @@
-.listItem {
+.container {
   position: relative;
 }
-
+.listItem {
+  width: 100%;
+}
+a {
+  text-decoration: none;
+}
 .userDetailsContainer {
   width: 100%;
   display: flex;
@@ -113,4 +118,5 @@
 
 .isVisible {
   z-index: 2;
+  transition: all 3s;
 }

@@ -22,36 +22,57 @@ const Chat: React.FC = () => {
   const { userId, partnerId } = useParams<MatchParams>();
   const roomName = `${userId}_${partnerId}`;
 
-  useEffect(() => {
-    if (userId !== partnerId) {
-        // Join a room
-        socket.emit('join room', roomName);
-    socket.on('chat message', (msg: MessageType) => {
-      console.log('====================================');
-      console.log(msg);
-      console.log('====================================');
-      setMessages([...messages, msg.message]);
-    });
-    }
+  
+ useEffect(() => {
+    // Join a room
+    socket.emit('join room', roomName);
 
-    // Don't join the room if the user is the same as the partner
-    
-  }, [messages]);
+    // Register the event listener for receiving chat messages
+  socket.on('chat message', handleChatMessage);
 
+  // Register the event listener for receiving chat history
+  socket.on('chat history', handleChatHistory);
+
+  return () => {
+    // Unregister the event listeners when the component is unmounted
+    socket.off('chat message', handleChatMessage);
+    socket.off('chat history', handleChatHistory);
+  };
+  
+  }, [roomName]);
+
+  const handleChatMessage = (msg: MessageType) => {
+    console.log(msg);
+    setMessages((prevMessages) => [...prevMessages, {
+      sender: msg.sender,
+      message: msg.message,
+      isCurrentUser: msg.sender === userId, // Check if the message was sent by the current user
+    }]);
+  };
+
+  const handleChatHistory = (chatHistory: MessageType[]) => {
+    setMessages(chatHistory.map(msg => ({
+      user: msg.sender,
+      message: msg.message,
+      isCurrentUser: msg.sender === userId, // Check if the message was sent by the current user
+    })));
+  };
   
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    // Emit a chat message to the room
-    socket.emit('chat message', {
-      user: userId,
+const msg= {
+      sender: userId,
       message,
       isCurrentUser: true,
-    }, roomName);
-
+    }
+    // Emit a chat message to the room
+    socket.emit('chat message',msg, roomName);
     setMessage('');
   };
 
+  
+  console.log(messages);
+  
   return (
     <div>
       <ul className={style.messages}>

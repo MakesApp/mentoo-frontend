@@ -20,4 +20,5 @@ button {
 }
 #root {
   flex: 1;
+  position: relative;
 }

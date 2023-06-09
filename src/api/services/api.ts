@@ -1,4 +1,4 @@
-import { useMutation,useQuery } from 'react-query';
+import { useMutation,useQueryClient } from 'react-query';
 import api from '../../config/api';
 
 
@@ -44,8 +44,15 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<any, unknown
     ({ placeId, query }) => api.patch(`/place/${placeId}`, { query }),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('place');
+        queryClient.invalidateQueries('places');
       }
     }
   );
+};
+export const getUsers = async ({ queryKey }) => {
+
+  const [_, users] = queryKey;
+  const response = await api.post('/user/getUsers', { list: users });
+
+  return response.data;
 };

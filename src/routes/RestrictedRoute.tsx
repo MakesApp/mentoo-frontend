@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Spinner from '../components/Spinner/Spinner';
 import { useAuthContext } from '../context/useAuth';
 
 interface RestrictedRouteProps {
@@ -7,13 +8,14 @@ interface RestrictedRouteProps {
   allowedRoles: string[];
   fallbackPath: string;
   component: React.ComponentType<any>;
+  contextProvider?: React.ComponentType<any>; // Optional contextProvider prop
 }
 
-const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ path, allowedRoles, fallbackPath, component: Component }) => {
+const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ path, allowedRoles, fallbackPath, component: Component, contextProvider: ContextProvider }) => {
   const { user, loading } = useAuthContext();
 
   if (loading) {
-    return <div>Loading...</div>; // or any loading spinner component
+    return <Spinner/> // or any loading spinner component
   }
 
   return (
@@ -21,7 +23,9 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ path, allowedRoles, f
       path={path}
       render={props =>
         user && allowedRoles.includes(user.role)
-          ? <Component {...props} />
+          ? ContextProvider // Check if ContextProvider is given
+            ? <ContextProvider><Component {...props} /></ContextProvider> // Wrap Component with ContextProvider
+            : <Component {...props} /> // If not, render Component as is
           : <Redirect to={fallbackPath} />
       }
     />

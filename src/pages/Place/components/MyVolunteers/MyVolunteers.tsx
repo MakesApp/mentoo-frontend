@@ -1,38 +1,24 @@
 import React from 'react'
 import List from '../List/List'
 import pauseIcon from '../../../../assets/images/pause-icon.svg'
-import closeIcon from '../../../../assets/images/close-icon.svg'
 import Button from '../Button/Button'
-import { useUpdateVolunteerListMutation } from '../../../../api/services/api'
-import { useAuthContext } from '../../../../context/useAuth'
-interface User {
-  id: string;
-  profileImage: string;
-  fullName: string;
-}
+import {   useUpdateVolunteerListMutation } from '../../../../api/services/api'
+import { usePlaceContext } from '../../context/placeContext'
 
-interface ListProps {
-  users: User[];
-}
-
-const MyVolunteers: React.FC<ListProps>  = ({users}) => {
+const MyVolunteers: React.FC = () => {
 const {mutateAsync}=useUpdateVolunteerListMutation()
-const {user}=useAuthContext()
-const {placeId:place}=user;
-
+const {place,candidateVolunteers,myVolunteers}=usePlaceContext();
+const {_id:placeId}=place;
   const handleOnClick=async (user)=>{
-    
-console.log(user);
     const query={
-          candidateVolunteers:[...place.candidateVolunteers,user._id],
-          myVolunteers:place.myVolunteers.filter(volunteer=>volunteer!==user._id)
+          candidateVolunteers:[...candidateVolunteers,user._id],
+          myVolunteers:myVolunteers.filter(volunteer=>volunteer._id!==user._id)
     }
-   const response= await mutateAsync({placeId: place._id,query});
-   console.log(response);
+    await mutateAsync({placeId: placeId,query});
    
   };
   return (
-    <List users={users}>
+    <List users={myVolunteers}>
       {(user)=>{
         
     return  <Button backgroundColor={"#792BA6"} handleOnClick={()=>handleOnClick(user)}>

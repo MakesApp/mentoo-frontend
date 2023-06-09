@@ -5,5 +5,5 @@ export interface IPlace  {
   description: string;
   audience: string;
   placeImage?: string;
-  agentId:string;
+  userId:string;
 }

@@ -16,40 +16,34 @@ interface MatchParams {
 const PlaceDetails: React.FC=() =>{
     const {placeId}=useParams<MatchParams>();
   const {data, status} = useQuery(['places', placeId], getPlaceById);
-  const [place,setPlace]=useState({})
+  const [place,setPlace]=useState(null)
   useEffect(()=>{
     if(data)
     setPlace(data.place)
   },[data])
+  
 
-  const {
-      fullName,
-      placeImage,
-      description,
-      availableDays,
-      address,
-      audience,
-    } = place;
+ 
     
-  return (
+  return place&& (
     <div className={style.container}>
         <Header>
             <Link to={VOLUNTEER_PAGE}>
             <img src={arrowLeft} alt="arrow left"/>
             </Link>
         </Header>
-      <img className={style.placeImg} src={placeImage} alt="" />
+      <img className={style.placeImg} src={place.placeImage} alt="" />
       <div className={style.titleAndDescriptionContainer}>
-      <TitleAndDescription title={fullName} description={description} />
+      <TitleAndDescription title={place.placeName} description={place.description} />
       <TitleAndDescription
         title={"מה אנחנו מחפשים?"}
-        description={audience}
+        description={place.audience}
       />
       <TitleAndDescription
         title={"ימים פעילים בשבוע"}
-        description={<Days days={availableDays} />}
+        description={<Days days={place.availableDays} />}
       />
-      <TitleAndDescription title={"כתובת"} description={address} />
+      <TitleAndDescription title={"כתובת"} description={place.address} />
       </div>
       <button className={style.mentooBtn}>
         <span>

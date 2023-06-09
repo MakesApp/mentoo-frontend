@@ -17,6 +17,7 @@ import Register from '../pages/Register/Register';
 import PlaceDetails from '../pages/PlaceDetails/PlaceDetails';
 import Place from '../pages/Place/Place';
 import Chat from '../pages/Chat/Chat';
+import { PlaceProvider } from '../pages/Place/context/placeContext';
 
 const RoutesConfig: React.FC = () => {
   return (
@@ -39,6 +40,7 @@ const RoutesConfig: React.FC = () => {
     allowedRoles={['place']}
     fallbackPath={LOGIN_PAGE}
     component={Place}
+    contextProvider={PlaceProvider}
   /> 
   {/* <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/> */}
   
