@@ -1,3 +1,8 @@
+.name {
+  color: #7030a0;
+  font-size: 20px;
+}
+
 .headerContainer {
   display: flex;
   align-items: center;
@@ -20,7 +25,7 @@
 }
 .headerRight {
   display: flex;
-  flex-direction: column;
+  column-gap: 15px;
 }
 .avatarIcon {
   width: 40px;
@@ -40,4 +45,8 @@
 
 .headerMiddle img:last-child {
   width: 75px;
+}
+
+.placeName {
+  font-size: 16px;
 }

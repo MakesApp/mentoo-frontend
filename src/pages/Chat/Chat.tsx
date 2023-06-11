@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import style from './Chat.module.css';
+import Header from './components/Header/Header';
 
 type MessageType = {
   user: string;
@@ -71,15 +72,16 @@ const msg= {
   };
 
   
-  console.log(messages);
   
   return (
-    <div>
+    <div >
+      <Header/>
+      <div className={style.content}>
       <ul className={style.messages}>
         {messages.map((msg, index) => (
           <li key={index} className={msg.isCurrentUser ? style.right : style.left}>
             {/* <img src={`http://path-to-your-image-server/${msg.user}.png`} onError={(e)=>{e.target.onerror = null; e.target.src="default_avatar.png"}} alt="user avatar"/> */}
-            <p>{msg.message}</p>
+            <p className={style.message}>{msg.message}</p>
           </li>
         ))}
       </ul>
@@ -87,6 +89,7 @@ const msg= {
         <input id="m" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
         <button type="submit">Send</button>
       </form>
+      </div>
     </div>
   );
 };

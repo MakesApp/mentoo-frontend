@@ -1,3 +1,6 @@
+.content {
+  padding: 0 5%;
+}
 .messages {
   list-style-type: none;
 }
@@ -8,4 +11,8 @@
 
 .left {
   text-align: left;
+}
+
+.message {
+  font-size: 18px;
 }
