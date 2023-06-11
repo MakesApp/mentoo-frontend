@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = () => {
        <img className={style.avatarIcon} src={user?.avatar?user.avatar:userAvatar} alt="Avatar Icon" />
        <div>
     <h2 className="name">{user?.fullName}</h2>
-    <span className="placeName">{placeData?.place?.placeName}</span>
+    {placeData&&<span className="placeName">{placeData.place?.placeName}</span>}
 </div>
       </div>
       <div className={style.headerMiddle}>

@@ -31,7 +31,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({place, moveToLast}) => {
           className={`${style.actionButton} ${isClicked ? style.bgGreen : ''}`}
           onClick={() => {
             if (isClicked) {
-              history.push(`/chat/${user._id}/${placeUserId}`);
+              history.push(`/chat/${placeUserId}`);
             }
             setIsClicked(true);
           }}

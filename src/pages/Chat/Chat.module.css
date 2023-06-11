@@ -1,18 +1,57 @@
 .content {
-  padding: 0 5%;
+  padding: 5%;
 }
 .messages {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
   list-style-type: none;
 }
-
+.right,
+.left {
+  display: flex;
+  width: 100%;
+  column-gap: 10px;
+}
 .right {
   text-align: right;
+  flex-direction: row;
 }
 
 .left {
   text-align: left;
+  flex-direction: row-reverse;
+}
+
+.right .message::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  border: 10px solid;
+  border-color: #eaeaea transparent transparent transparent;
+}
+
+.left .message::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  border: 10px solid;
+  border-color: #eaeaea transparent transparent transparent;
 }
 
 .message {
   font-size: 18px;
+  background-color: #eaeaea;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  position: relative; /* add this to make the triangle position relative to the message */
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }

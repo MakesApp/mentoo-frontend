@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import style from './Chat.module.css';
 import Header from './components/Header/Header';
+import userAvatar from '../../assets/images/user-avatar.png'
+import { useAuthContext } from '../../context/useAuth';
 
 type MessageType = {
-  user: string;
+  sender: string;
   message: string;
   isCurrentUser: boolean;
 }
@@ -13,16 +15,16 @@ type MessageType = {
 const socket = io('http://localhost:8080');
 
 interface MatchParams {
-  userId: string;
   partnerId: string;
 }
 
 const Chat: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const { userId, partnerId } = useParams<MatchParams>();
+  const { partnerId } = useParams<MatchParams>();
+  const { user }=useAuthContext();
+  const userId=user._id;
   const roomName = `${userId}_${partnerId}`;
-
   
  useEffect(() => {
     // Join a room
@@ -43,7 +45,6 @@ const Chat: React.FC = () => {
   }, [roomName]);
 
   const handleChatMessage = (msg: MessageType) => {
-    console.log(msg);
     setMessages((prevMessages) => [...prevMessages, {
       sender: msg.sender,
       message: msg.message,
@@ -52,8 +53,10 @@ const Chat: React.FC = () => {
   };
 
   const handleChatHistory = (chatHistory: MessageType[]) => {
+    console.log(chatHistory);
+
     setMessages(chatHistory.map(msg => ({
-      user: msg.sender,
+      sender: msg.sender,
       message: msg.message,
       isCurrentUser: msg.sender === userId, // Check if the message was sent by the current user
     })));
@@ -63,6 +66,7 @@ const Chat: React.FC = () => {
     event.preventDefault();
 const msg= {
       sender: userId,
+      partnerId,
       message,
       isCurrentUser: true,
     }
@@ -72,18 +76,20 @@ const msg= {
   };
 
   
-  
   return (
     <div >
       <Header/>
       <div className={style.content}>
       <ul className={style.messages}>
-        {messages.map((msg, index) => (
-          <li key={index} className={msg.isCurrentUser ? style.right : style.left}>
-            {/* <img src={`http://path-to-your-image-server/${msg.user}.png`} onError={(e)=>{e.target.onerror = null; e.target.src="default_avatar.png"}} alt="user avatar"/> */}
-            <p className={style.message}>{msg.message}</p>
-          </li>
-        ))}
+     {messages.map((msg, index) => {
+  const showAvatar = index === 0 || messages[index - 1].sender !== msg.sender;
+  return (
+    <li key={index} className={msg.isCurrentUser ? style.right : style.left}>
+      {showAvatar && <img src={`${user?.avatar||userAvatar}`}  className={style.avatar} alt="user avatar" />}
+      <p className={style.message}>{msg.message}</p>
+    </li>
+  );
+})}
       </ul>
       <form onSubmit={onSubmit}>
         <input id="m" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />

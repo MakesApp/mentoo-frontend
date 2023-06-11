@@ -21,7 +21,7 @@ const history=useHistory()
   };
   const handleOnItemClick=(e)=>{
     e.stopPropagation()
-    history.push(`/chat/${user._id}/${placeUserId._id}`)
+    history.push(`/chat/${placeUserId._id}`)
 
   }
   const handleCloseIcon=(e)=>{
