@@ -9,6 +9,7 @@ import {
   // REGISTER_PAGE,
   PLACE_DETAILS,
   CHAT_PAGE,
+  CHAT_LIST_PAGE,
 } from './routePath';
 import RestrictedRoute from './RestrictedRoute';
 import PublicRoute from './PublicRoute';
@@ -18,6 +19,7 @@ import PlaceDetails from '../pages/PlaceDetails/PlaceDetails';
 import Place from '../pages/Place/Place';
 import Chat from '../pages/Chat/Chat';
 import { PlaceProvider } from '../pages/Place/context/placeContext';
+import ChatList from '../components/ChatList/ChatList';
 
 const RoutesConfig: React.FC = () => {
   return (
@@ -29,6 +31,12 @@ const RoutesConfig: React.FC = () => {
     component={PlaceDetails}
   /> 
   <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login}/>
+  <RestrictedRoute
+    path={CHAT_LIST_PAGE}
+    allowedRoles={['volunteer','place']}
+    fallbackPath={LOGIN_PAGE}
+    component={ChatList}
+  />
   <RestrictedRoute
     path={CHAT_PAGE}
     allowedRoles={['volunteer','place']}

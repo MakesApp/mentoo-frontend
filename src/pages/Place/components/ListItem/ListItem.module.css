@@ -16,7 +16,7 @@ a {
   align-items: center;
   overflow: hidden;
   column-gap: 25px;
-  padding: 5%;
+  padding: 5% 7.5%;
   transition: transform 0.5s ease;
 }
 

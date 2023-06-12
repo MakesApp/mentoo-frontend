@@ -24,7 +24,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     user,
     loading
   };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

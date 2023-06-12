@@ -12,10 +12,10 @@
 }
 
 .listItem:first-child {
-  padding-right: 5%;
+  padding-right: 7.5%;
 }
 .listItem:last-child {
-  padding-left: 5%;
+  padding-left: 7.5%;
 }
 .btn {
   text-align: right;

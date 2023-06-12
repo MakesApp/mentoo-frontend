@@ -4,7 +4,6 @@ import React, { ReactNode } from 'react';
 import defaultAvatar from '../../../../assets/images/user-avatar.png'
 import { IUser } from '../../../../types/IUser';
 import style from './ListItem.module.css'
-import { useAuthContext } from '../../../../context/useAuth';
 import { Link, useHistory } from 'react-router-dom';
 interface ListItemProps {
   user: IUser;
@@ -12,7 +11,6 @@ interface ListItemProps {
 }
 const ListItem: React.FC<ListItemProps>= ({user,children}) => {
         const [isContainerMoved, setIsContainerMoved] = useState(false);
-        const {user:placeUserId}=useAuthContext()
 const history=useHistory()
  
   const handleShowMore = (e) => {
@@ -21,7 +19,7 @@ const history=useHistory()
   };
   const handleOnItemClick=(e)=>{
     e.stopPropagation()
-    history.push(`/chat/${placeUserId._id}`)
+    history.push(`/chat/${user._id}`)
 
   }
   const handleCloseIcon=(e)=>{

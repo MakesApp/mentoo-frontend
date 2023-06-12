@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
-import style from './Chat.module.css';
 import Header from './components/Header/Header';
 import userAvatar from '../../assets/images/user-avatar.png'
+import sendIcon from '../../assets/images/send-icon.svg'
 import { useAuthContext } from '../../context/useAuth';
-
+import style from './Chat.module.css'
 type MessageType = {
   sender: string;
   message: string;
@@ -19,82 +19,80 @@ interface MatchParams {
 }
 
 const Chat: React.FC = () => {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<null | HTMLUListElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { partnerId } = useParams<MatchParams>();
   const { user }=useAuthContext();
   const userId=user._id;
-  const roomName = `${userId}_${partnerId}`;
-  
- useEffect(() => {
-    // Join a room
+  const ids = [userId, partnerId].sort();
+  const roomName = `${ids[0]}_${ids[1]}`;
+
+useEffect(() => {
+  console.log('====================================');
+  console.log(messagesEndRef?.current);
+  console.log('====================================');
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [messages]);
+
+  useEffect(() => {
     socket.emit('join room', roomName);
+    socket.on('chat message', (msg: MessageType) => {
+      setMessages((prevMessages) => [...prevMessages, {
+        sender: msg.sender,
+        message: msg.message,
+        isCurrentUser: msg.sender === userId,
+      }]);
+    });
+    socket.on('chat history', (chatHistory: MessageType[]) => {
+      setMessages(chatHistory.map(msg => ({
+        sender: msg.sender,
+        message: msg.message,
+        isCurrentUser: msg.sender === userId,
+      })));
+    });
 
-    // Register the event listener for receiving chat messages
-  socket.on('chat message', handleChatMessage);
-
-  // Register the event listener for receiving chat history
-  socket.on('chat history', handleChatHistory);
-
-  return () => {
-    // Unregister the event listeners when the component is unmounted
-    socket.off('chat message', handleChatMessage);
-    socket.off('chat history', handleChatHistory);
-  };
-  
+    return () => {
+      socket.off('chat message');
+      socket.off('chat history');
+    };
   }, [roomName]);
 
-  const handleChatMessage = (msg: MessageType) => {
-    setMessages((prevMessages) => [...prevMessages, {
-      sender: msg.sender,
-      message: msg.message,
-      isCurrentUser: msg.sender === userId, // Check if the message was sent by the current user
-    }]);
-  };
-
-  const handleChatHistory = (chatHistory: MessageType[]) => {
-    console.log(chatHistory);
-
-    setMessages(chatHistory.map(msg => ({
-      sender: msg.sender,
-      message: msg.message,
-      isCurrentUser: msg.sender === userId, // Check if the message was sent by the current user
-    })));
-  };
-  
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-const msg= {
+    socket.emit('chat message',{
       sender: userId,
       partnerId,
       message,
       isCurrentUser: true,
-    }
-    // Emit a chat message to the room
-    socket.emit('chat message',msg, roomName);
+    }, roomName);
     setMessage('');
   };
 
-  
+  const offsets = headerRef.current?.offsetHeight + formRef.current?.offsetHeight || 0;
+console.log( offsets);
+
   return (
-    <div >
-      <Header/>
+    <div className={style.container}>
+      <Header ref={headerRef}/>
       <div className={style.content}>
-      <ul className={style.messages}>
-     {messages.map((msg, index) => {
-  const showAvatar = index === 0 || messages[index - 1].sender !== msg.sender;
-  return (
-    <li key={index} className={msg.isCurrentUser ? style.right : style.left}>
-      {showAvatar && <img src={`${user?.avatar||userAvatar}`}  className={style.avatar} alt="user avatar" />}
-      <p className={style.message}>{msg.message}</p>
-    </li>
-  );
-})}
-      </ul>
-      <form onSubmit={onSubmit}>
-        <input id="m" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type="submit">Send</button>
-      </form>
+        <ul ref={messagesEndRef} className={style.messages} style={{ maxHeight: `calc(100vh - ${offsets+75}px)` }}>
+          {messages.map((msg, index) => {
+            const isFirstMessage = index === 0 || messages[index - 1].sender !== msg.sender;
+            return (
+              <li key={index} className={`${msg.isCurrentUser ? style.right : style.left} ${isFirstMessage ? style.first : ''}`}>
+                {isFirstMessage && <img src={`${user?.avatar||userAvatar}`}  className={style.avatar} alt="user avatar" />}
+                <p className={style.message}>{msg.message}</p>
+              </li>
+            );
+          })}
+        </ul>
+        <form className={style.form} onSubmit={onSubmit} ref={formRef}>
+          <input id="m" autoComplete="off" value={message} onChange={(e) => setMessage(e.target.value)}  className={style.inputField}/>
+          <button className={style.submitBtn}  type="submit"><img src={sendIcon} alt="send icon"/></button>
+        </form>
       </div>
     </div>
   );

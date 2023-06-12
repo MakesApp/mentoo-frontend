@@ -28,7 +28,7 @@ const PlaceDetails: React.FC=() =>{
   return place&& (
     <div className={style.container}>
         <Header>
-            <Link to={VOLUNTEER_PAGE}>
+            <Link to={{pathname:'/'}}>
             <img src={arrowLeft} alt="arrow left"/>
             </Link>
         </Header>
