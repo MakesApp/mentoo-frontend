@@ -25,42 +25,41 @@ const RoutesConfig: React.FC = () => {
   return (
     <Switch>
       <RestrictedRoute
-    path={PLACE_DETAILS}
-    allowedRoles={['volunteer']}
-    fallbackPath={LOGIN_PAGE}
-    component={PlaceDetails}
-  /> 
-  <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login}/>
-  <RestrictedRoute
-    path={CHAT_LIST_PAGE}
-    allowedRoles={['volunteer','place']}
-    fallbackPath={LOGIN_PAGE}
-    component={ChatList}
-  />
-  <RestrictedRoute
-    path={CHAT_PAGE}
-    allowedRoles={['volunteer','place']}
-    fallbackPath={LOGIN_PAGE}
-    component={Chat}
-  />
-  <RestrictedRoute
-    path={PLACE_PAGE}
-    allowedRoles={['place']}
-    fallbackPath={LOGIN_PAGE}
-    component={Place}
-    contextProvider={PlaceProvider}
-  /> 
-  {/* <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/> */}
-  
-  <RestrictedRoute
-    path={VOLUNTEER_PAGE}
-    allowedRoles={['volunteer']}
-    fallbackPath={LOGIN_PAGE}
-    component={Volunteer}
-  /> 
-  <UnauthenticatedOnlyRoute path="/" component={Login}/>
-</Switch>
+        path={PLACE_DETAILS}
+        allowedRoles={['volunteer']}
+        fallbackPath={LOGIN_PAGE}
+        component={PlaceDetails}
+      />
+      <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login} />
+      <RestrictedRoute
+        path={CHAT_LIST_PAGE}
+        allowedRoles={['volunteer', 'place']}
+        fallbackPath={LOGIN_PAGE}
+        component={ChatList}
+      />
+      <RestrictedRoute
+        path={CHAT_PAGE}
+        allowedRoles={['volunteer', 'place']}
+        fallbackPath={LOGIN_PAGE}
+        component={Chat}
+      />
+      <RestrictedRoute
+        path={PLACE_PAGE}
+        allowedRoles={['place']}
+        fallbackPath={LOGIN_PAGE}
+        component={Place}
+        contextProvider={PlaceProvider}
+      />
+      {/* <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/> */}
 
+      <RestrictedRoute
+        path={VOLUNTEER_PAGE}
+        allowedRoles={['volunteer']}
+        fallbackPath={LOGIN_PAGE}
+        component={Volunteer}
+      />
+      <UnauthenticatedOnlyRoute path="/" component={Login} />
+    </Switch>
   );
 };
 

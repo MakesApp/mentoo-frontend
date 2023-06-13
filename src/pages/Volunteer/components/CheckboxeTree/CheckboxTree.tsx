@@ -9,8 +9,12 @@ interface CheckboxTreeProps {
   setExpandedNodes: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const CheckboxTree: React.FC<CheckboxTreeProps> = ({checkedNodes,setCheckedNodes,setExpandedNodes,expandedNodes}) => {
-
+const CheckboxTree: React.FC<CheckboxTreeProps> = ({
+  checkedNodes,
+  setCheckedNodes,
+  setExpandedNodes,
+  expandedNodes,
+}) => {
   const handleCheckChange = (node: Node, isChecked: boolean) => {
     const newCheckedNodes = [...checkedNodes];
     const updateNodes = (node: Node) => {
@@ -35,7 +39,7 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({checkedNodes,setCheckedNodes
     if (nodeIndex === -1) {
       setExpandedNodes([...expandedNodes, name]);
     } else {
-      setExpandedNodes(expandedNodes.filter(id => id !== name));
+      setExpandedNodes(expandedNodes.filter((id) => id !== name));
     }
   };
 
@@ -44,9 +48,12 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({checkedNodes,setCheckedNodes
     const isExpanded = expandedNodes.includes(node.name);
 
     return (
-      <div  className={style.treeNode} key={node.name}>
+      <div className={style.treeNode} key={node.name}>
         {hasChildren && (
-          <span className={style.toggle} onClick={() => handleToggleExpand(node.name)}>
+          <span
+            className={style.toggle}
+            onClick={() => handleToggleExpand(node.name)}
+          >
             {isExpanded ? '▼' : '▶'}
           </span>
         )}
@@ -59,7 +66,9 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({checkedNodes,setCheckedNodes
           />
           {node.name}
         </label>
-        {hasChildren && isExpanded && node.children?.map((child) => renderNode(child, level + 1))}
+        {hasChildren &&
+          isExpanded &&
+          node.children?.map((child) => renderNode(child, level + 1))}
       </div>
     );
   };

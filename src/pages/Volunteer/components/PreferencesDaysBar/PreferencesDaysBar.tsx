@@ -6,7 +6,9 @@ import style from './PreferencesDaysBar.module.css';
 const PreferencesDaysBar: React.FC = ({ selectedDays, setSelectedDays }) => {
   const handleOnChange = (day: string): void => {
     if (selectedDays.includes(day)) {
-      const filteredDays = selectedDays.filter((selectedDay) => selectedDay !== day);
+      const filteredDays = selectedDays.filter(
+        (selectedDay) => selectedDay !== day
+      );
       setSelectedDays(filteredDays);
       return;
     }
@@ -18,7 +20,11 @@ const PreferencesDaysBar: React.FC = ({ selectedDays, setSelectedDays }) => {
     <div className={style.daysContainer}>
       <div className={style.dropdown}>
         <button className={style.dropdownBtn}>
-          <img className={style.downArrowImg} src={downArrow} alt="down arrow" />
+          <img
+            className={style.downArrowImg}
+            src={downArrow}
+            alt="down arrow"
+          />
           <span> ימי התנדבות</span>
         </button>
 

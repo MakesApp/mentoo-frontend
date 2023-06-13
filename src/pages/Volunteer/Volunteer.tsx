@@ -10,28 +10,25 @@ import style from './Volunteer.module.css';
 import { useQuery } from 'react-query';
 import { getAllPlaces } from '../../api/services/api';
 
-
 const Volunteer: React.FC = () => {
-    const { data, status } = useQuery('places', getAllPlaces);
+  const { data, status } = useQuery('places', getAllPlaces);
 
-     
   const [expanded, setExpanded] = useState<string[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [places,setPlaces]=useState<IPlace[]>([]);
+  const [places, setPlaces] = useState<IPlace[]>([]);
 
+  useEffect(() => {
+    if (data) setPlaces(data.places);
+  }, [data]);
 
-  useEffect(()=>{
-       if(data)
-       setPlaces(data.places)
-     },[data])
-
-    
   useEffect(() => {
     let newFilteredPlaces = [...places];
     if (regions.length > 0) {
-      newFilteredPlaces = newFilteredPlaces.filter((place) => regions.includes(place.address));
+      newFilteredPlaces = newFilteredPlaces.filter((place) =>
+        regions.includes(place.address)
+      );
     }
 
     if (selectedDays.length > 0) {
@@ -42,17 +39,22 @@ const Volunteer: React.FC = () => {
     setFilteredPlaces(newFilteredPlaces);
   }, [regions, selectedDays, places]);
 
-   const moveToLast = useCallback((placeId: string) => {
-    setPlaces((prevPlaces) => {
-      const place = prevPlaces.find((place) => place._id === placeId);
-      const filteredPlaces = prevPlaces.filter((place) => place._id !== placeId);
-      return [...filteredPlaces, place];
-    });
-  }, [setPlaces]);
+  const moveToLast = useCallback(
+    (placeId: string) => {
+      setPlaces((prevPlaces) => {
+        const place = prevPlaces.find((place) => place._id === placeId);
+        const filteredPlaces = prevPlaces.filter(
+          (place) => place._id !== placeId
+        );
+        return [...filteredPlaces, place];
+      });
+    },
+    [setPlaces]
+  );
 
   return (
     <div>
-      <Header avatarUrl=""/>
+      <Header avatarUrl="" />
       <PersonalData />
       <div className={style.content}>
         <div className={style.daysRegionContainer}>
@@ -62,17 +64,19 @@ const Volunteer: React.FC = () => {
             expandedNodes={expanded}
             setExpandedNodes={setExpanded}
           />
-          <PreferencesDaysBar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
+          <PreferencesDaysBar
+            selectedDays={selectedDays}
+            setSelectedDays={setSelectedDays}
+          />
         </div>
-        <span className={style.result}>{`${filteredPlaces.length} תוצאות`}</span>
+        <span
+          className={style.result}
+        >{`${filteredPlaces.length} תוצאות`}</span>
         <ul className={style.cardList}>
           {filteredPlaces.map((place) => {
             return (
               <li className={style.card} key={place._id}>
-                <PlaceCard
-                 place={place}
-                 moveToLast={moveToLast}
-                />
+                <PlaceCard place={place} moveToLast={moveToLast} />
               </li>
             );
           })}

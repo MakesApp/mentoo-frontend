@@ -3,9 +3,9 @@ import './Nav.css'; // Replace with the actual file path to your Nav CSS file
 import { Link } from 'react-router-dom';
 // import { Link } from "react-router-dom";
 import chatIcon from 'assets/images/chat-icon.svg';
-import {  VOLUNTEER_PAGE } from '../../routes/routePath';
+import { VOLUNTEER_PAGE } from '../../routes/routePath';
 
-const Nav=()=> {
+const Nav = () => {
   const [userPicture, setUserPicture] = useState(
     'https://www.w3schools.com/howto/img_avatar.png'
   );
@@ -41,6 +41,6 @@ const Nav=()=> {
       </nav>
     </>
   );
-}
+};
 
 export default Nav;

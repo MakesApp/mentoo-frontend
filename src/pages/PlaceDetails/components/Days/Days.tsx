@@ -7,18 +7,25 @@ interface DaysProps {
 }
 
 const Days: React.FC<DaysProps> = ({ days }) => {
-  const compareDays=( )=> {
+  const compareDays = () => {
     const jsxArr: JSX.Element[] = [];
-    for (let i = 0; i < Object.keys(weekDays).length; i++) { 
-           
+    for (let i = 0; i < Object.keys(weekDays).length; i++) {
       if (days.includes(Object.keys(weekDays)[i])) {
-        jsxArr.push(<li className={styles.availableDayItem}>{Object.values(weekDays)[i]}</li>);
+        jsxArr.push(
+          <li className={styles.availableDayItem}>
+            {Object.values(weekDays)[i]}
+          </li>
+        );
       } else {
-        jsxArr.push(<li className={styles.notAvailableDayItem}>{Object.values(weekDays)[i]}</li>);
+        jsxArr.push(
+          <li className={styles.notAvailableDayItem}>
+            {Object.values(weekDays)[i]}
+          </li>
+        );
       }
     }
     return jsxArr;
-  }
+  };
 
   return (
     <>

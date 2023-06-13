@@ -6,8 +6,11 @@ import style from './Auth.module.css';
 import Logo from '../Logo/Logo';
 
 const validationSchema = Yup.object({
-  email: Yup.string().email('איימיל לא תקין').required('הכניסו איימיל') 
-  .matches(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+  email: Yup.string()
+    .email('איימיל לא תקין')
+    .required('הכניסו איימיל')
+    .matches(
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
       'פורמט לא תקין'
     ),
   password: Yup.string().min(6, 'לפחות 6 תווים').required('הכניסו סיסמה'),
@@ -17,16 +20,15 @@ interface AuthFormProps {
   onSubmit: (email: string, password: string) => void;
   buttonValue: string;
   children: ReactNode;
-  error:string
+  error: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
   onSubmit,
   buttonValue,
   children,
-  error
+  error,
 }) => {
-
   const initialValues = {
     email: '',
     password: '',
@@ -58,14 +60,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <div>
             <img
               className={style.roleImg}
-              src={ volunteerImg}
+              src={volunteerImg}
               alt={'סוג משתמש'}
             />
           </div>
           <div className={style.formContainer}>
-            <h2 className={style.formTitle}>
-              התחברות לחשבון המנטו שלך
-            </h2>
+            <h2 className={style.formTitle}>התחברות לחשבון המנטו שלך</h2>
             <div className={style.formControl}>
               {/* Email Input */}
               <Field
@@ -95,7 +95,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 component="div"
               />
             </div>
-            <span role="alert" className={style.alertMsg}>{error}</span>
+            <span role="alert" className={style.alertMsg}>
+              {error}
+            </span>
             {children}
             <button
               className={`${style.submit}`}

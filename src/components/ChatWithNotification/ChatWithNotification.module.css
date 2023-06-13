@@ -1,0 +1,19 @@
+.link {
+  position: relative;
+  display: inline-block;
+}
+
+.chatIcon {
+  /* styling for the chat icon image */
+}
+
+.notificationDot {
+  /* styling for the red dot notification */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}

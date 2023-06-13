@@ -8,16 +8,23 @@ interface Props {
   component: React.ComponentType<any>;
 }
 
-const UnauthenticatedOnlyRoute: React.FC<Props> = ({ path, component: Component }) => {
+const UnauthenticatedOnlyRoute: React.FC<Props> = ({
+  path,
+  component: Component,
+}) => {
   const { user } = useAuthContext();
 
   return (
-    <Route 
+    <Route
       path={path}
-      render={props =>
-        user 
-          ? <Redirect to={user.role === 'volunteer' ? VOLUNTEER_PAGE : PLACE_PAGE} />
-          : <Component {...props} />
+      render={(props) =>
+        user ? (
+          <Redirect
+            to={user.role === 'volunteer' ? VOLUNTEER_PAGE : PLACE_PAGE}
+          />
+        ) : (
+          <Component {...props} />
+        )
       }
     />
   );

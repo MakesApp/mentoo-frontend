@@ -8,13 +8,14 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ currentItem, list, setCurrentItem }) => {
-
   return (
     <ul className={style.list}>
       {list.map((item) => (
         <li
           key={item}
-          className={`${style.listItem} ${currentItem === item ? style.selected : ''}`}
+          className={`${style.listItem} ${
+            currentItem === item ? style.selected : ''
+          }`}
         >
           <button className={style.btn} onClick={() => setCurrentItem(item)}>
             {item}

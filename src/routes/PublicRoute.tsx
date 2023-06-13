@@ -23,7 +23,7 @@ const PublicRoute: React.FC<PublicRouteProps> = ({
   }, [user, fallbackPath]);
 
   // Always return a Route component.
-  return <Component/>;
+  return <Component />;
 };
 
 export default PublicRoute;

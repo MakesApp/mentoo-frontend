@@ -9,7 +9,7 @@ import style from './Login.module.css';
 const Login = () => {
   const { mutateAsync } = useLoginMutation();
   const { setUser } = useAuthContext();
-  const [error,setError]=useState()
+  const [error, setError] = useState();
   const history = useHistory();
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -17,17 +17,16 @@ const Login = () => {
       const { status, data } = response;
 
       if (status === 200) {
-        setUser(data.user)
+        setUser(data.user);
         const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
         history.push(path);
         return;
       }
-      
 
       // Handle successful login
     } catch (error) {
       // Handle login error
-      setError(error.response.data.message)
+      setError(error.response.data.message);
     }
   };
 
@@ -38,7 +37,7 @@ const Login = () => {
           שכחתי סיסמה
         </Link> */}
       </AuthForm>
-{/* 
+      {/* 
       <div className={style.redirectContainer}>
         <span >אין לך חשבון ?</span>
         <Link className={style.redirectLink} to={REGISTER_PAGE}>פתיחת חשבון מנטו</Link>

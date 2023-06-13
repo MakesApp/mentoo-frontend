@@ -12,15 +12,24 @@ interface PlaceCardProps {
   moveToLast: (placeId: string) => void;
 }
 
-const PlaceCard: React.FC<PlaceCardProps> = ({place, moveToLast}) => {
-  const {user}=useAuthContext()
+const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
+  const { user } = useAuthContext();
   const [isClicked, setIsClicked] = useState(false);
   const history = useHistory();
-  const { placeImage, placeName ,_id:placeId , description ,userId:placeUserId}=place;
-  
+  const {
+    placeImage,
+    placeName,
+    _id: placeId,
+    description,
+    userId: placeUserId,
+  } = place;
+
   return (
     <div className={style.placeContainer}>
-      <Link to={{pathname:`/place/${placeId}/details`}} className={style.place}>
+      <Link
+        to={{ pathname: `/place/${placeId}/details` }}
+        className={style.place}
+      >
         <div className={style.imageContainer}>
           <img className={style.mainImg} src={placeImage} alt="" />
         </div>
@@ -36,7 +45,11 @@ const PlaceCard: React.FC<PlaceCardProps> = ({place, moveToLast}) => {
             setIsClicked(true);
           }}
         >
-          <img className={style.chatButtonImg} src={isClicked ? WhiteChatIcon : vIcon} alt="chat icon" />
+          <img
+            className={style.chatButtonImg}
+            src={isClicked ? WhiteChatIcon : vIcon}
+            alt="chat icon"
+          />
         </button>
         <button
           className={style.actionButton}

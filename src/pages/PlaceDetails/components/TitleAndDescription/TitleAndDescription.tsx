@@ -6,7 +6,10 @@ interface TitleAndDescriptionProps {
   description: string;
 }
 
-const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({ title, description }) => {
+const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({
+  title,
+  description,
+}) => {
   return (
     <div className={style.container}>
       <h2 className={style.title}>{title}</h2>

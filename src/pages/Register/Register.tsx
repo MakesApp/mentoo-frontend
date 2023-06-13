@@ -8,35 +8,38 @@ import style from './Register.module.css';
 
 const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
-  const [error,setError]=useState()
-  const {setUser}=useAuthContext()
+  const [error, setError] = useState();
+  const { setUser } = useAuthContext();
   const { mutateAsync } = useRegisterMutation();
-  const history=useHistory();
+  const history = useHistory();
 
-  const handleOnRegister = async(email:string, password:string) => {
- try {
+  const handleOnRegister = async (email: string, password: string) => {
+    try {
       const response = await mutateAsync({ email, password });
       const { status, data } = response;
-  console.log(data);
-  
+      console.log(data);
+
       if (status === 200) {
-        setUser(data.user)
+        setUser(data.user);
         const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
         history.push(path);
         return;
       }
-      
 
       // Handle successful login
     } catch (error) {
       // Handle login error
-      setError(error.response.data.message)
-    }    
+      setError(error.response.data.message);
+    }
   };
 
   return (
     <div className={style.container}>
-      <AuthForm onSubmit={handleOnRegister} buttonValue={'הצטרפות למאגר'} error={error}>
+      <AuthForm
+        onSubmit={handleOnRegister}
+        buttonValue={'הצטרפות למאגר'}
+        error={error}
+      >
         <div className={style.mailConfirmation}>
           <input
             type="checkbox"
