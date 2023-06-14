@@ -12,7 +12,8 @@ const CandidatesVolunteers: React.FC = () => {
 
   const { _id: placeId } = place;
 
-  const accept = async (user) => {
+  const accept = async (e,user) => {
+    e.stopPropagation()
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
@@ -21,7 +22,8 @@ const CandidatesVolunteers: React.FC = () => {
     };
     await mutateAsync({ placeId: placeId, query });
   };
-  const reject = async (user) => {
+  const reject = async (e,user) => {
+    e.stopPropagation()
     const query = {
       oldVolunteers: [...oldVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
@@ -37,14 +39,14 @@ const CandidatesVolunteers: React.FC = () => {
           {' '}
           <Button
             backgroundColor={'#792BA6'}
-            handleOnClick={() => accept(user)}
+            handleOnClick={(e) => accept(e,user)}
           >
             <img src={vIcon} alt={'v icon'} />
             <span>זה מנטו</span>
           </Button>
           <Button
             backgroundColor={'#B272CB'}
-            handleOnClick={() => reject(user)}
+            handleOnClick={(e) => reject(e,user)}
           >
             <img src={closeIcon} alt={'close icon'} />
             <span>פעם אחרת</span>

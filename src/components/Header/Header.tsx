@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <Logo />
       </div>
       <div className={style.headerLeft}>
-        <ChatWithNotification />
+       {user?.role!=='place'&& <ChatWithNotification />}
         {children}
       </div>
     </header>

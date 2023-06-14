@@ -17,7 +17,7 @@ const PlaceDetails: React.FC = () => {
   const { placeId } = useParams<MatchParams>();
   const { data, status } = useQuery(['places', placeId], getPlaceById,
     {
-    enabled: placeId,
+    enabled: !!placeId,
     });
   const [place, setPlace] = useState(null);
   useEffect(() => {

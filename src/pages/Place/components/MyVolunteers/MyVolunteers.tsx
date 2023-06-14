@@ -9,7 +9,8 @@ const MyVolunteers: React.FC = () => {
   const { mutateAsync } = useUpdateVolunteerListMutation();
   const { place, candidateVolunteers, myVolunteers } = usePlaceContext();
   const { _id: placeId } = place;
-  const handleOnClick = async (user) => {
+  const handleOnClick = async (e,user) => {
+    e.stopPropagation();
     const query = {
       candidateVolunteers: [...candidateVolunteers, user._id],
       myVolunteers: myVolunteers.filter(
@@ -24,7 +25,7 @@ const MyVolunteers: React.FC = () => {
         return (
           <Button
             backgroundColor={'#792BA6'}
-            handleOnClick={() => handleOnClick(user)}
+            handleOnClick={(e) => handleOnClick(e,user)}
           >
             <img src={pauseIcon} alt={'pause'} />
             <span>למועמדים שלי</span>

@@ -6,10 +6,10 @@ import { getUserUnreadMessages } from '../api/services/api';
 const AuthContext = createContext(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [hasUnreadMessages, setHasUnreadMessages] = useState();
   const [loading, setLoading] = useState(true);
-  const { data } = useQuery('chat', getUserUnreadMessages);
+  const { data } = useQuery('chat', getUserUnreadMessages,{enabled:!!user});
 
   useEffect(() => {
     if (data) setHasUnreadMessages(data.hasUnreadMessages);

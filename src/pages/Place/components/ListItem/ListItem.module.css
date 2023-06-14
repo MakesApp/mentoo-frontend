@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  background-color: #fff;
 }
 .listItem {
   width: 100%;
@@ -16,7 +17,7 @@ a {
   align-items: center;
   overflow: hidden;
   column-gap: 25px;
-  padding: 5% 7.5%;
+  padding: 5%;
   transition: transform 0.5s ease;
 }
 
@@ -37,7 +38,6 @@ a {
   width: 7px;
   line-height: 0;
   list-style: none outside none;
-  margin-right: 15px;
   margin-top: 3px;
   vertical-align: top;
   border-radius: 50%;
@@ -119,4 +119,11 @@ a {
 .isVisible {
   z-index: 2;
   transition: all 3s;
+}
+
+.redDot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
 }

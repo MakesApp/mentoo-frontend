@@ -15,7 +15,8 @@ const OldVolunteers: React.FC = () => {
   const { mutateAsync } = useUpdateVolunteerListMutation();
   const { _id: placeId } = place;
 
-  const accept = async (user) => {
+  const accept = async (e,user) => {
+    e.stopPropagation()
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       oldVolunteers: oldVolunteers.filter(
@@ -27,7 +28,7 @@ const OldVolunteers: React.FC = () => {
   return (
     <List users={oldVolunteers}>
       {(user) => (
-        <Button backgroundColor={'#792BA6'} handleOnClick={() => accept(user)}>
+        <Button backgroundColor={'#792BA6'} handleOnClick={(e) => accept(e,user)}>
           <img src={vIcon} alt={'v icon'} />
           <span>למתנדבים שלי</span>
         </Button>

@@ -39,7 +39,7 @@ const Header = React.forwardRef((props: HeaderProps, ref: React.Ref<any>) => {
       </div>
       <div className={style.headerMiddle}></div>
       <div className={style.headerLeft}>
-        <ChatWithNotification />
+       {user?.role!=='place'&& <ChatWithNotification />}
         <Link to={{ pathname: '/' }}>
           <img src={arrowLeft} alt="arrow left" />
         </Link>

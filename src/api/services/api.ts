@@ -52,7 +52,7 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<
 };
 export const getUsers = async ({ queryKey }) => {
   const [_, users] = queryKey;
-  const response = await api.post('/user/getUsers', { list: users });
+  const response = await api.post('/users/getUsers', { list: users });
 
   return response.data;
 };
@@ -68,3 +68,4 @@ export const getUserUnreadMessages = async () => {
 
   return response.data;
 };
+

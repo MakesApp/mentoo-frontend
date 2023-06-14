@@ -21,6 +21,7 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
     e.stopPropagation();
     history.push(`/chat/${user._id}`);
   };
+  
   const handleCloseIcon = (e) => {
     e.stopPropagation();
     setIsContainerMoved(!isContainerMoved);
@@ -39,16 +40,18 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
               onClick={(e) => handleCloseIcon(e)}
             ></button>
           ) : (
+            <button onClick={(e) => {
+                handleShowMore(e);
+              }}>
             <ul
               className={style.icons}
-              onClick={(e) => {
-                handleShowMore(e);
-              }}
+              
             >
               <li></li>
               <li></li>
               <li></li>
             </ul>
+            </button>
           )}
 
           <img
@@ -59,6 +62,9 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
           <div>
             <span className={style.userName}>{user.fullName}</span>
           </div>
+         {user?.hasUnreadMessages&& <div className={style.redDot}>
+          </div>
+            }
         </div>
         <div
           className={`${style.content} ${isContainerMoved && style.isVisible} `}

@@ -33,7 +33,7 @@ const Volunteer: React.FC = () => {
 
     if (selectedDays.length > 0) {
       newFilteredPlaces = newFilteredPlaces.filter((place) =>
-        selectedDays.every((day) => place.availableDays?.includes(day))
+        selectedDays.some((day) => place.availableDays?.includes(day))
       );
     }
     setFilteredPlaces(newFilteredPlaces);

@@ -33,7 +33,7 @@ const RoutesConfig: React.FC = () => {
       <UnauthenticatedOnlyRoute path={LOGIN_PAGE} component={Login} />
       <RestrictedRoute
         path={CHAT_LIST_PAGE}
-        allowedRoles={['volunteer', 'place']}
+        allowedRoles={['volunteer']}
         fallbackPath={LOGIN_PAGE}
         component={ChatList}
       />
