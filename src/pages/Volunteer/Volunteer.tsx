@@ -11,12 +11,12 @@ import { useQuery } from 'react-query';
 import { getAllPlaces } from '../../api/services/api';
 
 const Volunteer: React.FC = () => {
-  const { data, status } = useQuery('places', getAllPlaces);
+  const { data } = useQuery('places', getAllPlaces);
 
   const [expanded, setExpanded] = useState<string[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [selectedDays, setSelectedDays] = useState<number[]>([]); // Changed the type to 'number[]' to match the data type
   const [places, setPlaces] = useState<IPlace[]>([]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Volunteer: React.FC = () => {
         const filteredPlaces = prevPlaces.filter(
           (place) => place._id !== placeId
         );
-        return [...filteredPlaces, place];
+        return [...filteredPlaces, place!]; // Added '!' to assert that 'place' is not undefined
       });
     },
     [setPlaces]
@@ -66,12 +66,12 @@ const Volunteer: React.FC = () => {
           />
           <PreferencesDaysBar
             selectedDays={selectedDays}
-            setSelectedDays={setSelectedDays}
+            setSelectedDays={setSelectedDays as React.Dispatch<
+              React.SetStateAction<number[]>
+            >} // Added type assertion to match the correct type
           />
         </div>
-        <span
-          className={style.result}
-        >{`${filteredPlaces.length} תוצאות`}</span>
+        <span className={style.result}>{`${filteredPlaces.length} תוצאות`}</span>
         <ul className={style.cardList}>
           {filteredPlaces.map((place) => {
             return (

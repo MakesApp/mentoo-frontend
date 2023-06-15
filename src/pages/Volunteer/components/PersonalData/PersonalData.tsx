@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './PersonalData.module.css';
 
 interface User {
@@ -9,11 +9,12 @@ interface User {
 }
 
 const PersonalData: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState<User>({
+  const currentUser: User = {
     id: 1,
-    fullName: 'Lord Voldermot',
+    fullName: 'Lord Voldemort',
     volunteeringTime: 118,
-  });
+    project: 'TEALS',
+  };
 
   return (
     <div>
@@ -27,7 +28,7 @@ const PersonalData: React.FC = () => {
           </p>
         </div>
         <div>
-          <p className={style.project}>{'TEALS'}</p>
+          <p className={style.project}>{currentUser.project}</p>
         </div>
       </div>
     </div>

@@ -2,32 +2,37 @@ import style from './PlaceDetails.module.css';
 import TitleAndDescription from './components/TitleAndDescription/TitleAndDescription';
 import Days from './components/Days/Days';
 import chatIcon from '../../assets/images/chat-icon-white.svg';
-import Header from '../../components/Header/Header';
+import Header, { HeaderProps } from '../../components/Header/Header';
 import arrowLeft from '../../assets/images/arrow-left.svg';
 import { Link, useParams } from 'react-router-dom';
 import { VOLUNTEER_PAGE } from '../../routes/routePath';
 import { useQuery } from 'react-query';
 import { getPlaceById } from '../../api/services/api';
 import { useEffect, useState } from 'react';
+
 interface MatchParams {
   placeId: string;
 }
 
 const PlaceDetails: React.FC = () => {
   const { placeId } = useParams<MatchParams>();
-  const { data, status } = useQuery(['places', placeId], getPlaceById,
-    {
+  const { data, status } = useQuery(['places', placeId], getPlaceById, {
     enabled: !!placeId,
-    });
-  const [place, setPlace] = useState(null);
+  });
+  const [place, setPlace] = useState<any>(null);
+
   useEffect(() => {
     if (data) setPlace(data.place);
   }, [data]);
 
+  const headerProps: HeaderProps = {
+    avatarUrl: '', // Add the required property
+  };
+
   return (
     place && (
       <div className={style.container}>
-        <Header>
+        <Header {...headerProps}>
           <Link to={{ pathname: '/' }}>
             <img src={arrowLeft} alt="arrow left" />
           </Link>

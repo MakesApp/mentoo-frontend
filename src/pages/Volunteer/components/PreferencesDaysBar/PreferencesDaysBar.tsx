@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { days } from '../../constants';
 import downArrow from '../../../../assets/images/downArrow.png';
 import style from './PreferencesDaysBar.module.css';
 
-const PreferencesDaysBar: React.FC = ({ selectedDays, setSelectedDays }) => {
+const PreferencesDaysBar: React.FC = () => {
   const handleOnChange = (day: string): void => {
-    if (selectedDays.includes(day)) {
-      const filteredDays = selectedDays.filter(
-        (selectedDay) => selectedDay !== day
-      );
-      setSelectedDays(filteredDays);
-      return;
-    }
-
-    setSelectedDays([...selectedDays, day]);
+    console.log(day);
   };
 
   return (
@@ -39,7 +31,6 @@ const PreferencesDaysBar: React.FC = ({ selectedDays, setSelectedDays }) => {
                       id={`custom-checkbox-${name}`}
                       name={name}
                       value={name}
-                      checked={selectedDays.includes(name)}
                       onChange={() => handleOnChange(name)}
                     />
                     <label htmlFor={`custom-checkbox-${name}`}>{name}</label>

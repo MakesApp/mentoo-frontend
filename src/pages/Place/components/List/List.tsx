@@ -1,15 +1,19 @@
 import React, { ReactNode } from 'react';
 import ListItem from '../ListItem/ListItem';
 import style from './List.module.css';
-interface User {
-  id: string;
+
+interface IUser {
+  _id: string;
+  email: string;
+  password: string;
+  role: string;
   profileImage: string;
   fullName: string;
 }
 
 interface ListProps {
-  users: User[];
-  children: ReactNode;
+  users: IUser[];
+  children: (user: IUser) => ReactNode;
 }
 
 const List: React.FC<ListProps> = ({ users, children }) => {
@@ -18,7 +22,7 @@ const List: React.FC<ListProps> = ({ users, children }) => {
       <ul className={style.list}>
         {users?.map((user) => (
           <ListItem key={user._id} user={user}>
-            {children}
+            {children(user)}
           </ListItem>
         ))}
       </ul>

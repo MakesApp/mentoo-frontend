@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import { useAuthContext } from '../context/useAuth';
 
 interface PublicRouteProps {
@@ -9,7 +9,6 @@ interface PublicRouteProps {
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({
-  path,
   fallbackPath,
   component: Component,
 }) => {

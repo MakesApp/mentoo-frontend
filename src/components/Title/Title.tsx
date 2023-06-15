@@ -1,5 +1,11 @@
 import style from './Title.module.css';
-const Title = ({ title, subTitle }) => {
+
+interface TitleProps {
+  title: string;
+  subTitle: string;
+}
+
+const Title: React.FC<TitleProps> = ({ title, subTitle }) => {
   return (
     <div className={style.container}>
       <h1 className={style.title}>{title}</h1>

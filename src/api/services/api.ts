@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient, UseMutationResult } from 'react-query';
+import { useMutation, useQueryClient, UseMutationResult } from 'react-query';
 import api from '../../config/api';
 
 export const useLoginMutation = () => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import style from './Header.module.css';
 import Logo from '../Logo/Logo';
-import chatIcon from '../../assets/images/chat-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
 import defaultAvatar from '../../assets/images/user-avatar.png';
 import { useLogoutMutation } from '../../api/services/api';
@@ -9,15 +8,14 @@ import ChatWithNotification from '../ChatWithNotification/ChatWithNotification';
 
 interface HeaderProps {
   avatarUrl: string;
+  handleOnClick?: () => void; // Make handleOnClick prop optional if not always used
 }
-const Header: React.FC<HeaderProps> = ({ children }) => {
+
+const Header: React.FC<HeaderProps> = ({ avatarUrl, children, handleOnClick }) => {
   const { user, setUser } = useAuthContext();
   const logoutMutation = useLogoutMutation();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
-  const handleOnClick = () => {
-    setLogoutVisible(!isLogoutVisible);
-  };
   const handleLogout = async () => {
     try {
       await logoutMutation.mutateAsync();
@@ -26,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       console.log(err);
     }
   };
+
   return (
     <header className={style.headerContainer}>
       <div className={style.headerRight}>
@@ -48,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <Logo />
       </div>
       <div className={style.headerLeft}>
-       {user?.role!=='place'&& <ChatWithNotification />}
+        {user?.role !== 'place' && <ChatWithNotification />}
         {children}
       </div>
     </header>

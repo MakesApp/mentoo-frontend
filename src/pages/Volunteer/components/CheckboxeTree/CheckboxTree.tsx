@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './CheckboxTree.module.css';
 import { regionData } from './constants';
+
+interface Node {
+  name: string;
+  children?: Node[];
+}
 
 interface CheckboxTreeProps {
   checkedNodes: number[];
@@ -60,7 +65,7 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({
         <label className={style.nodeLabel}>
           <input
             type="checkbox"
-            checked={checkedNodes.includes(node.name)}
+            checked={checkedNodes.includes(Number(node.name))}
             onChange={(e) => handleCheckChange(node, e.target.checked)}
             onClick={(e) => e.stopPropagation()}
           />
@@ -73,11 +78,7 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({
     );
   };
 
-  return (
-    <div className={style.tree}>
-      {regionData.map((node) => renderNode(node))}
-    </div>
-  );
+  return <div className={style.tree}>{regionData.map(renderNode)}</div>;
 };
 
 export default CheckboxTree;

@@ -2,41 +2,49 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getPlaceById, getUsers } from '../../../api/services/api';
 import { useAuthContext } from '../../../context/useAuth';
+import { IUser } from '../../../types/IUser';
 
-const PlaceContext = createContext(undefined);
+interface PlaceContextProps {
+  myVolunteers: IUser[] | null;
+  setMyVolunteers: React.Dispatch<React.SetStateAction<IUser[] | null>>;
+  candidateVolunteers: IUser[] | null;
+  setCandidateVolunteers: React.Dispatch<React.SetStateAction<IUser[] | null>>;
+  place: any;
+  oldVolunteers: IUser[] | null;
+}
+
+const PlaceContext = createContext<PlaceContextProps | undefined>(undefined);
 
 export const PlaceProvider: React.FC = ({ children }) => {
   const { user } = useAuthContext();
   const { placeId } = user;
-  const [place, setPlace] = useState(null);
-  const [myVolunteers, setMyVolunteers] = useState(null);
-  const [candidateVolunteers, setCandidateVolunteers] = useState(null);
-  const [oldVolunteers, setOldVolunteers] = useState(null);
+  const [place, setPlace] = useState<any>(null);
+  const [myVolunteers, setMyVolunteers] = useState<IUser[] | null>(null);
+  const [candidateVolunteers, setCandidateVolunteers] = useState<IUser[] | null>(
+    null
+  );
+  const [oldVolunteers, setOldVolunteers] = useState<IUser[] | null>(null);
 
   const { data: placeData } = useQuery(['places', placeId], getPlaceById);
-const { data: myVolunteersData } = useQuery(
-  ['places', place?.myVolunteers],
-  getUsers,
-  {
+  const { data: myVolunteersData } = useQuery(['places', place?.myVolunteers], getUsers, {
     enabled: !!place?.myVolunteers,
-  }
-);
+  });
 
-const { data: candidateVolunteersData } = useQuery(
-  ['places', place?.candidateVolunteers],
-  getUsers,
-  {
-    enabled: !!place?.candidateVolunteers,
-  }
-);
+  const { data: candidateVolunteersData } = useQuery(
+    ['places', place?.candidateVolunteers],
+    getUsers,
+    {
+      enabled: !!place?.candidateVolunteers,
+    }
+  );
 
-const { data: oldVolunteersData } = useQuery(
-  ['places', place?.oldVolunteers],
-  getUsers,
-  {
-    enabled: !!place?.oldVolunteers,
-  }
-);
+  const { data: oldVolunteersData } = useQuery(
+    ['places', place?.oldVolunteers],
+    getUsers,
+    {
+      enabled: !!place?.oldVolunteers,
+    }
+  );
 
   useEffect(() => {
     if (placeData) setPlace(placeData.place);
@@ -46,7 +54,7 @@ const { data: oldVolunteersData } = useQuery(
     if (oldVolunteersData) setOldVolunteers(oldVolunteersData.users);
   }, [myVolunteersData, candidateVolunteersData, oldVolunteersData, placeData]);
 
-  const value = {
+  const value: PlaceContextProps = {
     myVolunteers,
     setMyVolunteers,
     candidateVolunteers,

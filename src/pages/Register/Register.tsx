@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useRegisterMutation } from '../../api/services/api';
-import AuthForm from '../../components/Auth/Auth';
+import AuthForm from '../../components/AuthForm/AuthForm';
 import { useAuthContext } from '../../context/useAuth';
 import { VOLUNTEER_PAGE } from '../../routes/routePath';
 import style from './Register.module.css';
 
 const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState<string | undefined>(); // Provide the correct type for the 'error' state
   const { setUser } = useAuthContext();
   const { mutateAsync } = useRegisterMutation();
   const history = useHistory();
@@ -17,7 +17,6 @@ const Register = () => {
     try {
       const response = await mutateAsync({ email, password });
       const { status, data } = response;
-      console.log(data);
 
       if (status === 200) {
         setUser(data.user);
@@ -26,10 +25,10 @@ const Register = () => {
         return;
       }
 
-      // Handle successful login
+      // Handle successful registration
     } catch (error) {
-      // Handle login error
-      setError(error.response.data.message);
+      // Handle registration error
+      setError(error.response?.data?.message); // Access the error message from the response
     }
   };
 

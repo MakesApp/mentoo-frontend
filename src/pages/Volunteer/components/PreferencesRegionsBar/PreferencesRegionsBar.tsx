@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import downArrow from '../../../../assets/images/downArrow.png';
 import CheckboxTree from '../CheckboxeTree/CheckboxTree';
 import style from './PreferencesRegionsBar.module.css';
+
 interface PreferencesRegionsBarProps {
   checkedNodes: number[];
   setCheckedNodes: React.Dispatch<React.SetStateAction<number[]>>;
   expandedNodes: number[];
   setExpandedNodes: React.Dispatch<React.SetStateAction<number[]>>;
 }
+
 const PreferencesRegionsBar: React.FC<PreferencesRegionsBarProps> = ({
   checkedNodes,
   setCheckedNodes,

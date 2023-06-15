@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
-import Header from './components/Header/Header';
+import Header, { HeaderProps } from './components/Header/Header';
 import userAvatar from '../../assets/images/user-avatar.png';
 import sendIcon from '../../assets/images/send-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
@@ -13,9 +13,10 @@ type MessageType = {
   message: string;
   isCurrentUser: boolean;
   seenBy?: string;
+  _id: string;
 };
 
-const socket = io(process.env.REACT_APP_SOCKET_URL);
+const socket = io(process.env.REACT_APP_SOCKET_URL!);
 
 interface MatchParams {
   partnerId: string;
@@ -23,7 +24,7 @@ interface MatchParams {
 
 const Chat: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const messagesEndRef = useRef<null | HTMLUListElement>(null);
+  const messagesEndRef = useRef<HTMLUListElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -57,11 +58,9 @@ const Chat: React.FC = () => {
         }))
       );
 
-      // After receiving chat history, emit 'messages seen' event to mark all messages as seen
       const unseenMessageIds = chatHistory
         .filter((msg) => msg.sender !== userId && !msg.seenBy)
         .map((msg) => msg._id);
-      console.log(unseenMessageIds);
 
       if (unseenMessageIds.length > 0) {
         socket.emit('messages seen', unseenMessageIds, roomName, userId);
@@ -101,6 +100,7 @@ const Chat: React.FC = () => {
       sender: userId,
       message,
       isCurrentUser: true,
+      _id: '', // Assign a value to _id
     };
     socket.emit('chat message', newMessage, roomName);
 
@@ -111,9 +111,13 @@ const Chat: React.FC = () => {
     (headerRef.current?.offsetHeight || 0) +
     (formRef.current?.offsetHeight || 0);
 
+  const headerProps: HeaderProps = {
+    avatarUrl: user?.avatarUrl,
+  };
+
   return (
     <div className={style.container}>
-      <Header ref={headerRef} />
+      <Header {...headerProps} ref={headerRef} />
       <div className={style.content}>
         <ul
           ref={messagesEndRef}
@@ -133,7 +137,7 @@ const Chat: React.FC = () => {
               >
                 {isFirstMessage && (
                   <img
-                    src={user?.avatar || userAvatar}
+                    src={user?.avatarUrl || userAvatar}
                     className={style.avatar}
                     alt="user avatar"
                   />

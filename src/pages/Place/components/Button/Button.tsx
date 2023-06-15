@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, CSSProperties, MouseEventHandler } from 'react';
+import  { FC, ReactNode, CSSProperties, MouseEventHandler } from 'react';
 import style from './Button.module.css';
 
 interface ButtonProps {

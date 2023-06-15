@@ -4,31 +4,35 @@ import React, { ReactNode } from 'react';
 import defaultAvatar from '../../../../assets/images/user-avatar.png';
 import { IUser } from '../../../../types/IUser';
 import style from './ListItem.module.css';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 interface ListItemProps {
   user: IUser;
   children: (user: IUser) => ReactNode;
 }
+
 const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
   const [isContainerMoved, setIsContainerMoved] = useState(false);
   const history = useHistory();
 
-  const handleShowMore = (e) => {
+  const handleShowMore = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsContainerMoved(!isContainerMoved);
   };
-  const handleOnItemClick = (e) => {
+
+  const handleOnItemClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     history.push(`/chat/${user._id}`);
   };
-  
-  const handleCloseIcon = (e) => {
+
+  const handleCloseIcon = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsContainerMoved(!isContainerMoved);
   };
+
   return (
     <li key={user._id} className={style.container}>
-      <button onClick={(e) => handleOnItemClick(e)} className={style.listItem}>
+      <button onClick={handleOnItemClick} className={style.listItem}>
         <div
           className={`${style.userDetailsContainer} ${
             isContainerMoved ? style.moveContainer : ''
@@ -37,20 +41,15 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
           {isContainerMoved ? (
             <button
               className={style.closeIcon}
-              onClick={(e) => handleCloseIcon(e)}
+              onClick={handleCloseIcon}
             ></button>
           ) : (
-            <button onClick={(e) => {
-                handleShowMore(e);
-              }}>
-            <ul
-              className={style.icons}
-              
-            >
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+            <button onClick={handleShowMore}>
+              <ul className={style.icons}>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
             </button>
           )}
 
@@ -62,9 +61,7 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
           <div>
             <span className={style.userName}>{user.fullName}</span>
           </div>
-         {user?.hasUnreadMessages&& <div className={style.redDot}>
-          </div>
-            }
+          {user?.hasUnreadMessages && <div className={style.redDot}></div>}
         </div>
         <div
           className={`${style.content} ${isContainerMoved && style.isVisible} `}

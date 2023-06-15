@@ -4,12 +4,14 @@ import pauseIcon from '../../../../assets/images/pause-icon.svg';
 import Button from '../Button/Button';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 import { usePlaceContext } from '../../context/placeContext';
+import { IUser } from '../../../../types/IUser';
 
 const MyVolunteers: React.FC = () => {
   const { mutateAsync } = useUpdateVolunteerListMutation();
   const { place, candidateVolunteers, myVolunteers } = usePlaceContext();
   const { _id: placeId } = place;
-  const handleOnClick = async (e,user) => {
+
+  const handleOnClick = async (e: React.MouseEvent, user: IUser) => {
     e.stopPropagation();
     const query = {
       candidateVolunteers: [...candidateVolunteers, user._id],
@@ -19,13 +21,14 @@ const MyVolunteers: React.FC = () => {
     };
     await mutateAsync({ placeId: placeId, query });
   };
+
   return (
     <List users={myVolunteers}>
-      {(user) => {
+      {(user: IUser) => {
         return (
           <Button
             backgroundColor={'#792BA6'}
-            handleOnClick={(e) => handleOnClick(e,user)}
+            handleOnClick={(e) => handleOnClick(e, user)}
           >
             <img src={pauseIcon} alt={'pause'} />
             <span>למועמדים שלי</span>

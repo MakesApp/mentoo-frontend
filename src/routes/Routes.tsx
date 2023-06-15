@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {  Switch } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import UnauthenticatedOnlyRoute from './UnauthenticatedOnlyRoute';
 import {
@@ -12,9 +12,7 @@ import {
   CHAT_LIST_PAGE,
 } from './routePath';
 import RestrictedRoute from './RestrictedRoute';
-import PublicRoute from './PublicRoute';
 import Volunteer from '../pages/Volunteer/Volunteer';
-import Register from '../pages/Register/Register';
 import PlaceDetails from '../pages/PlaceDetails/PlaceDetails';
 import Place from '../pages/Place/Place';
 import Chat from '../pages/Chat/Chat';

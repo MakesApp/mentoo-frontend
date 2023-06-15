@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, { ReactNode, FormEvent } from 'react';
+import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import volunteerImg from '../../assets/images/volunteer.svg';
-import style from './Auth.module.css';
+import style from './AuthForm.module.css';
 import Logo from '../Logo/Logo';
 
 const validationSchema = Yup.object({
@@ -37,9 +37,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const alert = false;
 
   const handleSubmit = (
-    values: any,
-    actions: any,
-    event: React.FormEvent<HTMLFormElement>
+    values: { email: string; password: string },
+    actions: FormikHelpers<{ email: string; password: string }>,
+    event: FormEvent<HTMLFormElement>
   ) => {
     onSubmit(values.email, values.password);
     actions.setSubmitting(false); // Manually set submitting state to false

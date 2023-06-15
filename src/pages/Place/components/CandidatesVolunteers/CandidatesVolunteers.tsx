@@ -12,41 +12,41 @@ const CandidatesVolunteers: React.FC = () => {
 
   const { _id: placeId } = place;
 
-  const accept = async (e,user) => {
-    e.stopPropagation()
+  const accept = async (e: React.MouseEvent, user: any) => {
+    e.stopPropagation();
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
-        (volunteer) => volunteer._id !== user._id
+        (volunteer: any) => volunteer._id !== user._id
       ),
     };
     await mutateAsync({ placeId: placeId, query });
   };
-  const reject = async (e,user) => {
-    e.stopPropagation()
+  const reject = async (e: React.MouseEvent, user: any) => {
+    e.stopPropagation();
     const query = {
       oldVolunteers: [...oldVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
-        (volunteer) => volunteer._id !== user._id
+        (volunteer: any) => volunteer._id !== user._id
       ),
     };
     await mutateAsync({ placeId: placeId, query });
   };
+
   return (
     <List users={candidateVolunteers}>
-      {(user) => (
+      {(user: any) => (
         <>
-          {' '}
           <Button
             backgroundColor={'#792BA6'}
-            handleOnClick={(e) => accept(e,user)}
+            handleOnClick={(e) => accept(e, user)}
           >
             <img src={vIcon} alt={'v icon'} />
             <span>זה מנטו</span>
           </Button>
           <Button
             backgroundColor={'#B272CB'}
-            handleOnClick={(e) => reject(e,user)}
+            handleOnClick={(e) => reject(e, user)}
           >
             <img src={closeIcon} alt={'close icon'} />
             <span>פעם אחרת</span>

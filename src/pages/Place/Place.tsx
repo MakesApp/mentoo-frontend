@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Header from '../../components/Header/Header';
+import { useState } from 'react';
+import Header, { HeaderProps } from '../../components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Title from '../../components/Title/Title';
 import MyVolunteers from './components/MyVolunteers/MyVolunteers';
@@ -24,9 +24,14 @@ const Place = () => {
         return null;
     }
   };
+
+  const headerProps: HeaderProps = {
+    avatarUrl: place?.avatarUrl || '', // Provide the avatarUrl prop to the Header component
+  };
+
   return (
     <div>
-      <Header />
+      <Header {...headerProps} />
       <Title title={'מחוברים לחיים'} subTitle={currentList} />
       <Menu
         list={listTitles}
