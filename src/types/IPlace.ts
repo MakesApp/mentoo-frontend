@@ -1,4 +1,5 @@
 export interface IPlace {
+  _id:string;
   placeName: string;
   availableDays: string[];
   address: string;
