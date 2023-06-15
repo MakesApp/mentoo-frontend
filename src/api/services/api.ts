@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient, UseMutationResult } from 'react-query';
 import api from '../../config/api';
 
 export const useLoginMutation = () => {
@@ -22,7 +22,8 @@ export const getAllPlaces = async () => {
 
   return response.data;
 };
-export const getPlaceById = async ({ queryKey }) => {
+
+export const getPlaceById = async ({ queryKey }: { queryKey: string[] }) => {
   const [_, placeId] = queryKey;
   const response = await api.get(`/place/${placeId}`);
   return response.data;
@@ -37,12 +38,12 @@ export const useLogoutMutation = () => {
 export const useUpdateVolunteerListMutation = (): UseMutationResult<
   any,
   unknown,
-  UpdateVolunteerPayload,
+  { placeId: string, query: any },
   unknown
 > => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ placeId, query }) => api.patch(`/place/${placeId}`, { query }),
+    ({ placeId, query }) => api.patch(`/place/${placeId}`, query),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('places');
@@ -50,7 +51,8 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<
     }
   );
 };
-export const getUsers = async ({ queryKey }) => {
+
+export const getUsers = async ({ queryKey }: { queryKey: string[] }) => {
   const [_, users] = queryKey;
   const response = await api.post('/users/getUsers', { list: users });
 
@@ -68,4 +70,3 @@ export const getUserUnreadMessages = async () => {
 
   return response.data;
 };
-
