@@ -9,10 +9,11 @@ import { useQuery } from 'react-query';
 import ChatWithNotification from '../../../../components/ChatWithNotification/ChatWithNotification';
 
 interface HeaderProps {
-  avatarUrl: string;
+  // Define the ref prop
+  ref: React.Ref<HTMLDivElement>;
 }
 
-const Header = React.forwardRef((props: HeaderProps, ref: React.Ref<any>) => {
+const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
   const { user } = useAuthContext();
   const { placeId } = user;
   const { data: placeData } = useQuery(['places', placeId], getPlaceById, {
@@ -47,6 +48,5 @@ const Header = React.forwardRef((props: HeaderProps, ref: React.Ref<any>) => {
   );
 });
 
-Header.displayName = 'Header';
 
 export default Header;

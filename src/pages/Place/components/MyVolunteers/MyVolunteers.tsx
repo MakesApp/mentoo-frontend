@@ -4,27 +4,26 @@ import pauseIcon from '../../../../assets/images/pause-icon.svg';
 import Button from '../Button/Button';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 import { usePlaceContext } from '../../context/placeContext';
-import { IUser } from '../../../../types/IUser';
 
 const MyVolunteers: React.FC = () => {
   const { mutateAsync } = useUpdateVolunteerListMutation();
   const { place, candidateVolunteers, myVolunteers } = usePlaceContext();
-  const { _id: placeId } = place;
+const placeId = place ? place._id : null;
 
-  const handleOnClick = async (e: React.MouseEvent, user: IUser) => {
+  const handleOnClick = async (e: React.MouseEvent, user) => {
     e.stopPropagation();
     const query = {
       candidateVolunteers: [...candidateVolunteers, user._id],
-      myVolunteers: myVolunteers.filter(
+      myVolunteers: myVolunteers?.filter(
         (volunteer) => volunteer._id !== user._id
       ),
     };
     await mutateAsync({ placeId: placeId, query });
   };
 
-  return (
+  return myVolunteers &&(
     <List users={myVolunteers}>
-      {(user: IUser) => {
+      {(user) => {
         return (
           <Button
             backgroundColor={'#792BA6'}

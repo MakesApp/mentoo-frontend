@@ -16,8 +16,9 @@ const Volunteer: React.FC = () => {
   const [expanded, setExpanded] = useState<string[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
-  const [selectedDays, setSelectedDays] = useState<number[]>([]); // Changed the type to 'number[]' to match the data type
+  const [selectedDays, setSelectedDays] = useState<string[]>([]); // Changed the type to 'number[]' to match the data type
   const [places, setPlaces] = useState<IPlace[]>([]);
+console.log(regions,selectedDays);
 
   useEffect(() => {
     if (data) setPlaces(data.places);
@@ -54,7 +55,7 @@ const Volunteer: React.FC = () => {
 
   return (
     <div>
-      <Header avatarUrl="" />
+      <Header  />
       <PersonalData />
       <div className={style.content}>
         <div className={style.daysRegionContainer}>
@@ -66,9 +67,7 @@ const Volunteer: React.FC = () => {
           />
           <PreferencesDaysBar
             selectedDays={selectedDays}
-            setSelectedDays={setSelectedDays as React.Dispatch<
-              React.SetStateAction<number[]>
-            >} // Added type assertion to match the correct type
+            setSelectedDays={setSelectedDays} // Added type assertion to match the correct type
           />
         </div>
         <span className={style.result}>{`${filteredPlaces.length} תוצאות`}</span>

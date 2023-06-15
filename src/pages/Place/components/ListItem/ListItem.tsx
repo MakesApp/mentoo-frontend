@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 interface ListItemProps {
   user: IUser;
-  children: (user: IUser) => ReactNode;
+  children: (user: IUser) => ReactNode|undefined;
 }
 
 const ListItem: React.FC<ListItemProps> = ({ user, children }) => {

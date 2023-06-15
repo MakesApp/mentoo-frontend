@@ -1,19 +1,12 @@
 import React, { ReactNode } from 'react';
+import { IUser } from '../../../../types/IUser';
 import ListItem from '../ListItem/ListItem';
 import style from './List.module.css';
 
-interface IUser {
-  _id: string;
-  email: string;
-  password: string;
-  role: string;
-  profileImage: string;
-  fullName: string;
-}
 
 interface ListProps {
   users: IUser[];
-  children: (user: IUser) => ReactNode;
+  children: (user:IUser) => ReactNode|any;
 }
 
 const List: React.FC<ListProps> = ({ users, children }) => {

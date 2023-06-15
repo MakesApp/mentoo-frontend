@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import api from '../config/api';
 import { useQuery } from 'react-query';
 import { getUserUnreadMessages } from '../api/services/api';
@@ -10,10 +10,12 @@ interface AuthContextProps {
   loading: boolean;
   hasUnreadMessages: boolean | undefined;
 }
-
+interface AuthProviderProps{
+  children:ReactNode
+}
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | any>(null);
   const [hasUnreadMessages, setHasUnreadMessages] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(true);

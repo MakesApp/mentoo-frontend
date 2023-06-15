@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import style from './TitleAndDescription.module.css';
 
 interface TitleAndDescriptionProps {
   title: string;
-  description: string;
+  description: string|ReactNode;
 }
 
 const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({

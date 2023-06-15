@@ -1,3 +1,5 @@
+import { IUser } from "./IUser";
+
 export interface IPlace {
   _id:string;
   placeName: string;
@@ -7,4 +9,7 @@ export interface IPlace {
   audience: string;
   placeImage?: string;
   userId: string;
+  oldVolunteers:IUser[];
+  myVolunteers:IUser[];
+  candidateVolunteers:IUser[];
 }

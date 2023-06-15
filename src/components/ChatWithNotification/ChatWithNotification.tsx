@@ -10,7 +10,7 @@ const ChatWithNotification = () => {
   const { hasUnreadMessages } = useAuthContext();
 
   return (
-    <Link to={{ pathname: CHAT_LIST_PAGE }} className={style.link} onClick={handleOnClick}>
+    <Link to={{ pathname: CHAT_LIST_PAGE }} className={style.link} >
       <img src={chatIcon} alt="chat icon" className={style.chatIcon} />
       {hasUnreadMessages && <span className={style.notificationDot}></span>}
     </Link>

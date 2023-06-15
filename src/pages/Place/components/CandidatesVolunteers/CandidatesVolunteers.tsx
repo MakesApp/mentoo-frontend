@@ -10,7 +10,7 @@ const CandidatesVolunteers: React.FC = () => {
     usePlaceContext();
   const { mutateAsync } = useUpdateVolunteerListMutation();
 
-  const { _id: placeId } = place;
+const placeId = place ? place._id : null;
 
   const accept = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
@@ -33,7 +33,7 @@ const CandidatesVolunteers: React.FC = () => {
     await mutateAsync({ placeId: placeId, query });
   };
 
-  return (
+  return candidateVolunteers&& (
     <List users={candidateVolunteers}>
       {(user: any) => (
         <>

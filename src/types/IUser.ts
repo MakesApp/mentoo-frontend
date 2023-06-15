@@ -6,4 +6,5 @@ export interface IUser {
   avatar?: string; // avatar is optional
   fullName: string;
   placeId?: string; // placeId is optional
+  hasUnreadMessages?:boolean;
 }

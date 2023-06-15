@@ -8,7 +8,7 @@ import style from './Register.module.css';
 
 const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
-  const [error, setError] = useState<string | undefined>(); // Provide the correct type for the 'error' state
+  const [error, setError] = useState<any>(); // Provide the correct type for the 'error' state
   const { setUser } = useAuthContext();
   const { mutateAsync } = useRegisterMutation();
   const history = useHistory();
@@ -26,7 +26,7 @@ const Register = () => {
       }
 
       // Handle successful registration
-    } catch (error) {
+    } catch (error:any) {
       // Handle registration error
       setError(error.response?.data?.message); // Access the error message from the response
     }

@@ -4,10 +4,10 @@ import CheckboxTree from '../CheckboxeTree/CheckboxTree';
 import style from './PreferencesRegionsBar.module.css';
 
 interface PreferencesRegionsBarProps {
-  checkedNodes: number[];
-  setCheckedNodes: React.Dispatch<React.SetStateAction<number[]>>;
-  expandedNodes: number[];
-  setExpandedNodes: React.Dispatch<React.SetStateAction<number[]>>;
+  checkedNodes: string[];
+  setCheckedNodes: React.Dispatch<React.SetStateAction<string[]>>;
+  expandedNodes: string[];
+  setExpandedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const PreferencesRegionsBar: React.FC<PreferencesRegionsBarProps> = ({

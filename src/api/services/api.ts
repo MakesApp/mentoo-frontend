@@ -2,7 +2,7 @@ import { useMutation, useQueryClient, UseMutationResult } from 'react-query';
 import api from '../../config/api';
 
 export const useLoginMutation = () => {
-  const loginMutation = useMutation((payload) =>
+  const loginMutation = useMutation((payload:any) =>
     api.post('/user/login', payload)
   );
 
@@ -10,7 +10,7 @@ export const useLoginMutation = () => {
 };
 
 export const useRegisterMutation = () => {
-  const registerMutation = useMutation((payload) =>
+  const registerMutation = useMutation((payload:any) =>
     api.post('/user/register', payload)
   );
 
@@ -38,7 +38,7 @@ export const useLogoutMutation = () => {
 export const useUpdateVolunteerListMutation = (): UseMutationResult<
   any,
   unknown,
-  { placeId: string, query: any },
+  { placeId: string|null, query: any },
   unknown
 > => {
   const queryClient = useQueryClient();
@@ -52,7 +52,7 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<
   );
 };
 
-export const getUsers = async ({ queryKey }: { queryKey: string[] }) => {
+export const getUsers = async ({ queryKey }) => {
   const [_, users] = queryKey;
   const response = await api.post('/users/getUsers', { list: users });
 

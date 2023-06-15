@@ -1,22 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
-import Header, { HeaderProps } from './components/Header/Header';
+import Header from './components/Header/Header';
 import userAvatar from '../../assets/images/user-avatar.png';
 import sendIcon from '../../assets/images/send-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
 import style from './Chat.module.css';
 
 type MessageType = {
-  messageId: string;
+  messageId?: string;
   sender: string;
   message: string;
-  isCurrentUser: boolean;
+  isCurrentUser?: boolean;
   seenBy?: string;
-  _id: string;
+  _id?: string;
 };
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-const socket = io(process.env.REACT_APP_SOCKET_URL!);
+const socket = io(baseURL);
 
 interface MatchParams {
   partnerId: string;
@@ -76,7 +77,7 @@ const Chat: React.FC = () => {
     socket.on('messages seen', (seenMessageIds: string[]) => {
       setMessages((prevMessages) =>
         prevMessages.map((msg) => {
-          if (seenMessageIds.includes(msg.messageId)) {
+      if (seenMessageIds.includes(msg.messageId ?? '')) {
             return {
               ...msg,
               seenBy: userId,
@@ -111,13 +112,11 @@ const Chat: React.FC = () => {
     (headerRef.current?.offsetHeight || 0) +
     (formRef.current?.offsetHeight || 0);
 
-  const headerProps: HeaderProps = {
-    avatarUrl: user?.avatarUrl,
-  };
+ 
 
   return (
     <div className={style.container}>
-      <Header {...headerProps} ref={headerRef} />
+      <Header  ref={headerRef} />
       <div className={style.content}>
         <ul
           ref={messagesEndRef}

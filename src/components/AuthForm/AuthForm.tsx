@@ -1,9 +1,16 @@
-import React, { ReactNode, FormEvent } from 'react';
+import React, { ReactNode } from 'react';
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import volunteerImg from '../../assets/images/volunteer.svg';
 import style from './AuthForm.module.css';
 import Logo from '../Logo/Logo';
+
+interface AuthFormProps {
+  onSubmit: (email: string, password: string) => void;
+  buttonValue?: string;
+  children?: ReactNode|undefined;
+  error?: (string|undefined);
+}
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -16,12 +23,7 @@ const validationSchema = Yup.object({
   password: Yup.string().min(6, 'לפחות 6 תווים').required('הכניסו סיסמה'),
 });
 
-interface AuthFormProps {
-  onSubmit: (email: string, password: string) => void;
-  buttonValue: string;
-  children: ReactNode;
-  error: string;
-}
+
 
 const AuthForm: React.FC<AuthFormProps> = ({
   onSubmit,
@@ -39,7 +41,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   const handleSubmit = (
     values: { email: string; password: string },
     actions: FormikHelpers<{ email: string; password: string }>,
-    event: FormEvent<HTMLFormElement>
   ) => {
     onSubmit(values.email, values.password);
     actions.setSubmitting(false); // Manually set submitting state to false

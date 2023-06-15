@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLoginMutation } from '../../api/services/api';
 import AuthForm from '../../components/AuthForm/AuthForm';
@@ -24,7 +24,7 @@ const Login = () => {
       }
 
       // Handle successful login
-    } catch (error) {
+    } catch (error:any) {
       // Handle login error
       setError(error.response?.data?.message);
     }

@@ -11,18 +11,19 @@ const ChatList = () => {
 
   return (
     <div>
-      <Header avatarUrl="your-avatar-url">
+      <Header >
         <Link to={{ pathname: '/' }}>
           <img src={arrowLeft} alt="arrow left" />
         </Link>
       </Header>
       <Title title={'מחוברים לחיים'} subTitle={'ההודעות שלי'} />
-      <List users={chatPartners}>
-        {(user: any) => {
+      {chatPartners&&<List users={chatPartners}>
+        {() => {
           // Render the user component or JSX here
           return <></>;
         }}
       </List>
+}
     </div>
   );
 };

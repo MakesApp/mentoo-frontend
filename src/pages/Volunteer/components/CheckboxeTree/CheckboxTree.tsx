@@ -8,10 +8,10 @@ interface Node {
 }
 
 interface CheckboxTreeProps {
-  checkedNodes: number[];
-  setCheckedNodes: React.Dispatch<React.SetStateAction<number[]>>;
-  expandedNodes: number[];
-  setExpandedNodes: React.Dispatch<React.SetStateAction<number[]>>;
+  checkedNodes: string[];
+  setCheckedNodes: React.Dispatch<React.SetStateAction<string[]>>;
+  expandedNodes: string[];
+  setExpandedNodes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CheckboxTree: React.FC<CheckboxTreeProps> = ({
@@ -65,7 +65,7 @@ const CheckboxTree: React.FC<CheckboxTreeProps> = ({
         <label className={style.nodeLabel}>
           <input
             type="checkbox"
-            checked={checkedNodes.includes(Number(node.name))}
+            checked={checkedNodes.includes(node.name)}
             onChange={(e) => handleCheckChange(node, e.target.checked)}
             onClick={(e) => e.stopPropagation()}
           />

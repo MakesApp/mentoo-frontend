@@ -3,27 +3,26 @@ import List from '../List/List';
 import vIcon from '../../../../assets/images/v-icon.svg';
 import { usePlaceContext } from '../../context/placeContext';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
-import { IUser } from '../../../../types/IUser';
 
 const OldVolunteers: React.FC = () => {
   const { oldVolunteers, myVolunteers, place } = usePlaceContext();
   const { mutateAsync } = useUpdateVolunteerListMutation();
-  const { _id: placeId } = place;
+  const placeId = place ? place._id : null;
 
-  const accept = async (e: React.MouseEvent, user: IUser) => {
+  const accept = async (e: React.MouseEvent, user) => {
     e.stopPropagation();
     const query = {
       myVolunteers: [...myVolunteers, user._id],
-      oldVolunteers: oldVolunteers.filter(
+      oldVolunteers: oldVolunteers?.filter(
         (volunteer) => volunteer._id !== user._id
       ),
     };
     await mutateAsync({ placeId: placeId, query });
   };
 
-  return (
+  return  oldVolunteers&&(
     <List users={oldVolunteers}>
-      {(user: IUser) => (
+      {(user) => (
         <Button
           backgroundColor={'#792BA6'}
           handleOnClick={(e) => accept(e, user)}
