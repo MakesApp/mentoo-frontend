@@ -6,7 +6,7 @@ import style from './List.module.css';
 
 interface ListProps {
   users: IUser[];
-  children?: React.ReactNode | ((user: IUser) => React.ReactNode);
+  children?: any;
 }
 
 const List: React.FC<ListProps> = ({ users, children }) => {

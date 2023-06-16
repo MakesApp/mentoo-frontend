@@ -14,6 +14,7 @@ type MessageType = {
   isCurrentUser?: boolean;
   seenBy?: string;
   _id?: string;
+  createdAt?:string;
 };
 const baseURL = import.meta.env.VITE_API_SOCKET_URL;
 
