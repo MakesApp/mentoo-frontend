@@ -15,7 +15,7 @@ type MessageType = {
   seenBy?: string;
   _id?: string;
 };
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_SOCKET_URL;
 
 const socket = io(baseURL);
 
@@ -129,7 +129,7 @@ const Chat: React.FC = () => {
               messages[messages.indexOf(msg) - 1].sender !== msg.sender;
             return (
               <li
-                key={msg._id}
+                key={msg.createdAt}
                 className={`${msg.isCurrentUser ? style.right : style.left} ${
                   isFirstMessage ? style.first : ''
                 }`}
