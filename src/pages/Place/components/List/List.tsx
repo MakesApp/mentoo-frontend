@@ -15,7 +15,7 @@ const List: React.FC<ListProps> = ({ users, children }) => {
       <ul className={style.list}>
         {users?.map((user) => (
           <ListItem key={user._id} user={user}>
-            {children(user)}
+            {children}
           </ListItem>
         ))}
       </ul>
