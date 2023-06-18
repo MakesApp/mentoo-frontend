@@ -6,6 +6,7 @@ import userAvatar from '../../assets/images/user-avatar.png';
 import sendIcon from '../../assets/images/send-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
 import style from './Chat.module.css';
+import {useQueryClient} from 'react-query';
 
 type MessageType = {
   messageId?: string;
@@ -25,6 +26,7 @@ interface MatchParams {
 }
 
 const Chat: React.FC = () => {
+    const queryClient = useQueryClient();
   const headerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLUListElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -51,6 +53,8 @@ const Chat: React.FC = () => {
           isCurrentUser: msg.sender === userId,
         },
       ]);
+      queryClient.invalidateQueries('chat');
+
     });
     socket.on('chat history', (chatHistory: MessageType[]) => {
       setMessages(

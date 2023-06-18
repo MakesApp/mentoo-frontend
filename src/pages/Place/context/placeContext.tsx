@@ -29,12 +29,12 @@ export const PlaceProvider: React.FC<PlaceProviderProps> = ({ children }) => {
   const [oldVolunteers, setOldVolunteers] = useState<IUser[]>([]);
 
   const { data: placeData } = useQuery(['places', placeId], getPlaceById);
-  const { data: myVolunteersData } = useQuery(['places', place?.myVolunteers], getUsers, {
+  const { data: myVolunteersData } = useQuery(['places', place?.myVolunteers,'chat'], getUsers, {
     enabled: !!place?.myVolunteers,
   });
 
   const { data: candidateVolunteersData } = useQuery(
-    ['places', place?.candidateVolunteers],
+    ['places', place?.candidateVolunteers,'chat'],
     getUsers,
     {
       enabled: !!place?.candidateVolunteers,
@@ -42,7 +42,7 @@ export const PlaceProvider: React.FC<PlaceProviderProps> = ({ children }) => {
   );
 
   const { data: oldVolunteersData } = useQuery(
-    ['places', place?.oldVolunteers],
+    ['places', place?.oldVolunteers,'chat'],
     getUsers,
     {
       enabled: !!place?.oldVolunteers,

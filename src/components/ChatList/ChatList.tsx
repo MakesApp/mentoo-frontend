@@ -7,7 +7,7 @@ import { getChatPartners } from '../../api/services/api';
 import { useQuery } from 'react-query';
 
 const ChatList = () => {
-  const { data: chatPartners } = useQuery('chatPartners', getChatPartners);
+  const { data: chatPartners } = useQuery('chat', getChatPartners);
 
   return (
     <div>

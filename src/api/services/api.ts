@@ -35,15 +35,13 @@ export const useLogoutMutation = () => {
   return logoutMutation;
 };
 
-export const useUpdateVolunteerListMutation = (): UseMutationResult<
-  any,
-  unknown,
-  { placeId: string|null, query: any },
-  unknown
-> => {
+export const useUpdateVolunteerListMutation = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ placeId, query }) => api.patch(`/place/${placeId}`, query),
+    ({ placeId, query }: { placeId: any; query: any }) => {
+      
+       api.patch(`/place/${placeId}`, {query});
+    },
     {
       onSuccess: () => {
         queryClient.invalidateQueries('places');
@@ -51,6 +49,7 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<
     }
   );
 };
+
 
 export const getUsers = async ({ queryKey }) => {
   const [_, users] = queryKey;

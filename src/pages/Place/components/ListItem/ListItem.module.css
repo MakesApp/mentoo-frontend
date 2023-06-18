@@ -114,6 +114,7 @@ a {
 
 .icons {
   cursor: pointer;
+  padding: 1rem;
 }
 
 .isVisible {
