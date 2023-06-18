@@ -9,7 +9,7 @@ export interface IPlace {
   audience: string;
   placeImage?: string;
   userId: string;
-  oldVolunteers:IUser[];
-  myVolunteers:IUser[];
-  candidateVolunteers:IUser[];
+  oldVolunteers:any;
+  myVolunteers:any;
+  candidateVolunteers:any;
 }

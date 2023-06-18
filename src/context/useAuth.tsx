@@ -3,6 +3,7 @@ import api from '../config/api';
 import { useQuery } from 'react-query';
 import { getUserUnreadMessages } from '../api/services/api';
 import { IUser } from '../types/IUser';
+import Spinner from '../components/Spinner/Spinner';
 
 interface AuthContextProps {
   setUser: React.Dispatch<React.SetStateAction<null>>;
@@ -19,7 +20,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | any>(null);
   const [hasUnreadMessages, setHasUnreadMessages] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(true);
-  const { data } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!user });
+  const { data,isLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!user });
+
+  
 
   useEffect(() => {
     if (data) setHasUnreadMessages(data.hasUnreadMessages);
@@ -37,6 +40,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .finally(() => setLoading(false));
   }, []);
 
+   if(isLoading)
+  return <Spinner/>;
   const value: AuthContextProps = {
     setUser,
     user,

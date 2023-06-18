@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useRegisterMutation } from '../../api/services/api';
 import AuthForm from '../../components/AuthForm/AuthForm';
+import Spinner from '../../components/Spinner/Spinner';
 import { useAuthContext } from '../../context/useAuth';
 import { VOLUNTEER_PAGE } from '../../routes/routePath';
 import style from './Register.module.css';
@@ -10,7 +11,7 @@ const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [error, setError] = useState<any>(); // Provide the correct type for the 'error' state
   const { setUser } = useAuthContext();
-  const { mutateAsync } = useRegisterMutation();
+  const { mutateAsync,isLoading } = useRegisterMutation();
   const history = useHistory();
 
   const handleOnRegister = async (email: string, password: string) => {
@@ -32,6 +33,9 @@ const Register = () => {
     }
   };
 
+  if(isLoading)
+  return <Spinner/>
+  
   return (
     <div className={style.container}>
       <AuthForm

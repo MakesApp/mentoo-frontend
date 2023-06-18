@@ -8,6 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getPlaceById } from '../../api/services/api';
 import { useEffect, useState } from 'react';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface MatchParams {
   placeId: string;
@@ -15,15 +16,18 @@ interface MatchParams {
 
 const PlaceDetails: React.FC = () => {
   const { placeId } = useParams<MatchParams>();
-  const { data } = useQuery(['place', placeId], getPlaceById, {
+  const { data,isLoading } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
   const [place, setPlace] = useState<any>(null);
+  
 
   useEffect(() => {
     if (data) setPlace(data.place);
   }, [data]);
 
+  if(isLoading)
+  return <Spinner/>
   
   return (
     place && (

@@ -9,16 +9,18 @@ import PreferencesRegionsBar from './components/PreferencesRegionsBar/Preference
 import style from './Volunteer.module.css';
 import { useQuery } from 'react-query';
 import { getAllPlaces } from '../../api/services/api';
+import Spinner from '../../components/Spinner/Spinner';
 
 const Volunteer: React.FC = () => {
-  const { data } = useQuery('places', getAllPlaces);
+  const { data ,isLoading} = useQuery('places', getAllPlaces);
 
   const [expanded, setExpanded] = useState<string[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]); // Changed the type to 'number[]' to match the data type
   const [places, setPlaces] = useState<IPlace[]>([]);
-console.log(regions,selectedDays);
+
+
 
   useEffect(() => {
     if (data) setPlaces(data.places);
@@ -53,6 +55,9 @@ console.log(regions,selectedDays);
     [setPlaces]
   );
 
+    if(isLoading)
+  return <Spinner/>
+  
   return (
     <div>
       <Header  />

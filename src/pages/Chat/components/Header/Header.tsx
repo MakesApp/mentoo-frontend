@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { getPlaceById } from '../../../../api/services/api';
 import { useQuery } from 'react-query';
 import ChatWithNotification from '../../../../components/ChatWithNotification/ChatWithNotification';
+import Spinner from '../../../../components/Spinner/Spinner';
 
 interface HeaderProps {
   // Define the ref prop
@@ -16,10 +17,11 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
   const { user } = useAuthContext();
   const { placeId } = user;
-  const { data: placeData } = useQuery(['place', placeId], getPlaceById, {
+  const { data: placeData,isLoading } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
-
+ if(isLoading)
+  return <Spinner/>
   return (
     <header ref={ref} className={style.headerContainer}>
       <div className={style.headerRight}>

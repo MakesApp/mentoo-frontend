@@ -2,12 +2,13 @@ import  { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLoginMutation } from '../../api/services/api';
 import AuthForm from '../../components/AuthForm/AuthForm';
+import Spinner from '../../components/Spinner/Spinner';
 import { useAuthContext } from '../../context/useAuth';
 import { VOLUNTEER_PAGE } from '../../routes/routePath';
 import style from './Login.module.css';
 
 const Login = () => {
-  const { mutateAsync } = useLoginMutation();
+  const { mutateAsync,isLoading } = useLoginMutation();
   const { setUser } = useAuthContext();
   const [error, setError] = useState<string | undefined>();
   const history = useHistory();
@@ -29,6 +30,9 @@ const Login = () => {
       setError(error.response?.data?.message);
     }
   };
+
+  if(isLoading)
+  return <Spinner/>
 
   return (
     <div className={style.loginContainer}>

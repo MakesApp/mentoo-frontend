@@ -4,11 +4,13 @@ import vIcon from '../../../../assets/images/v-icon.svg';
 import closeIcon from '../../../../assets/images/close-icon.svg';
 import { usePlaceContext } from '../../context/placeContext';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
+import Spinner from '../../../../components/Spinner/Spinner';
 
 const CandidatesVolunteers: React.FC = () => {
-  const { candidateVolunteers, myVolunteers, oldVolunteers, place } =
+  const {  place,isLoading,setPlace } =
     usePlaceContext();
-  const { mutateAsync } = useUpdateVolunteerListMutation();
+    const {candidateVolunteers=[], myVolunteers=[], oldVolunteers=[]}=place||{};
+  const { mutateAsync,isLoading:isMutationLoading } = useUpdateVolunteerListMutation();
 
 const placeId = place ? place._id : null;
 
@@ -21,23 +23,26 @@ const placeId = place ? place._id : null;
         (volunteer: any) => volunteer._id !== user._id
       ),
     };
-console.log(query);
 
     await mutateAsync({ placeId: placeId, query });
-    
+    setPlace({...place,...query})
   };
   const reject = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
     const query = {
-      oldVolunteers: [...oldVolunteers, user._id],
+      oldVolunteers: [...oldVolunteers, user],
       candidateVolunteers: candidateVolunteers.filter(
         (volunteer: any) => volunteer._id !== user._id
       ),
     };
     await mutateAsync({ placeId: placeId, query });
+    setPlace({...place,...query})
   };
 
-  return candidateVolunteers&& (
+  if(isMutationLoading||isLoading)
+  return <Spinner/>
+
+  return (
     <List users={candidateVolunteers}>
       {(user: any) => (
         <>

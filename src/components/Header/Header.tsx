@@ -5,13 +5,14 @@ import { useAuthContext } from '../../context/useAuth';
 import defaultAvatar from '../../assets/images/user-avatar.png';
 import { useLogoutMutation } from '../../api/services/api';
 import ChatWithNotification from '../ChatWithNotification/ChatWithNotification';
+import Spinner from '../Spinner/Spinner';
 
 interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const { user, setUser } = useAuthContext();
-  const logoutMutation = useLogoutMutation();
+  const {mutateAsync,isLoading} = useLogoutMutation();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
   const handleOnClick = () => {
@@ -19,12 +20,16 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   };
   const handleLogout = async () => {
     try {
-      await logoutMutation.mutateAsync();
+      await mutateAsync();
       setUser(null);
     } catch (err) {
       console.log(err);
     }
   };
+
+  if(isLoading)
+  return <Spinner/>
+
   return (
     <header className={style.headerContainer}>
       <div className={style.headerRight}>

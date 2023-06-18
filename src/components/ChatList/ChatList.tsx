@@ -5,10 +5,15 @@ import Title from '../Title/Title';
 import List from '../../pages/Place/components/List/List';
 import { getChatPartners } from '../../api/services/api';
 import { useQuery } from 'react-query';
+import Spinner from '../Spinner/Spinner';
 
 const ChatList = () => {
-  const { data: chatPartners } = useQuery('chatPartners', getChatPartners);
+  const { data: chatPartners,isLoading } = useQuery('chatPartners', getChatPartners);
 
+  if(isLoading)
+  return <Spinner/>
+  
+  
   return (
     <div>
       <Header >
