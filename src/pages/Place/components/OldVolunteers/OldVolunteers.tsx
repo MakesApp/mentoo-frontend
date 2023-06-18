@@ -10,7 +10,6 @@ const OldVolunteers: React.FC = () => {
   const placeId = place ? place._id : null;
 
   const accept = async (e: React.MouseEvent, user) => {
-    e.stopPropagation();
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       oldVolunteers: oldVolunteers?.filter(

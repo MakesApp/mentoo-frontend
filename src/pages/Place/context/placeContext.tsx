@@ -28,13 +28,14 @@ export const PlaceProvider: React.FC<PlaceProviderProps> = ({ children }) => {
   const [candidateVolunteers, setCandidateVolunteers] = useState<IUser[]>([]);
   const [oldVolunteers, setOldVolunteers] = useState<IUser[]>([]);
 
-  const { data: placeData } = useQuery(['places', placeId], getPlaceById);
-  const { data: myVolunteersData } = useQuery(['places', place?.myVolunteers,'chat'], getUsers, {
+  const { data: placeData } = useQuery(['place', placeId], getPlaceById,{enabled:!!placeId});
+
+  const { data: myVolunteersData } = useQuery(['users', place?.myVolunteers], getUsers, {
     enabled: !!place?.myVolunteers,
   });
 
   const { data: candidateVolunteersData } = useQuery(
-    ['places', place?.candidateVolunteers,'chat'],
+    ['users', place?.candidateVolunteers],
     getUsers,
     {
       enabled: !!place?.candidateVolunteers,
@@ -42,13 +43,12 @@ export const PlaceProvider: React.FC<PlaceProviderProps> = ({ children }) => {
   );
 
   const { data: oldVolunteersData } = useQuery(
-    ['places', place?.oldVolunteers,'chat'],
+    ['users', place?.oldVolunteers],
     getUsers,
     {
       enabled: !!place?.oldVolunteers,
     }
   );
-
   useEffect(() => {
     if (placeData) setPlace(placeData.place);
     if (myVolunteersData) setMyVolunteers(myVolunteersData.users);

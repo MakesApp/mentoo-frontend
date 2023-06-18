@@ -19,7 +19,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | any>(null);
   const [hasUnreadMessages, setHasUnreadMessages] = useState<boolean | undefined>();
   const [loading, setLoading] = useState(true);
-  const { data } = useQuery('chat', getUserUnreadMessages, { enabled: !!user });
+  const { data } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!user });
 
   useEffect(() => {
     if (data) setHasUnreadMessages(data.hasUnreadMessages);

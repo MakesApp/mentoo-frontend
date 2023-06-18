@@ -15,7 +15,7 @@ interface MatchParams {
 
 const PlaceDetails: React.FC = () => {
   const { placeId } = useParams<MatchParams>();
-  const { data } = useQuery(['places', placeId], getPlaceById, {
+  const { data } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
   const [place, setPlace] = useState<any>(null);

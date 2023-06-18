@@ -8,20 +8,20 @@ import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 const CandidatesVolunteers: React.FC = () => {
   const { candidateVolunteers, myVolunteers, oldVolunteers, place } =
     usePlaceContext();
-    
   const { mutateAsync } = useUpdateVolunteerListMutation();
 
 const placeId = place ? place._id : null;
 
   const accept = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
-
+    
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
         (volunteer: any) => volunteer._id !== user._id
       ),
     };
+console.log(query);
 
     await mutateAsync({ placeId: placeId, query });
     
@@ -34,9 +34,6 @@ const placeId = place ? place._id : null;
         (volunteer: any) => volunteer._id !== user._id
       ),
     };
-    console.log('====================================');
-    console.log(query);
-    console.log('====================================');
     await mutateAsync({ placeId: placeId, query });
   };
 

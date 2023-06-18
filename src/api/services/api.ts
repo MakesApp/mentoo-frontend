@@ -35,21 +35,23 @@ export const useLogoutMutation = () => {
   return logoutMutation;
 };
 
-export const useUpdateVolunteerListMutation = () => {
+export const useUpdateVolunteerListMutation = (): UseMutationResult<
+  any,
+  unknown,
+  { placeId: string|null, query: any },
+  unknown
+> => {
   const queryClient = useQueryClient();
   return useMutation(
-    ({ placeId, query }: { placeId: any; query: any }) => {
-      
-       api.patch(`/place/${placeId}`, {query});
-    },
+    ({ placeId, query }) => api.patch(`/place/${placeId}`, {query}),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries('places');
+      onSuccess: (data) => {
+        const placeId=data.data.place._id;
+        queryClient.invalidateQueries(['place',placeId]);
       },
     }
   );
 };
-
 
 export const getUsers = async ({ queryKey }) => {
   const [_, users] = queryKey;

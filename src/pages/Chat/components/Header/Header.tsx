@@ -16,7 +16,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
   const { user } = useAuthContext();
   const { placeId } = user;
-  const { data: placeData } = useQuery(['places', placeId], getPlaceById, {
+  const { data: placeData } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
 

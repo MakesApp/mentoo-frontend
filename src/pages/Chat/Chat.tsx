@@ -53,7 +53,6 @@ const Chat: React.FC = () => {
           isCurrentUser: msg.sender === userId,
         },
       ]);
-      queryClient.invalidateQueries('chat');
 
     });
     socket.on('chat history', (chatHistory: MessageType[]) => {
@@ -109,6 +108,7 @@ const Chat: React.FC = () => {
       _id: '', // Assign a value to _id
     };
     socket.emit('chat message', newMessage, roomName);
+    queryClient.invalidateQueries('chat');
 
     setMessage('');
   };
