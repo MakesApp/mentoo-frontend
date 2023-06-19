@@ -19,7 +19,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
     placeName,
     _id: placeId,
     description,
-    userId: placeUserId,
+    user: placeUserId,
   } = place;
 
   return (

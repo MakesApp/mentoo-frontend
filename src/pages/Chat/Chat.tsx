@@ -6,7 +6,10 @@ import userAvatar from '../../assets/images/user-avatar.png';
 import sendIcon from '../../assets/images/send-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
 import style from './Chat.module.css';
-import {useQueryClient} from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
+import { getUserById } from '../../api/services/api';
+import Spinner from '../../components/Spinner/Spinner';
+import { formatGroupDate, formatTimestamp } from '../../utils/utils';
 
 type MessageType = {
   messageId?: string;
@@ -15,10 +18,10 @@ type MessageType = {
   isCurrentUser?: boolean;
   seenBy?: string;
   _id?: string;
-  createdAt?:string;
+  createdAt?: string;
 };
-const baseURL = import.meta.env.VITE_API_SOCKET_URL;
 
+const baseURL = import.meta.env.VITE_API_SOCKET_URL;
 const socket = io(baseURL);
 
 interface MatchParams {
@@ -26,7 +29,7 @@ interface MatchParams {
 }
 
 const Chat: React.FC = () => {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const headerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLUListElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -34,12 +37,16 @@ const Chat: React.FC = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { partnerId } = useParams<MatchParams>();
   const { user } = useAuthContext();
+  const { data: partner, isLoading } = useQuery(['getUser', partnerId], getUserById, { enabled: !!partnerId });
   const userId = user._id;
   const ids = [userId, partnerId].sort();
   const roomName = `${ids[0]}_${ids[1]}`;
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const messagesList = messagesEndRef.current;
+    if (messagesList) {
+      messagesList.scrollTop = messagesList.scrollHeight;
+    }
   }, [messages]);
 
   useEffect(() => {
@@ -48,12 +55,10 @@ const Chat: React.FC = () => {
       setMessages((prevMessages) => [
         ...prevMessages,
         {
-          sender: msg.sender,
-          message: msg.message,
+          ...msg,
           isCurrentUser: msg.sender === userId,
         },
       ]);
-
     });
     socket.on('chat history', (chatHistory: MessageType[]) => {
       setMessages(
@@ -81,7 +86,7 @@ const Chat: React.FC = () => {
     socket.on('messages seen', (seenMessageIds: string[]) => {
       setMessages((prevMessages) =>
         prevMessages.map((msg) => {
-      if (seenMessageIds.includes(msg.messageId ?? '')) {
+          if (seenMessageIds.includes(msg.messageId ?? '')) {
             return {
               ...msg,
               seenBy: userId,
@@ -105,7 +110,6 @@ const Chat: React.FC = () => {
       sender: userId,
       message,
       isCurrentUser: true,
-      _id: '', // Assign a value to _id
     };
     socket.emit('chat message', newMessage, roomName);
     queryClient.invalidateQueries('chat');
@@ -117,39 +121,64 @@ const Chat: React.FC = () => {
     (headerRef.current?.offsetHeight || 0) +
     (formRef.current?.offsetHeight || 0);
 
- 
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  const groupedMessages: { [key: string]: MessageType[] } = {};
+
+  messages.forEach((msg) => {
+    
+    const date = new Date(msg.createdAt || '');
+    const dateString = formatGroupDate(date);
+
+    if (groupedMessages[dateString]) {
+      groupedMessages[dateString].push(msg);
+    } else {
+      groupedMessages[dateString] = [msg];
+    }
+  });
 
   return (
     <div className={style.container}>
-      <Header  ref={headerRef} />
+      <Header user={partner} ref={headerRef} />
       <div className={style.content}>
         <ul
           ref={messagesEndRef}
           className={style.messages}
           style={{ maxHeight: `calc(100vh - ${offsets + 75}px)` }}
         >
-          {messages.map((msg) => {
-            const isFirstMessage =
-              messages.indexOf(msg) === 0 ||
-              messages[messages.indexOf(msg) - 1].sender !== msg.sender;
-            return (
-              <li
-                key={msg.createdAt}
-                className={`${msg.isCurrentUser ? style.right : style.left} ${
-                  isFirstMessage ? style.first : ''
-                }`}
-              >
-                {isFirstMessage && (
-                  <img
-                    src={user?.avatarUrl || userAvatar}
-                    className={style.avatar}
-                    alt="user avatar"
-                  />
-                )}
-                <p className={style.message}>{msg.message}</p>
-              </li>
-            );
-          })}
+          {Object.entries(groupedMessages).map(([date, messages]) => (
+            <React.Fragment key={date}>
+              <li className={style.dateSection}>{date}</li>
+              {messages.map((msg) => {
+                const isFirstMessage =
+                  messages.indexOf(msg) === 0 ||
+                  messages[messages.indexOf(msg) - 1].sender !== msg.sender;
+                return (
+                  <li
+                    key={msg.createdAt}
+                    className={`${msg.isCurrentUser ? style.right : style.left} ${
+                      isFirstMessage ? style.first : ''
+                    }`}
+                  >
+                    {isFirstMessage && (
+                      <img
+                        src={user?.avatarUrl || userAvatar}
+                        className={style.avatar}
+                        alt="user avatar"
+                      />
+                    )}
+                    <div className={style.message}>
+                      <p>{msg.message}</p>
+                      {msg.createdAt&&<span className={style.timestamp}>{formatTimestamp(msg.createdAt)}</span>}
+                    </div>
+                  </li>
+                );
+              })}
+            </React.Fragment>
+          ))}
         </ul>
         <form className={style.form} onSubmit={onSubmit} ref={formRef}>
           <input

@@ -65,3 +65,11 @@ export const getUserUnreadMessages = async () => {
 
   return response.data;
 };
+export const getUserById = async ({queryKey}) => {
+    const [_, userId] = queryKey;
+
+  const response = await api.get(`/user/${userId}`);
+
+  return response.data;
+};
+

@@ -52,7 +52,6 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
               </ul>
             </button>
           )}
-
           <img
             className={style.profileImg}
             src={user?.avatar ? user.avatar : defaultAvatar}

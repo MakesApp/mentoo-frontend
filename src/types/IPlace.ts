@@ -8,7 +8,7 @@ export interface IPlace {
   description: string;
   audience: string;
   placeImage?: string;
-  userId: string;
+  user: IUser;
   oldVolunteers:any;
   myVolunteers:any;
   candidateVolunteers:any;

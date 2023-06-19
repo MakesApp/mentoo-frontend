@@ -1,3 +1,4 @@
+
 export interface IUser {
   _id:string;
   email: string;
@@ -5,6 +6,6 @@ export interface IUser {
   role: string;
   avatar?: string; // avatar is optional
   fullName: string;
-  placeId?: string; // placeId is optional
+  placeId?: any; // placeId is optional
   hasUnreadMessages?:boolean;
 }

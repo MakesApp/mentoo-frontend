@@ -2,39 +2,31 @@ import React from 'react';
 import style from './Header.module.css';
 import arrowLeft from '../../../../assets/images/arrow-left.svg';
 import userAvatar from '../../../../assets/images/user-avatar.png';
-import { useAuthContext } from '../../../../context/useAuth';
 import { Link } from 'react-router-dom';
-import { getPlaceById } from '../../../../api/services/api';
-import { useQuery } from 'react-query';
 import ChatWithNotification from '../../../../components/ChatWithNotification/ChatWithNotification';
-import Spinner from '../../../../components/Spinner/Spinner';
+import { IUser } from '../../../../types/IUser';
 
 interface HeaderProps {
-  // Define the ref prop
+    user: IUser; 
   ref: React.Ref<HTMLDivElement>;
 }
 
 const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
-  const { user } = useAuthContext();
-  const { placeId } = user;
-  const { data: placeData,isLoading } = useQuery(['place', placeId], getPlaceById, {
-    enabled: !!placeId,
-  });
- if(isLoading)
-  return <Spinner/>
+  const {user}=props;
+  
   return (
     <header ref={ref} className={style.headerContainer}>
       <div className={style.headerRight}>
         <img
           className={style.avatarIcon}
-          src={user?.avatarUrl || userAvatar}
+          src={user?.avatar || userAvatar}
           alt="Avatar Icon"
         />
         <div>
           <h2 className={style.name}>{user?.fullName}</h2>
-          {placeData && (
+          {user.placeId && (
             <span className={style.placeName}>
-              {placeData.place?.placeName}
+              {user.placeId?.placeName}
             </span>
           )}
         </div>

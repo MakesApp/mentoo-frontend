@@ -37,7 +37,7 @@
 }
 
 .left {
-  text-align: left;
+  text-align: right;
   justify-content: flex-end;
   flex-direction: row-reverse;
 }
@@ -108,4 +108,33 @@
 .right + .left,
 .left + .right {
   margin-top: 20px;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #999;
+}
+
+.dateSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #888;
+}
+
+.dateSection::before,
+.dateSection::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background-color: #888;
+  margin: 0 10px;
+}
+
+.dateSection span {
+  padding: 0 10px;
+  background-color: #fff;
 }
