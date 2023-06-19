@@ -6,7 +6,7 @@ import userAvatar from '../../assets/images/user-avatar.png';
 import sendIcon from '../../assets/images/send-icon.svg';
 import { useAuthContext } from '../../context/useAuth';
 import style from './Chat.module.css';
-import { useQueryClient, useQuery } from 'react-query';
+import {  useQuery } from 'react-query';
 import { getUserById } from '../../api/services/api';
 import Spinner from '../../components/Spinner/Spinner';
 import { formatGroupDate, formatTimestamp } from '../../utils/utils';
@@ -29,7 +29,6 @@ interface MatchParams {
 }
 
 const Chat: React.FC = () => {
-  const queryClient = useQueryClient();
   const headerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLUListElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -112,7 +111,6 @@ const Chat: React.FC = () => {
       isCurrentUser: true,
     };
     socket.emit('chat message', newMessage, roomName);
-    queryClient.invalidateQueries('chat');
 
     setMessage('');
   };
