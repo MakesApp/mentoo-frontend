@@ -8,9 +8,10 @@ import Spinner from '../../../../components/Spinner/Spinner';
 
 const MyVolunteers: React.FC = () => {
   const { mutateAsync,isLoading:isMutationLoading } = useUpdateVolunteerListMutation();
-  const { place, isLoading,setPlace } = usePlaceContext();
+  const { place, isLoading:isPlaceLoading } = usePlaceContext();
   const {candidateVolunteers=[], myVolunteers=[]}=place||{}
 const placeId = place ? place._id : null;
+const isLoading=isMutationLoading||isPlaceLoading
 
   const handleOnClick = async (e: React.MouseEvent, user) => {
     e.stopPropagation();
@@ -21,11 +22,10 @@ const placeId = place ? place._id : null;
       ),
     };
     await mutateAsync({ placeId: placeId, query });
-    setPlace({...place,...query})
   };
 
 
-  if(isLoading||isMutationLoading)
+  if(isLoading)
   return <Spinner/>
 
   return (

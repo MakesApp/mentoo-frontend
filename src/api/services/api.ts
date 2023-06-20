@@ -1,21 +1,40 @@
 import { useMutation, UseMutationResult } from 'react-query';
 import api from '../../config/api';
-
+import queryClient from '../../config/reactQuery';
 export const useLoginMutation = () => {
-  const loginMutation = useMutation((payload:any) =>
-    api.post('/user/login', payload)
+  return useMutation((payload: any) =>
+    api.post('/user/login', payload),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('auth');
+      },
+    }
   );
-
-  return loginMutation;
 };
 
 export const useRegisterMutation = () => {
-  const registerMutation = useMutation((payload:any) =>
-    api.post('/user/register', payload)
+  return useMutation((payload: any) =>
+    api.post('/user/register', payload),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('auth');
+      },
+    }
   );
-
-  return registerMutation;
 };
+
+export const useLogoutMutation = () => {
+  return useMutation(() => api.get('/user/logout'), {
+    onSuccess: () => {
+        queryClient.setQueryData('auth', undefined);
+        queryClient.clear();
+
+    },
+  });
+};
+
+
+
 
 export const getAllPlaces = async () => {
   const response = await api.get('/place/getPlaces');
@@ -29,11 +48,6 @@ export const getPlaceById = async ({ queryKey }: { queryKey: string[] }) => {
   return response.data;
 };
 
-export const useLogoutMutation = () => {
-  const logoutMutation = useMutation(() => api.get('/user/logout'));
-
-  return logoutMutation;
-};
 
 export const useUpdateVolunteerListMutation = (): UseMutationResult<
   any,
@@ -43,6 +57,11 @@ export const useUpdateVolunteerListMutation = (): UseMutationResult<
 > => {
   return useMutation(
     ({ placeId, query }) => api.patch(`/place/${placeId}`, {query}),
+     {
+      onSuccess: () => {
+        queryClient.invalidateQueries('place')
+      },
+    }
    
   );
 };
@@ -73,3 +92,9 @@ export const getUserById = async ({queryKey}) => {
   return response.data;
 };
 
+export const authUser = async () => {
+
+  const response = await api.get(`/user/auth`);
+
+  return response.data;
+};

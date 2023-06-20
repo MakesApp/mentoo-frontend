@@ -7,11 +7,12 @@ import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 import Spinner from '../../../../components/Spinner/Spinner';
 
 const CandidatesVolunteers: React.FC = () => {
-  const {  place,isLoading,setPlace } =
+  const {  place,isLoading:isPlaceLoading } =
     usePlaceContext();
     const {candidateVolunteers=[], myVolunteers=[], oldVolunteers=[]}=place||{};
   const { mutateAsync,isLoading:isMutationLoading } = useUpdateVolunteerListMutation();
-
+  
+  const isLoading=isMutationLoading||isPlaceLoading
 const placeId = place ? place._id : null;
 
   const accept = async (e: React.MouseEvent, user: any) => {
@@ -25,7 +26,7 @@ const placeId = place ? place._id : null;
     };
 
     await mutateAsync({ placeId: placeId, query });
-    setPlace({...place,...query})
+
   };
   const reject = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
@@ -36,10 +37,10 @@ const placeId = place ? place._id : null;
       ),
     };
     await mutateAsync({ placeId: placeId, query });
-    setPlace({...place,...query})
+
   };
 
-  if(isMutationLoading||isLoading)
+  if(isLoading)
   return <Spinner/>
 
   return (

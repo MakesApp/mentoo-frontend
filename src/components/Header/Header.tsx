@@ -11,7 +11,7 @@ interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const { user, setUser } = useAuthContext();
+  const { user } = useAuthContext();
   const {mutateAsync,isLoading} = useLogoutMutation();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
@@ -21,7 +21,6 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   const handleLogout = async () => {
     try {
       await mutateAsync();
-      setUser(null);
     } catch (err) {
       console.log(err);
     }

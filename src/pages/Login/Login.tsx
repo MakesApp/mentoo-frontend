@@ -1,28 +1,18 @@
 import  { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useLoginMutation } from '../../api/services/api';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import Spinner from '../../components/Spinner/Spinner';
 import { useAuthContext } from '../../context/useAuth';
-import { VOLUNTEER_PAGE } from '../../routes/routePath';
 import style from './Login.module.css';
 
 const Login = () => {
-  const { mutateAsync,isLoading } = useLoginMutation();
-  const { setUser } = useAuthContext();
+  const { mutateAsync,isLoading:loginLoading } = useLoginMutation();
+  const {isLoading:isUserLoading}=useAuthContext()
+  const isLoading=loginLoading||isUserLoading;
   const [error, setError] = useState<string | undefined>();
-  const history = useHistory();
-
   const handleLogin = async (email: string, password: string) => {
     try {
-      const response = await mutateAsync({ email, password });
-      const { status, data } = response;
-
-      if (status === 200) {
-        setUser(data.user);
-        const path = data.user.role === 'volunteer' ? VOLUNTEER_PAGE : '/';
-        history.push(path);
-      }
+       await mutateAsync({ email, password });
 
       // Handle successful login
     } catch (error:any) {

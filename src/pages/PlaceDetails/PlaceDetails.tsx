@@ -19,16 +19,13 @@ const PlaceDetails: React.FC = () => {
   const { data,isLoading } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
-  const [place, setPlace] = useState<any>(null);
   
+  const place=data?data.place:null;
 
-  useEffect(() => {
-    if (data) setPlace(data.place);
-  }, [data]);
 
   if(isLoading)
   return <Spinner/>
-  
+
   return (
     place && (
       <div className={style.container}>

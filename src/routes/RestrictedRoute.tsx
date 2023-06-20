@@ -18,9 +18,9 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
   component: Component,
   contextProvider: ContextProvider,
 }) => {
-  const { user, loading } = useAuthContext();
+  const { user, isLoading } = useAuthContext();
 
-  if (loading) {
+  if (isLoading) {
     return <Spinner />; // or any loading spinner component
   }
 

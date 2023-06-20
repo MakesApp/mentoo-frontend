@@ -1,14 +1,10 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import api from '../config/api';
 import { useQuery } from 'react-query';
-import { getUserUnreadMessages } from '../api/services/api';
-import { IUser } from '../types/IUser';
-import Spinner from '../components/Spinner/Spinner';
+import { authUser, getUserUnreadMessages } from '../api/services/api';
 
 interface AuthContextProps {
-  setUser: React.Dispatch<React.SetStateAction<null>>;
   user: null | any;
-  loading: boolean;
+  isLoading: boolean;
   hasUnreadMessages: boolean | undefined;
 }
 interface AuthProviderProps{
@@ -17,36 +13,13 @@ interface AuthProviderProps{
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<IUser | any>(null);
-  const [hasUnreadMessages, setHasUnreadMessages] = useState<boolean | undefined>();
-  const [loading, setLoading] = useState(true);
-  const { data,isLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!user });
+  const {data:userData,isLoading:isAuthLoading}=useQuery('auth',authUser)
+  const { data:unredMessagesData,isLoading:unredMessagesLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!userData });
 
-  
-
-  useEffect(() => {
-    if (data) setHasUnreadMessages(data.hasUnreadMessages);
-  }, [data]);
-
-  useEffect(() => {
-    api
-      .get('/user/auth')
-      .then((res) => {
-        setUser(res.data); // If the user is authenticated, store their information
-      })
-      .catch(() => {
-        setUser(null); // If the user is not authenticated, set the user to null
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-   if(isLoading)
-  return <Spinner/>;
   const value: AuthContextProps = {
-    setUser,
-    user,
-    loading,
-    hasUnreadMessages,
+    user:userData,
+    isLoading:isAuthLoading,
+    hasUnreadMessages:unredMessagesData?.hasUnreadMessages,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
