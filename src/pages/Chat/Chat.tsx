@@ -10,6 +10,7 @@ import {  useQuery } from 'react-query';
 import { getUserById } from '../../api/services/api';
 import Spinner from '../../components/Spinner/Spinner';
 import { formatGroupDate, formatTimestamp } from '../../utils/utils';
+import queryClient from '../../config/reactQuery';
 
 type MessageType = {
   messageId?: string;
@@ -83,6 +84,7 @@ const Chat: React.FC = () => {
 
   useEffect(() => {
     socket.on('messages seen', (seenMessageIds: string[]) => {
+      queryClient.invalidateQueries('unreadMessages')
       setMessages((prevMessages) =>
         prevMessages.map((msg) => {
           if (seenMessageIds.includes(msg.messageId ?? '')) {
