@@ -1,14 +1,22 @@
 .container {
-  height: 100dvh;
+  height: 100vh; /* corrected typo */
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+
+.header {
+  /* Assuming you have a .header class for the header component */
+  flex: 0 0 auto; /* Don't grow, don't shrink, auto base height */
+}
+
 .content {
-  padding: 0 7.5%;
-  flex-grow: 1;
+  padding: 0 7.5% 30px 7.5%;
+  flex-grow: 1; /* Grow to fill available space */
   display: flex;
+
   flex-direction: column;
+  overflow: hidden; /* Prevent overflowing content */
 }
 
 .messages {
@@ -16,9 +24,10 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  flex-grow: 1;
+  flex-grow: 1; /* Let this take any remaining space within .content */
   list-style-type: none;
 }
+
 .messages::-webkit-scrollbar {
   display: none;
 }
@@ -29,6 +38,7 @@
   column-gap: 15px;
   width: 100%;
 }
+
 .right {
   justify-content: flex-end;
   text-align: right;
@@ -55,6 +65,7 @@
   height: 50px;
   border-radius: 50%;
 }
+
 .right.first .message::after {
   content: '';
   position: absolute;
@@ -72,16 +83,17 @@
   border: 10px solid;
   border-color: #eaeaea transparent transparent transparent;
 }
+
 .form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  justify-self: flex-end;
   background: #ffffff;
   border-radius: 5px;
   padding: 5px 25px;
   border-radius: 25px;
   outline: 1px solid black;
+  flex: 0 0 auto; /* Don't grow, don't shrink, auto base height */
 }
 
 .inputField {
