@@ -147,7 +147,7 @@ const Chat: React.FC = () => {
         <ul
           ref={messagesEndRef}
           className={style.messages}
-          style={{ maxHeight: `calc(100vh - ${offsets + 75}px)` }}
+          style={{ maxHeight: `calc(100dvh - ${offsets + 75}px)` }}
         >
           {Object.entries(groupedMessages).map(([date, messages]) => (
             <React.Fragment key={date}>
