@@ -22,7 +22,7 @@ type MessageType = {
   createdAt?: string;
 };
 
-const baseURL = import.meta.env.VITE_API_SOCKET_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const socket = io(baseURL);
 
 interface MatchParams {
