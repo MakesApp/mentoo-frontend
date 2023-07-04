@@ -1,5 +1,5 @@
 .container {
-  height: 100vh; /* corrected typo */
+  height: 100dvh; /* corrected typo */
   width: 100%;
   display: flex;
   flex-direction: column;

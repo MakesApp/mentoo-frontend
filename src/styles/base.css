@@ -10,7 +10,7 @@ body {
   max-width: 480px;
   overflow-x: hidden;
   direction: rtl;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
