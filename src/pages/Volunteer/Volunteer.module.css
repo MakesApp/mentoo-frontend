@@ -1,5 +1,6 @@
 .content {
   padding: 7.5%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: none;
