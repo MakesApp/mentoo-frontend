@@ -12,7 +12,8 @@ interface PlaceCardProps {
 }
 
 const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isVClicked, setIsVClicked] = useState(false);
+  const [isXClicked, setIsXClicked] = useState(false);
   const history = useHistory();
   const {
     placeImage,
@@ -35,30 +36,34 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
 
       <div className={style.btnsContainer}>
         <button
-          className={`${style.actionButton} ${isClicked ? style.bgGreen : ''}`}
+          className={`${style.actionButton} ${isVClicked ? style.bgGreen : ''}`}
           onClick={() => {
-            if (isClicked) {
+            if (isVClicked) {
               history.push(`/chat/${placeUserId}`);
             }
-            setIsClicked(true);
+            setIsVClicked(true);
           }}
         >
           <img
             className={style.chatButtonImg}
-            src={isClicked ? WhiteChatIcon : vIcon}
+            src={isVClicked ? WhiteChatIcon : vIcon}
             alt="chat icon"
           />
         </button>
         <button
-          className={style.actionButton}
+          className={`${style.actionButton} ${isXClicked?style.redBg:''}`}
           onClick={() => {
-            if (!isClicked) {
+           
+            if (!isVClicked) {
               moveToLast(placeId);
+            setIsXClicked(!isXClicked)
+
             }
-            setIsClicked(false);
+            else setIsXClicked(false)
+            setIsVClicked(false);
           }}
         >
-          <img className={style.buttonsImg} src={xIcon} alt="X icon" />
+          <img className={`${style.buttonsImg}`} src={xIcon} alt="X icon" />
         </button>
       </div>
 
