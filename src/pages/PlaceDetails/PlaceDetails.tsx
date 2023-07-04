@@ -4,7 +4,7 @@ import Days from './components/Days/Days';
 import chatIcon from '../../assets/images/chat-icon-white.svg';
 import Header from '../../components/Header/Header';
 import arrowLeft from '../../assets/images/arrow-left.svg';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getPlaceById } from '../../api/services/api';
 import { useEffect, useState } from 'react';
@@ -15,12 +15,15 @@ interface MatchParams {
 }
 
 const PlaceDetails: React.FC = () => {
+  const history=useHistory()
   const { placeId } = useParams<MatchParams>();
   const { data,isLoading } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
   
+  
   const place=data?data.place:null;
+
 
 
   if(isLoading)
@@ -50,7 +53,7 @@ const PlaceDetails: React.FC = () => {
           />
           <TitleAndDescription title={'כתובת'} description={place.address} />
         </div>
-        <button className={style.mentooBtn}>
+        <button onClick={()=>history.push(`/chat/${place?.user}`)} className={style.mentooBtn}>
           <span>יש מצב שזה מנטו</span>
           <img src={chatIcon} alt="chat" />
         </button>
