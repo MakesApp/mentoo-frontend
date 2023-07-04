@@ -52,14 +52,14 @@ const placeId = place ? place._id : null;
             handleOnClick={(e) => accept(e, user)}
           >
             <img src={vIcon} alt={'v icon'} />
-            <span>זה מנטו</span>
+            <span>למתנדבים שלי</span>
           </Button>
           <Button
             backgroundColor={'#B272CB'}
             handleOnClick={(e) => reject(e, user)}
           >
             <img src={closeIcon} alt={'close icon'} />
-            <span>פעם אחרת</span>
+            <span>מתנדב לשעבר</span>
           </Button>
         </>
       )}
