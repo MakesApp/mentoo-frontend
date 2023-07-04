@@ -157,36 +157,45 @@ const Chat: React.FC = () => {
                   messages[messages.indexOf(msg) - 1].sender !== msg.sender;
                 return (
                   <li
-                    key={msg.createdAt}
-                    className={`${msg.isCurrentUser ? style.right : style.left} ${
-                      isFirstMessage ? style.first : ''
-                    }`}
-                  >
-                    {isFirstMessage && (
-                      <img
-                        src={user?.avatarUrl || userAvatar}
-                        className={style.avatar}
-                        alt="user avatar"
-                      />
-                    )}
-                    <div className={style.message}>
-                      <p>{msg.message}</p>
-                      {msg.createdAt&&<span className={style.timestamp}>{formatTimestamp(msg.createdAt)}</span>}
-                    </div>
-                  </li>
+  key={msg.createdAt}
+  className={`${msg.isCurrentUser ? style.right : style.left} ${
+    isFirstMessage ? style.first : ''
+  }`}
+>
+  {isFirstMessage && (
+    <img
+      src={user?.avatarUrl || userAvatar}
+      className={style.avatar}
+      alt="user avatar"
+    />
+  )}
+  <div className={style.message}>
+    {msg.message.split('\n').map((item, key) => {
+      return <p key={key}>{item}</p>
+    })}
+    {msg.createdAt&&<span className={style.timestamp}>{formatTimestamp(msg.createdAt)}</span>}
+  </div>
+</li>
+
                 );
               })}
             </React.Fragment>
           ))}
         </ul>
         <form className={style.form} onSubmit={onSubmit} ref={formRef}>
-          <input
-            id="m"
-            autoComplete="off"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className={style.inputField}
-          />
+         <textarea
+     id="m"
+     autoComplete="off"
+    value={message}
+    onChange={(e) => setMessage(e.target.value)}
+    className={style.textField}
+     onKeyDown={(e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault(); // prevent form submission or textarea default behaviour
+        setMessage(prevMessage => prevMessage + '\n');
+      }
+    }}
+  />
           <button className={style.submitBtn} type="submit">
             <img src={sendIcon} alt="send icon" />
           </button>

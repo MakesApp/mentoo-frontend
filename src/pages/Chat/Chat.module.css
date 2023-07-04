@@ -91,17 +91,19 @@
   align-items: center;
   background: #ffffff;
   border-radius: 5px;
-  padding: 5px 25px;
+  padding: 0 25px;
   border-radius: 25px;
   outline: 1px solid black;
   flex: 0 0 auto; /* Don't grow, don't shrink, auto base height */
 }
 
-.inputField {
+.textField {
   flex: 1;
+  resize: none;
   height: 100%;
   border: none;
   font-size: 18px;
+  padding: 5px 0;
   outline: none;
   background: none;
 }
