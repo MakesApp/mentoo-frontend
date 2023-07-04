@@ -1,6 +1,7 @@
 .container {
   height: 100dvh; /* corrected typo */
   width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
