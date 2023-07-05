@@ -53,6 +53,7 @@ const Chat: React.FC = () => {
     socket.emit('join room', roomName, userId, partnerId);
     socket.on('chat message', (msg: MessageType) => {
         queryClient.invalidateQueries('unreadMessages')
+        queryClient.invalidateQueries('place')
       setMessages((prevMessages) => [
         ...prevMessages,
         {
@@ -86,6 +87,7 @@ const Chat: React.FC = () => {
   useEffect(() => {
     socket.on('messages seen', (seenMessageIds: string[]) => {
       queryClient.invalidateQueries('unreadMessages')
+      queryClient.invalidateQueries('place')
       setMessages((prevMessages) =>
         prevMessages.map((msg) => {
           if (seenMessageIds.includes(msg.messageId ?? '')) {
@@ -115,6 +117,7 @@ const Chat: React.FC = () => {
     };
     socket.emit('chat message', newMessage, roomName);
     queryClient.invalidateQueries('unreadMessages')
+    queryClient.invalidateQueries('place')
 
     setMessage('');
   };
