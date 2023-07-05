@@ -5,14 +5,14 @@ import { useAuthContext } from '../../context/useAuth';
 import style from './Login.module.css';
 
 const Login = () => {
-  const {setIsAuthenticated}=useAuthContext();
   const { mutateAsync } = useLoginMutation();
   const [error, setError] = useState<string | undefined>();
   const handleLogin = async (email: string, password: string) => {
     try {
-       await mutateAsync({ email, password });
-       localStorage.setItem('isAuthenticated','true')
-        setIsAuthenticated(true)
+       const response=await mutateAsync({ email, password });
+       console.log(response);
+       const {token}=response.data
+       localStorage.setItem('token',token)
       // Handle successful login
     } catch (error:any) {
       // Handle login error
