@@ -11,7 +11,7 @@ interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const { user } = useAuthContext();
+  const { user ,setIsAuthenticated} = useAuthContext();
   const {mutateAsync,isLoading} = useLogoutMutation();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
@@ -21,6 +21,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   const handleLogout = async () => {
     try {
       await mutateAsync();
+    localStorage.setItem('isAuthenticated','false')
+      setIsAuthenticated(true)
+      
+
     } catch (err) {
       console.log(err);
     }

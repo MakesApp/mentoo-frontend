@@ -23,7 +23,6 @@ type MessageType = {
 };
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-const socket = io(baseURL);
 
 interface MatchParams {
   partnerId: string;
@@ -35,6 +34,7 @@ const Chat: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
+  const [socket, setSocket] = useState<any>(null);
   const { partnerId } = useParams<MatchParams>();
   const { user } = useAuthContext();
   const { data: partner, isLoading } = useQuery(['getUser', partnerId], getUserById, { enabled: !!partnerId });
@@ -49,62 +49,66 @@ const Chat: React.FC = () => {
     }
   }, [messages]);
 
+
   useEffect(() => {
-    socket.emit('join room', roomName, userId, partnerId);
-    socket.on('chat message', (msg: MessageType) => {
-        queryClient.invalidateQueries('unreadMessages')
-        queryClient.invalidateQueries('place')
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          ...msg,
-          isCurrentUser: msg.sender === userId,
-        },
-      ]);
-    });
-    socket.on('chat history', (chatHistory: MessageType[]) => {
-      setMessages(
-        chatHistory.map((msg) => ({
-          ...msg,
-          isCurrentUser: msg.sender === userId,
-        }))
-      );
+    const socketIo = io(baseURL);
+    setSocket(socketIo);
+    if (socketIo) {
+      socketIo.emit('join room', roomName, userId, partnerId);
+      socketIo.on('chat message', (msg: MessageType) => {
+        queryClient.invalidateQueries('unreadMessages');
+        queryClient.invalidateQueries('place');
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            ...msg,
+            isCurrentUser: msg.sender === userId,
+          },
+        ]);
+      });
+      socketIo.on('chat history', (chatHistory: MessageType[]) => {
+        setMessages(
+          chatHistory.map((msg) => ({
+            ...msg,
+            isCurrentUser: msg.sender === userId,
+          }))
+        );
+      });
+    }
 
-      const unseenMessageIds = chatHistory
-        .filter((msg) => msg.sender !== userId && !msg.seenBy)
-        .map((msg) => msg._id);
-
-      if (unseenMessageIds.length > 0) {
-        socket.emit('messages seen', unseenMessageIds, roomName, userId);
-      }
-    });
     return () => {
-      socket.off('chat message');
-      socket.off('chat history');
+      if (socketIo) {
+        socketIo.off('chat message');
+        socketIo.off('chat history');
+        socketIo.disconnect();
+      }
     };
   }, [roomName]);
 
   useEffect(() => {
-    socket.on('messages seen', (seenMessageIds: string[]) => {
-      queryClient.invalidateQueries('unreadMessages')
-      queryClient.invalidateQueries('place')
-      setMessages((prevMessages) =>
-        prevMessages.map((msg) => {
-          if (seenMessageIds.includes(msg.messageId ?? '')) {
-            return {
-              ...msg,
-              seenBy: userId,
-            };
-          }
-          return msg;
-        })
-      );
-    });
+    if (socket) {
+      socket.on('messages seen', (seenMessageIds: string[]) => {
+        queryClient.invalidateQueries('unreadMessages');
+        queryClient.invalidateQueries('place');
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) => {
+            if (seenMessageIds.includes(msg.messageId ?? '')) {
+              return {
+                ...msg,
+                seenBy: userId,
+              };
+            }
+            return msg;
+          })
+        );
+      });
 
-    return () => {
-      socket.off('messages seen');
-    };
-  }, [userId]);
+      return () => {
+        socket.off('messages seen');
+      };
+    }
+  }, [userId, socket]);
+
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
