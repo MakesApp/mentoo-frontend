@@ -10,7 +10,6 @@ const Login = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
        const response=await mutateAsync({ email, password });
-       console.log(response);
        const {token}=response.data
        localStorage.setItem('token',token)
       // Handle successful login

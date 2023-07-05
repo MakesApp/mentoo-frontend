@@ -14,7 +14,6 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const token=localStorage.getItem('token')
-console.log(token);
 
 const { data: userData, isLoading: isAuthLoading } = useQuery('auth', authUser);  
 const { data:unredMessagesData,isLoading:unredMessagesLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!userData });
