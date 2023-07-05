@@ -52,6 +52,7 @@ const Chat: React.FC = () => {
   useEffect(() => {
     socket.emit('join room', roomName, userId, partnerId);
     socket.on('chat message', (msg: MessageType) => {
+        queryClient.invalidateQueries('unreadMessages')
       setMessages((prevMessages) => [
         ...prevMessages,
         {
@@ -113,6 +114,7 @@ const Chat: React.FC = () => {
       isCurrentUser: true,
     };
     socket.emit('chat message', newMessage, roomName);
+    queryClient.invalidateQueries('unreadMessages')
 
     setMessage('');
   };
