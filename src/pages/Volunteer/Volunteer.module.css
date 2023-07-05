@@ -1,9 +1,10 @@
+.container {
+  width: 100%;
+}
 .content {
   padding: 7.5%;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: none;
 }
 .daysRegionContainer {
   display: flex;
@@ -12,11 +13,13 @@
 }
 
 .cardList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
   padding: 0;
   list-style-type: none;
 }
 .card {
-  margin-bottom: 15px;
 }
 .result {
   display: block;

@@ -1,5 +1,6 @@
 /* PersonalData.css */
-
+.container {
+}
 .dataContainer {
   display: flex;
   align-items: center;
@@ -7,7 +8,7 @@
   flex-direction: row-reverse;
   background: #7030a0;
   color: #ffffff;
-  padding: 5% 0;
+  padding: 2.5% 0;
   font-size: 14px;
   font-family: 'pauza', sans-serif;
   font-weight: bold;

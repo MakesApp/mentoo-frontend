@@ -59,7 +59,7 @@ const Volunteer: React.FC = () => {
   return <Spinner/>
   
   return (
-    <div>
+    <div className={style.container}>
       <Header  />
       <PersonalData />
       <div className={style.content}>

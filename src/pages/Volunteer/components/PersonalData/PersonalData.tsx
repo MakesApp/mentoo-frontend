@@ -5,7 +5,7 @@ const PersonalData: React.FC = () => {
 
 
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.dataContainer}>
         <div className={style.personalInfo}>
           <p className={style.volHours}>{'?'}</p>

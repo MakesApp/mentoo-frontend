@@ -35,16 +35,15 @@
   column-gap: 5px;
   margin-top: 10px;
 }
-
 .description {
   color: #313131;
-  line-height: 0.7;
   font-size: 16px;
-  width: 80%;
-  display: block;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* Show two lines */
+  line-clamp: 2; /* Show two lines */
 }
 
 .placeInfoAvatar {
