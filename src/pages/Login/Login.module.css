@@ -1,10 +1,10 @@
 .loginContainer {
-  padding: 10% 7.5%;
   width: 100%;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 

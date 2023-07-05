@@ -1,9 +1,9 @@
 .spinner {
-  display: inline-block;
   width: 70px;
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 7.5px;
   transform: translate(-50%, -50%);
   height: 70px;
   border: 4px solid rgba(0, 0, 0, 0.9);
