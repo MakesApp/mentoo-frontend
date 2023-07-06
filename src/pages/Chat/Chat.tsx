@@ -57,6 +57,9 @@ const Chat: React.FC = () => {
     if (socketIo) {
       socketIo.emit('join room', roomName, userId, partnerId);
       socketIo.on('chat message', (msg: MessageType) => {
+      queryClient.invalidateQueries('unreadMessages')
+    queryClient.invalidateQueries('place')
+    queryClient.invalidateQueries('chatPartners')
 
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -66,9 +69,13 @@ const Chat: React.FC = () => {
           },
         ]);
       });
-      socketIo.on('all messages', (chatHistory: MessageType[]) => {
+      socketIo.on('all messages', (chatMessages: MessageType[]) => {
+               queryClient.invalidateQueries('unreadMessages')
+    queryClient.invalidateQueries('place')
+    queryClient.invalidateQueries('chatPartners')
+
         setMessages(
-          chatHistory.map((msg) => ({
+          chatMessages.map((msg) => ({
             ...msg,
             isCurrentUser: msg.sender === userId,
           }))
