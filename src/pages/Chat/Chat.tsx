@@ -188,7 +188,7 @@ const Chat: React.FC = () => {
       }
     }}
   />
-          <button className={style.submitBtn} type="submit">
+          <button disabled={!message} className={`${style.submitBtn} ${!message?style.disabled:''}`} type="submit">
             <img src={sendIcon} alt="send icon" />
           </button>
         </form>
