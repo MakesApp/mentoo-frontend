@@ -19,7 +19,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 const [isAuthenticated,setIsAuthenticated]=useState(Boolean(localStorage.getItem('token')))
 const { data: userData, isLoading: isAuthLoading } = useQuery('auth', authUser);  
 const { data:unredMessagesData,isLoading:unredMessagesLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!userData });
-
+console.log('====================================');
+console.log(unredMessagesData);
+console.log('====================================');
   const value: AuthContextProps = {
     isAuthenticated:isAuthenticated,
     setIsAuthenticated:setIsAuthenticated,
