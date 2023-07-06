@@ -39,8 +39,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           </button>
           {isLogoutVisible && (
             <button className={style.logoutBtn} onClick={handleLogout}>
-              להתנתק
-            </button>
+התנתקות            </button>
           )}
         </div>
       </div>
