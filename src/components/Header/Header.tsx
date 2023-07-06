@@ -3,34 +3,27 @@ import style from './Header.module.css';
 import Logo from '../Logo/Logo';
 import { useAuthContext } from '../../context/useAuth';
 import defaultAvatar from '../../assets/images/user-avatar.png';
-import { useLogoutMutation } from '../../api/services/api';
 import ChatWithNotification from '../ChatWithNotification/ChatWithNotification';
-import Spinner from '../Spinner/Spinner';
 
 interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const { user } = useAuthContext();
-  const {mutateAsync,isLoading} = useLogoutMutation();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
   const handleOnClick = () => {
     setLogoutVisible(!isLogoutVisible);
   };
-  const handleLogout = async () => {
+  const handleLogout =  () => {
     try {
-      await mutateAsync();
     localStorage.removeItem('token')
-      
 
     } catch (err) {
       console.log(err);
     }
   };
 
-  if(isLoading)
-  return <Spinner/>
 
   return (
     <header className={style.headerContainer}>
