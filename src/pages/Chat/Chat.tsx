@@ -56,6 +56,9 @@ const Chat: React.FC = () => {
     if (socketIo) {
       socketIo.emit('join room', roomName, userId, partnerId);
       socketIo.on('chat message', (msg: MessageType) => {
+            queryClient.invalidateQueries('unreadMessages')
+    queryClient.invalidateQueries('place')
+
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -86,6 +89,9 @@ const Chat: React.FC = () => {
   useEffect(() => {
     if (socket) {
       socket.on('messages seen', (seenMessageIds: string[]) => {
+            queryClient.invalidateQueries('unreadMessages')
+    queryClient.invalidateQueries('place')
+
         setMessages((prevMessages) =>
           prevMessages.map((msg) => {
             if (seenMessageIds.includes(msg.messageId ?? '')) {
@@ -116,8 +122,6 @@ const Chat: React.FC = () => {
       isCurrentUser: true,
     };
     socket.emit('chat message', newMessage, roomName);
-    queryClient.invalidateQueries('unreadMessages')
-    queryClient.invalidateQueries('place')
 
     setMessage('');
   };
