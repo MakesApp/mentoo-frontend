@@ -12,13 +12,13 @@ const UnauthenticatedOnlyRoute: React.FC<Props> = ({
   path,
   component: Component,
 }) => {
-  const { user } = useAuthContext();
+  const { isAuthenticated,user } = useAuthContext();
 
   return (
     <Route
       path={path}
       render={(props) =>
-        user ? (
+        isAuthenticated&&user ? (
           <Redirect
             to={user.role === 'volunteer' ? VOLUNTEER_PAGE : PLACE_PAGE}
           />

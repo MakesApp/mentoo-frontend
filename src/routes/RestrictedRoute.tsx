@@ -18,7 +18,7 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
   component: Component,
   contextProvider: ContextProvider,
 }) => {
-  const { user, isLoading } = useAuthContext();
+  const {isAuthenticated, user, isLoading } = useAuthContext();
 
   if (isLoading) {
     return <Spinner />; // or any loading spinner component
@@ -28,7 +28,7 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
     <Route
       path={path}
       render={(props) =>
-        user && allowedRoles.includes(user.role) ? (
+        isAuthenticated &&user&& allowedRoles.includes(user.role) ? (
           ContextProvider ? ( // Check if ContextProvider is given
             <ContextProvider>
               <Component {...props} />

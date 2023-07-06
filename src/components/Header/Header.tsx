@@ -11,7 +11,7 @@ interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const { user } = useAuthContext();
+  const { user ,setIsAuthenticated} = useAuthContext();
   const history=useHistory();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
@@ -19,13 +19,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     setLogoutVisible(!isLogoutVisible);
   };
   const handleLogout =  () => {
-    try {
     localStorage.removeItem('token')
+    setIsAuthenticated(false)
     history.push(LOGIN_PAGE)
 
-    } catch (err) {
-      console.log(err);
-    }
   };
 
 
