@@ -22,7 +22,7 @@ const ChatList = () => {
         </Link>
       </Header>
       <Title title={'מחוברים לחיים'} subTitle={'ההודעות שלי'} />
-      {chatPartners&&<List users={chatPartners}>
+      {chatPartners&&<List areOptionsDisabled={true} users={chatPartners}>
         {() => {
           // Render the user component or JSX here
           return <></>;

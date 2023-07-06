@@ -8,7 +8,7 @@ const PersonalData: React.FC = () => {
     <div className={style.container}>
       <div className={style.dataContainer}>
         <div className={style.personalInfo}>
-          <p className={style.volHours}>{'?'}</p>
+          <p className={style.volHours}>{'0'}</p>
           <p className={style.personalDataText}>
             <span> שעות </span>
             <span> ההתנדבות </span>

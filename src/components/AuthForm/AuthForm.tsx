@@ -10,6 +10,7 @@ interface AuthFormProps {
   buttonValue?: string;
   children?: ReactNode|undefined;
   error?: (string|undefined);
+  isLogging?:boolean;
 }
 
 const validationSchema = Yup.object({
@@ -30,6 +31,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   buttonValue,
   children,
   error,
+  isLogging
 }) => {
   const initialValues = {
     email: '',
@@ -103,7 +105,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <button
               className={`${style.submit}`}
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid||isLogging}
             >
               {buttonValue}
             </button>

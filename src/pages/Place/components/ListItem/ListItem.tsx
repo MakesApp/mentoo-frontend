@@ -9,9 +9,10 @@ import { useHistory } from 'react-router-dom';
 interface ListItemProps {
   user: IUser;
   children?:any;
+  areOptionsDisabled?:boolean;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
+const ListItem: React.FC<ListItemProps> = ({ areOptionsDisabled,user, children }) => {
   const [isContainerMoved, setIsContainerMoved] = useState(false);
   const history = useHistory();
 
@@ -38,19 +39,21 @@ const ListItem: React.FC<ListItemProps> = ({ user, children }) => {
             isContainerMoved ? style.moveContainer : ''
           }`}
         >
-          {isContainerMoved ? (
+          {!areOptionsDisabled&&(
+          isContainerMoved ? (
             <button
               className={style.closeIcon}
               onClick={handleCloseIcon}
             ></button>
           ) : (
-            <button onClick={handleShowMore}>
+            <button onClick={handleShowMore} >
               <ul className={style.icons}>
                 <li></li>
                 <li></li>
                 <li></li>
               </ul>
             </button>
+          )
           )}
           <img
             className={style.profileImg}
