@@ -4,12 +4,15 @@ import Logo from '../Logo/Logo';
 import { useAuthContext } from '../../context/useAuth';
 import defaultAvatar from '../../assets/images/user-avatar.png';
 import ChatWithNotification from '../ChatWithNotification/ChatWithNotification';
+import { LOGIN_PAGE } from '../../routes/routePath';
+import { useHistory } from 'react-router-dom';
 
 interface HeaderProps {
   children?: ReactNode| undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const { user } = useAuthContext();
+  const history=useHistory();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
   const handleOnClick = () => {
@@ -18,6 +21,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   const handleLogout =  () => {
     try {
     localStorage.removeItem('token')
+    history.push(LOGIN_PAGE)
 
     } catch (err) {
       console.log(err);
