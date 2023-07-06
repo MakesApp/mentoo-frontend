@@ -5,6 +5,7 @@ import userAvatar from '../../../../assets/images/user-avatar.png';
 import { Link } from 'react-router-dom';
 import ChatWithNotification from '../../../../components/ChatWithNotification/ChatWithNotification';
 import { IUser } from '../../../../types/IUser';
+import { useAuthContext } from '../../../../context/useAuth';
 
 interface HeaderProps {
     user: IUser; 
@@ -13,6 +14,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
   const {user}=props;
+  const {user:authUser}=useAuthContext()
   
   return (
     <header ref={ref} className={style.headerContainer}>
@@ -33,7 +35,7 @@ const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
       </div>
       <div className={style.headerMiddle}></div>
       <div className={style.headerLeft}>
-        {user?.role !== 'place' && <ChatWithNotification />}
+        {authUser?.role !== 'place' && <ChatWithNotification />}
         <Link to={{ pathname: '/' }}>
           <img src={arrowLeft} alt="arrow left" />
         </Link>

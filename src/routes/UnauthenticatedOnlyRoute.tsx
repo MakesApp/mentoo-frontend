@@ -18,7 +18,7 @@ const UnauthenticatedOnlyRoute: React.FC<Props> = ({
     <Route
       path={path}
       render={(props) =>
-        isAuthenticated&&user ? (
+        isAuthenticated && user ? (
           <Redirect
             to={user.role === 'volunteer' ? VOLUNTEER_PAGE : PLACE_PAGE}
           />

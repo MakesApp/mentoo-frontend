@@ -19,6 +19,7 @@ type MessageType = {
   isCurrentUser?: boolean;
   seenBy?: string;
   _id?: string;
+  role:string;
   createdAt?: string;
 };
 
@@ -118,6 +119,7 @@ const Chat: React.FC = () => {
     const newMessage: MessageType = {
       messageId: Date.now().toString(),
       sender: userId,
+      role:user.role,
       message,
       isCurrentUser: true,
     };
