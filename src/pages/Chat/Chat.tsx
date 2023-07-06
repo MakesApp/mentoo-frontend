@@ -57,6 +57,7 @@ const Chat: React.FC = () => {
     if (socketIo) {
       socketIo.emit('join room', roomName, userId, partnerId);
       socketIo.on('chat message', (msg: MessageType) => {
+
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -65,10 +66,7 @@ const Chat: React.FC = () => {
           },
         ]);
       });
-      socketIo.on('chat history', (chatHistory: MessageType[]) => {
-            queryClient.invalidateQueries('unreadMessages')
-    queryClient.invalidateQueries('place')
-    queryClient.invalidateQueries('chatPartners')
+      socketIo.on('all messages', (chatHistory: MessageType[]) => {
         setMessages(
           chatHistory.map((msg) => ({
             ...msg,
@@ -81,33 +79,12 @@ const Chat: React.FC = () => {
     return () => {
       if (socketIo) {
         socketIo.off('chat message');
-        socketIo.off('chat history');
+        socketIo.off('all messages');
         socketIo.disconnect();
       }
     };
   }, [roomName]);
 
-  useEffect(() => {
-    if (socket) {
-      socket.on('messages seen', (seenMessageIds: string[]) => {
-        setMessages((prevMessages) =>
-          prevMessages.map((msg) => {
-            if (seenMessageIds.includes(msg.messageId ?? '')) {
-              return {
-                ...msg,
-                seenBy: userId,
-              };
-            }
-            return msg;
-          })
-        );
-      });
-
-      return () => {
-        socket.off('messages seen');
-      };
-    }
-  }, [userId, socket]);
 
 
   const onSubmit = (event: React.FormEvent) => {
@@ -121,6 +98,7 @@ const Chat: React.FC = () => {
       isCurrentUser: true,
     };
     socket.emit('chat message', newMessage, roomName);
+
     setMessage('');
   };
 

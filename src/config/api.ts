@@ -23,6 +23,7 @@ api.interceptors.request.use((config) => {
 }, (error) => {
  if (error.response && error.response.status === 401) {
     // If the error is 401, redirect to login page
+    localStorage.removeItem('token'); // Replace with how you retrieve your token
     window.location.href = LOGIN_PAGE;
   } else {
     // Otherwise, log the error
