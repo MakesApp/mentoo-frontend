@@ -5,10 +5,9 @@ const App = () => {
 
   return (
     <>
-    <Spinner/>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <RoutesConfig />
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 };
