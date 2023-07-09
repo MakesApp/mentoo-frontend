@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import Header from './components/Header/Header';
@@ -11,6 +11,7 @@ import { getUserById } from '../../api/services/api';
 import Spinner from '../../components/Spinner/Spinner';
 import { formatGroupDate, formatTimestamp } from '../../utils/utils';
 import queryClient from '../../config/reactQuery';
+import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 type MessageType = {
   messageId?: string;
@@ -43,6 +44,21 @@ const Chat: React.FC = () => {
   const ids = [userId, partnerId].sort();
   const roomName = `${ids[0]}_${ids[1]}`;
 
+
+    const lastMessageRef = useRef<HTMLLIElement>(null);
+
+  const markAsSeen = useCallback((entry) => {
+    if (entry.isIntersecting) {
+      queryClient.invalidateQueries('place')
+      queryClient.invalidateQueries('unreadMessages')
+       queryClient.invalidateQueries('chatPartners')
+      socket.emit('mark as seen', userId, roomName);
+    }
+  }, [socket, userId, messages]);
+
+  useIntersectionObserver(lastMessageRef, markAsSeen, { threshold: 0.5 });
+
+
   useEffect(() => {
     const messagesList = messagesEndRef.current;
     if (messagesList) {
@@ -57,10 +73,6 @@ const Chat: React.FC = () => {
     if (socketIo) {
       socketIo.emit('join room', roomName, userId, partnerId);
       socketIo.on('chat message', (msg: MessageType) => {
-      queryClient.invalidateQueries('unreadMessages')
-    queryClient.invalidateQueries('place')
-    queryClient.invalidateQueries('chatPartners')
-
         setMessages((prevMessages) => [
           ...prevMessages,
           {
@@ -69,18 +81,15 @@ const Chat: React.FC = () => {
           },
         ]);
       });
-      socketIo.on('all messages', (chatMessages: MessageType[]) => {
-               queryClient.invalidateQueries('unreadMessages')
-    queryClient.invalidateQueries('place')
-    queryClient.invalidateQueries('chatPartners')
-
-        setMessages(
-          chatMessages.map((msg) => ({
-            ...msg,
-            isCurrentUser: msg.sender === userId,
-          }))
-        );
-      });
+   
+    socketIo.on('all messages', (chatMessages: MessageType[]) => {
+      setMessages(
+        chatMessages.map((msg) => ({
+          ...msg,
+          isCurrentUser: msg.sender === userId,
+        }))
+      );
+    });
     }
 
     return () => {
@@ -109,9 +118,6 @@ const Chat: React.FC = () => {
     setMessage('');
   };
 
-  const offsets =
-    (headerRef.current?.offsetHeight || 0) +
-    (formRef.current?.offsetHeight || 0);
 
 
   if (isLoading) {
@@ -131,6 +137,9 @@ const Chat: React.FC = () => {
       groupedMessages[dateString] = [msg];
     }
   });
+  const isLastMessage = messages[messages.length - 1];
+  
+  
 
   return (
     <div className={style.container}>
@@ -144,11 +153,14 @@ const Chat: React.FC = () => {
             <React.Fragment key={date}>
               <li className={style.dateSection}>{date}</li>
               {messages.map((msg) => {
+                
                 const isFirstMessage =
                   messages.indexOf(msg) === 0 ||
                   messages[messages.indexOf(msg) - 1].sender !== msg.sender;
                 return (
                   <li
+                                  ref={isLastMessage._id===msg._id? lastMessageRef : null}
+
   key={msg.createdAt}
   className={`${msg.isCurrentUser ? style.right : style.left} ${
     isFirstMessage ? style.first : ''
