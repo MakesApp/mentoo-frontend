@@ -33,6 +33,8 @@ interface MatchParams {
 const Chat: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLUListElement>(null);
+const inputRef = useRef<HTMLTextAreaElement | null>(null);
+
   const formRef = useRef<HTMLFormElement>(null);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -116,6 +118,9 @@ const Chat: React.FC = () => {
     socket.emit('chat message', newMessage, roomName);
 
     setMessage('');
+    if (inputRef.current) {
+    inputRef.current.focus();
+  }
   };
 
 
@@ -189,6 +194,7 @@ const Chat: React.FC = () => {
         <form className={style.form} onSubmit={onSubmit} ref={formRef}>
          <textarea
      id="m"
+       ref={inputRef}
      autoComplete="off"
     value={message}
     onChange={(e) => setMessage(e.target.value)}
