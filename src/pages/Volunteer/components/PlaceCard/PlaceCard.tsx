@@ -51,15 +51,12 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
           />
         </button>
         <button
-          className={`${style.actionButton} ${isXClicked?style.redBg:''}`}
+          className={`${style.actionButton} ${isXClicked ? style.redBg : ''}`}
           onClick={() => {
-           
             if (!isVClicked) {
               moveToLast(placeId);
-            setIsXClicked(!isXClicked)
-
-            }
-            else setIsXClicked(false)
+              setIsXClicked(!isXClicked);
+            } else setIsXClicked(false);
             setIsVClicked(false);
           }}
         >

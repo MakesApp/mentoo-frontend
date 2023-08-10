@@ -12,7 +12,7 @@ const UnauthenticatedOnlyRoute: React.FC<Props> = ({
   path,
   component: Component,
 }) => {
-  const { isAuthenticated,user } = useAuthContext();
+  const { isAuthenticated, user } = useAuthContext();
 
   return (
     <Route

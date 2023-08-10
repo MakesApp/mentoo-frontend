@@ -8,27 +8,29 @@ import { useQuery } from 'react-query';
 import Spinner from '../Spinner/Spinner';
 
 const ChatList = () => {
-  const { data: chatPartners,isLoading } = useQuery('chatPartners', getChatPartners);
+  const { data: chatPartners, isLoading } = useQuery(
+    'chatPartners',
+    getChatPartners
+  );
 
-  if(isLoading)
-  return <Spinner/>
-  
-  
+  if (isLoading) return <Spinner />;
+
   return (
     <div>
-      <Header >
+      <Header>
         <Link to={{ pathname: '/' }}>
           <img src={arrowLeft} alt="arrow left" />
         </Link>
       </Header>
       <Title title={'מחוברים לחיים'} subTitle={'ההודעות שלי'} />
-      {chatPartners&&<List areOptionsDisabled={true} users={chatPartners}>
-        {() => {
-          // Render the user component or JSX here
-          return <></>;
-        }}
-      </List>
-}
+      {chatPartners && (
+        <List areOptionsDisabled={true} users={chatPartners}>
+          {() => {
+            // Render the user component or JSX here
+            return <></>;
+          }}
+        </List>
+      )}
     </div>
   );
 };

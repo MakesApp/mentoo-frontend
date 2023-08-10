@@ -8,14 +8,14 @@ import { IUser } from '../../../../types/IUser';
 import { useAuthContext } from '../../../../context/useAuth';
 
 interface HeaderProps {
-    user: IUser; 
+  user: IUser;
   ref: React.Ref<HTMLDivElement>;
 }
 
 const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
-  const {user}=props;
-  const {user:authUser}=useAuthContext()
-  
+  const { user } = props;
+  const { user: authUser } = useAuthContext();
+
   return (
     <header ref={ref} className={style.headerContainer}>
       <div className={style.headerRight}>
@@ -26,11 +26,6 @@ const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
         />
         <div>
           <h2 className={style.name}>{user?.fullName}</h2>
-          {user.placeId && (
-            <span className={style.placeName}>
-              {user.placeId?.placeName}
-            </span>
-          )}
         </div>
       </div>
       <div className={style.headerMiddle}></div>
@@ -43,6 +38,5 @@ const Header: React.FC<HeaderProps> = React.forwardRef((props, ref) => {
     </header>
   );
 });
-
 
 export default Header;

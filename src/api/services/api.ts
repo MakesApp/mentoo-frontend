@@ -2,39 +2,29 @@ import { useMutation, UseMutationResult } from 'react-query';
 import api from '../../config/api';
 import queryClient from '../../config/reactQuery';
 export const useLoginMutation = () => {
-  return useMutation((payload: any) =>
-    api.post('/user/login', payload),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('auth');
-      },
-    }
-  );
+  return useMutation((payload: any) => api.post('/user/login', payload), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('auth');
+    },
+  });
 };
 
 export const useRegisterMutation = () => {
-  return useMutation((payload: any) =>
-    api.post('/user/register', payload),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('auth');
-      },
-    }
-  );
+  return useMutation((payload: any) => api.post('/user/register', payload), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('auth');
+    },
+  });
 };
 
 export const useLogoutMutation = () => {
   return useMutation(() => api.get('/user/logout'), {
     onSuccess: () => {
-        queryClient.setQueryData('auth', undefined);
-        queryClient.clear();
-
+      queryClient.setQueryData('auth', undefined);
+      queryClient.clear();
     },
   });
 };
-
-
-
 
 export const getAllPlaces = async () => {
   const response = await api.get('/place/getPlaces');
@@ -48,21 +38,19 @@ export const getPlaceById = async ({ queryKey }: { queryKey: string[] }) => {
   return response.data;
 };
 
-
 export const useUpdateVolunteerListMutation = (): UseMutationResult<
   any,
   unknown,
-  { placeId: string|null, query: any },
+  { userId: string | null; query: any },
   unknown
 > => {
   return useMutation(
-    ({ placeId, query }) => api.patch(`/place/${placeId}`, {query}),
-     {
+    ({ userId, query }) => api.patch(`/user/${userId}`, { query }),
+    {
       onSuccess: () => {
-        queryClient.invalidateQueries('place')
+        queryClient.invalidateQueries('auth');
       },
     }
-   
   );
 };
 
@@ -84,8 +72,8 @@ export const getUserUnreadMessages = async () => {
 
   return response.data;
 };
-export const getUserById = async ({queryKey}) => {
-    const [_, userId] = queryKey;
+export const getUserById = async ({ queryKey }) => {
+  const [_, userId] = queryKey;
 
   const response = await api.get(`/user/${userId}`);
 
@@ -93,7 +81,6 @@ export const getUserById = async ({queryKey}) => {
 };
 
 export const authUser = async () => {
-
   const response = await api.get(`/user/auth`);
 
   return response.data;

@@ -3,7 +3,7 @@ import style from './TitleAndDescription.module.css';
 
 interface TitleAndDescriptionProps {
   title: string;
-  description: string|ReactNode;
+  description: string | ReactNode;
 }
 
 const TitleAndDescription: React.FC<TitleAndDescriptionProps> = ({

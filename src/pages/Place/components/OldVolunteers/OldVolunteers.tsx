@@ -1,33 +1,37 @@
 import Button from '../Button/Button';
 import List from '../List/List';
 import vIcon from '../../../../assets/images/v-icon.svg';
-import { usePlaceContext } from '../../context/placeContext';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 import Spinner from '../../../../components/Spinner/Spinner';
+import { useAuthContext } from '../../../../context/useAuth';
 
-const OldVolunteers: React.FC = () => {
-  const { place,isLoading:isPlaceLoading } = usePlaceContext();
-  const {oldVolunteers=[], myVolunteers=[]}=place||{};
-  const { mutateAsync,isLoading:isMutationLoading } = useUpdateVolunteerListMutation();
-  const placeId = place ? place._id : null;
-  const isLoading=isPlaceLoading||isMutationLoading
+interface OldVolunteersProps {
+  myVolunteers: any;
+  oldVolunteers: any;
+}
+const OldVolunteers: React.FC<OldVolunteersProps> = ({
+  oldVolunteers,
+  myVolunteers,
+}) => {
+  const { mutateAsync, isLoading: isMutationLoading } =
+    useUpdateVolunteerListMutation();
+  const { user ,isLoading:isAuthLoading} = useAuthContext();
+  const userId = user._id;
+  const isLoading = isMutationLoading||isAuthLoading;
   const accept = async (e: React.MouseEvent, user) => {
-    e.stopPropagation()
+    e.stopPropagation();
     const query = {
       myVolunteers: [...myVolunteers, user],
       oldVolunteers: oldVolunteers?.filter(
         (volunteer) => volunteer._id !== user._id
       ),
     };
-    await mutateAsync({ placeId: placeId, query });
-
+    await mutateAsync({ userId: userId, query });
   };
 
+  if (isLoading || isMutationLoading) return <Spinner />;
 
-  if(isLoading||isMutationLoading)
-  return <Spinner/>
-
-  return  (
+  return (
     <List users={oldVolunteers}>
       {(user) => (
         <Button

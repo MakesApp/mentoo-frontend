@@ -10,21 +10,31 @@ interface AuthContextProps {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface AuthProviderProps{
-  children:ReactNode
+interface AuthProviderProps {
+  children: ReactNode;
 }
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-const [isAuthenticated,setIsAuthenticated]=useState(Boolean(localStorage.getItem('token')))
-const { data: userData, isLoading: isAuthLoading } = useQuery('auth', authUser);  
-const { data:unredMessagesData,isLoading:unredMessagesLoading } = useQuery('unreadMessages', getUserUnreadMessages, { enabled: !!userData });
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem('token'))
+  );
+  const { data: userData, isLoading: isAuthLoading } = useQuery(
+    'auth',
+    authUser
+  );
+
+  const { data: unredMessagesData, isLoading: unredMessagesLoading } = useQuery(
+    'unreadMessages',
+    getUserUnreadMessages,
+    { enabled: !!userData }
+  );
   const value: AuthContextProps = {
-    isAuthenticated:isAuthenticated,
-    setIsAuthenticated:setIsAuthenticated,
-    user:userData,
-    isLoading:isAuthLoading,
-    hasUnreadMessages:unredMessagesData?.hasUnreadMessages,
+    isAuthenticated: isAuthenticated,
+    setIsAuthenticated: setIsAuthenticated,
+    user: userData,
+    isLoading: isAuthLoading,
+    hasUnreadMessages: unredMessagesData?.hasUnreadMessages,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -8,23 +8,21 @@ import { LOGIN_PAGE } from '../../routes/routePath';
 import { useHistory } from 'react-router-dom';
 
 interface HeaderProps {
-  children?: ReactNode| undefined;
+  children?: ReactNode | undefined;
 }
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const { user ,setIsAuthenticated} = useAuthContext();
-  const history=useHistory();
+  const { user, setIsAuthenticated } = useAuthContext();
+  const history = useHistory();
 
   const [isLogoutVisible, setLogoutVisible] = useState(false);
   const handleOnClick = () => {
     setLogoutVisible(!isLogoutVisible);
   };
-  const handleLogout =  () => {
-    localStorage.removeItem('token')
-    setIsAuthenticated(false)
-    history.push(LOGIN_PAGE)
-
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    history.push(LOGIN_PAGE);
   };
-
 
   return (
     <header className={style.headerContainer}>
@@ -39,7 +37,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           </button>
           {isLogoutVisible && (
             <button className={style.logoutBtn} onClick={handleLogout}>
-התנתקות            </button>
+              התנתקות{' '}
+            </button>
           )}
         </div>
       </div>
@@ -47,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         <Logo />
       </div>
       <div className={style.headerLeft}>
-       {user?.role!=='place'&& <ChatWithNotification />}
+        {user?.role !== 'place' && <ChatWithNotification />}
         {children}
       </div>
     </header>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import UnauthenticatedOnlyRoute from './UnauthenticatedOnlyRoute';
 import {
@@ -16,7 +16,6 @@ import Volunteer from '../pages/Volunteer/Volunteer';
 import PlaceDetails from '../pages/PlaceDetails/PlaceDetails';
 import Place from '../pages/Place/Place';
 import Chat from '../pages/Chat/Chat';
-import { PlaceProvider } from '../pages/Place/context/placeContext';
 import ChatList from '../components/ChatList/ChatList';
 
 const RoutesConfig: React.FC = () => {
@@ -46,7 +45,6 @@ const RoutesConfig: React.FC = () => {
         allowedRoles={['place']}
         fallbackPath={LOGIN_PAGE}
         component={Place}
-        contextProvider={PlaceProvider}
       />
       {/* <UnauthenticatedOnlyRoute path={REGISTER_PAGE} component={Register}/> */}
 

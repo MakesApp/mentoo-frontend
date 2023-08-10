@@ -12,15 +12,13 @@ import { getAllPlaces } from '../../api/services/api';
 import Spinner from '../../components/Spinner/Spinner';
 
 const Volunteer: React.FC = () => {
-  const { data ,isLoading} = useQuery('places', getAllPlaces);
+  const { data, isLoading } = useQuery('places', getAllPlaces);
 
   const [expanded, setExpanded] = useState<string[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<IPlace[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]); // Changed the type to 'number[]' to match the data type
   const [places, setPlaces] = useState<IPlace[]>([]);
-
-
 
   useEffect(() => {
     if (data) setPlaces(data.places);
@@ -55,12 +53,11 @@ const Volunteer: React.FC = () => {
     [setPlaces]
   );
 
-    if(isLoading)
-  return <Spinner/>
-  
+  if (isLoading) return <Spinner />;
+
   return (
     <div className={style.container}>
-      <Header  />
+      <Header />
       <PersonalData />
       <div className={style.content}>
         <div className={style.daysRegionContainer}>
@@ -75,7 +72,9 @@ const Volunteer: React.FC = () => {
             setSelectedDays={setSelectedDays} // Added type assertion to match the correct type
           />
         </div>
-        <span className={style.result}>{`${filteredPlaces.length} תוצאות`}</span>
+        <span
+          className={style.result}
+        >{`${filteredPlaces.length} תוצאות`}</span>
         <ul className={style.cardList}>
           {filteredPlaces.map((place) => {
             return (

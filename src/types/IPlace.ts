@@ -1,7 +1,7 @@
-import { IUser } from "./IUser";
+import { IUser } from './IUser';
 
 export interface IPlace {
-  _id:string;
+  _id: string;
   placeName: string;
   availableDays: string[];
   address: string;
@@ -9,7 +9,4 @@ export interface IPlace {
   audience: string;
   placeImage?: string;
   user: IUser;
-  oldVolunteers:any;
-  myVolunteers:any;
-  candidateVolunteers:any;
 }

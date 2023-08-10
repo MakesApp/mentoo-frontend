@@ -24,7 +24,11 @@ const PreferencesDaysBar: React.FC<PreferencesDaysBarProps> = ({
     <div className={style.daysContainer}>
       <div className={style.dropdown}>
         <button className={style.dropdownBtn}>
-          <img className={style.downArrowImg} src={downArrow} alt="down arrow" />
+          <img
+            className={style.downArrowImg}
+            src={downArrow}
+            alt="down arrow"
+          />
           <span> ימי התנדבות</span>
         </button>
 

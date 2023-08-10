@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRegisterMutation } from '../../api/services/api';
 import AuthForm from '../../components/AuthForm/AuthForm';
@@ -8,21 +8,20 @@ import style from './Register.module.css';
 const Register = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [error, setError] = useState<any>(); // Provide the correct type for the 'error' state
-  const { mutateAsync,isLoading } = useRegisterMutation();
+  const { mutateAsync, isLoading } = useRegisterMutation();
 
   const handleOnRegister = async (email: string, password: string) => {
     try {
-       await mutateAsync({ email, password });
+      await mutateAsync({ email, password });
 
       // Handle successful registration
-    } catch (error:any) {
+    } catch (error: any) {
       // Handle registration error
       setError(error.response?.data?.message); // Access the error message from the response
     }
   };
 
-  if(isLoading)
-  return <Spinner/>
+  if (isLoading) return <Spinner />;
 
   return (
     <div className={style.container}>

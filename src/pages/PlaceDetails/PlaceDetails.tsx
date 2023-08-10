@@ -15,19 +15,15 @@ interface MatchParams {
 }
 
 const PlaceDetails: React.FC = () => {
-  const history=useHistory()
+  const history = useHistory();
   const { placeId } = useParams<MatchParams>();
-  const { data,isLoading } = useQuery(['place', placeId], getPlaceById, {
+  const { data, isLoading } = useQuery(['place', placeId], getPlaceById, {
     enabled: !!placeId,
   });
-  
-  
-  const place=data?data.place:null;
 
+  const place = data ? data.place : null;
 
-
-  if(isLoading)
-  return <Spinner/>
+  if (isLoading) return <Spinner />;
 
   return (
     place && (
@@ -53,7 +49,10 @@ const PlaceDetails: React.FC = () => {
           />
           <TitleAndDescription title={'כתובת'} description={place.address} />
         </div>
-        <button onClick={()=>history.push(`/chat/${place?.user}`)} className={style.mentooBtn}>
+        <button
+          onClick={() => history.push(`/chat/${place?.user}`)}
+          className={style.mentooBtn}
+        >
           <span>יש מצב שזה מנטו</span>
           <img src={chatIcon} alt="chat" />
         </button>

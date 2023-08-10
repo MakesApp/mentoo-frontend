@@ -2,22 +2,29 @@ import Button from '../Button/Button';
 import List from '../List/List';
 import vIcon from '../../../../assets/images/v-icon.svg';
 import closeIcon from '../../../../assets/images/close-icon.svg';
-import { usePlaceContext } from '../../context/placeContext';
 import { useUpdateVolunteerListMutation } from '../../../../api/services/api';
 import Spinner from '../../../../components/Spinner/Spinner';
+import { useAuthContext } from '../../../../context/useAuth';
 
-const CandidatesVolunteers: React.FC = () => {
-  const {  place,isLoading:isPlaceLoading } =
-    usePlaceContext();
-    const {candidateVolunteers=[], myVolunteers=[], oldVolunteers=[]}=place||{};
-  const { mutateAsync,isLoading:isMutationLoading } = useUpdateVolunteerListMutation();
-  
-  const isLoading=isMutationLoading||isPlaceLoading
-const placeId = place ? place._id : null;
+interface CandidatesVolunteersProps {
+  myVolunteers: any;
+  candidateVolunteers: any;
+  oldVolunteers: any;
+}
+const CandidatesVolunteers: React.FC<CandidatesVolunteersProps> = ({
+  oldVolunteers,
+  myVolunteers,
+  candidateVolunteers,
+}) => {
+  const { mutateAsync, isLoading: isMutationLoading } =
+    useUpdateVolunteerListMutation();
+  const { user ,isLoading:isAuthLoading} = useAuthContext();
+  const userId = user._id;
+  const isLoading = isMutationLoading||isAuthLoading;
 
   const accept = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
-    
+
     const query = {
       myVolunteers: [...myVolunteers, user._id],
       candidateVolunteers: candidateVolunteers.filter(
@@ -25,8 +32,7 @@ const placeId = place ? place._id : null;
       ),
     };
 
-    await mutateAsync({ placeId: placeId, query });
-
+    await mutateAsync({ userId: userId, query });
   };
   const reject = async (e: React.MouseEvent, user: any) => {
     e.stopPropagation();
@@ -36,12 +42,10 @@ const placeId = place ? place._id : null;
         (volunteer: any) => volunteer._id !== user._id
       ),
     };
-    await mutateAsync({ placeId: placeId, query });
-
+    await mutateAsync({ userId: userId, query });
   };
 
-  if(isLoading)
-  return <Spinner/>
+  if (isLoading) return <Spinner />;
 
   return (
     <List users={candidateVolunteers}>

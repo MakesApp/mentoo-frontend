@@ -8,9 +8,9 @@ import Logo from '../Logo/Logo';
 interface AuthFormProps {
   onSubmit: (email: string, password: string) => void;
   buttonValue?: string;
-  children?: ReactNode|undefined;
-  error?: (string|undefined);
-  isLogging?:boolean;
+  children?: ReactNode | undefined;
+  error?: string | undefined;
+  isLogging?: boolean;
 }
 
 const validationSchema = Yup.object({
@@ -24,14 +24,12 @@ const validationSchema = Yup.object({
   password: Yup.string().min(6, 'לפחות 6 תווים').required('הכניסו סיסמה'),
 });
 
-
-
 const AuthForm: React.FC<AuthFormProps> = ({
   onSubmit,
   buttonValue,
   children,
   error,
-  isLogging
+  isLogging,
 }) => {
   const initialValues = {
     email: '',
@@ -42,7 +40,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   const handleSubmit = (
     values: { email: string; password: string },
-    actions: FormikHelpers<{ email: string; password: string }>,
+    actions: FormikHelpers<{ email: string; password: string }>
   ) => {
     onSubmit(values.email, values.password);
     actions.setSubmitting(false); // Manually set submitting state to false
@@ -105,7 +103,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <button
               className={`${style.submit}`}
               type="submit"
-              disabled={!isValid||isLogging}
+              disabled={!isValid || isLogging}
             >
               {buttonValue}
             </button>

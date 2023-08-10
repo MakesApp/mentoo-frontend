@@ -21,6 +21,6 @@ const useIntersectionObserver = (elementRef, callback, options) => {
       }
     };
   }, [elementRef, callback, options]);
-}
+};
 
 export default useIntersectionObserver;

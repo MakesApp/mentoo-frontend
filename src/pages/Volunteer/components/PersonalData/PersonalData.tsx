@@ -2,8 +2,6 @@ import React from 'react';
 import style from './PersonalData.module.css';
 
 const PersonalData: React.FC = () => {
-
-
   return (
     <div className={style.container}>
       <div className={style.dataContainer}>

@@ -9,14 +9,14 @@ import queryClient from './config/reactQuery';
 const rootElement = document.getElementById('root');
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
-  </BrowserRouter>
-);
-  }
+    <BrowserRouter>
+      <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </QueryClientProvider>
+      </React.StrictMode>
+    </BrowserRouter>
+  );
+}
