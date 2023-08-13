@@ -1,12 +1,14 @@
 /* PlaceCard.css */
 .imageContainer {
+  position: relative;
 }
+
 .place {
   border: none;
 }
-.placeContainer {
-  position: relative;
-}
+
+.placeContainer {}
+
 .mainImg {
   width: 100%;
   aspect-ratio: 1/1;
@@ -24,7 +26,7 @@
 .btnsContainer {
   display: flex;
   position: absolute;
-  bottom: 25%;
+  bottom: 5%;
   right: 2.5%;
 }
 
@@ -36,6 +38,7 @@
   column-gap: 5px;
   margin-top: 10px;
 }
+
 .description {
   color: #313131;
   font-size: 16px;
@@ -43,8 +46,10 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2; /* Show two lines */
-  line-clamp: 2; /* Show two lines */
+  -webkit-line-clamp: 2;
+  /* Show two lines */
+  line-clamp: 2;
+  /* Show two lines */
 }
 
 .placeInfoAvatar {
@@ -61,13 +66,16 @@
   margin-right: 5px;
   border-radius: 15px;
 }
+
 .bgGreen {
   background: #30a041;
 }
+
 .placeName {
   color: #7030a0;
   font-size: 20px;
 }
+
 .redBg {
   background-color: red;
 }

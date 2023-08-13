@@ -90,4 +90,8 @@ export const regionData: Node[] = [
       { id: 50, name: 'אזור מודיעין ' },
     ],
   },
+  {
+    id: 41,
+    name: 'אונליין',
+  }
 ];

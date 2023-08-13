@@ -31,38 +31,37 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place, moveToLast }) => {
       >
         <div className={style.imageContainer}>
           <img className={style.mainImg} src={placeImage} alt="" />
+          <div className={style.btnsContainer}>
+            <button
+              className={`${style.actionButton} ${isVClicked ? style.bgGreen : ''}`}
+              onClick={() => {
+                if (isVClicked) {
+                  history.push(`/chat/${placeUserId}`);
+                }
+                setIsVClicked(true);
+              }}
+            >
+              <img
+                className={style.chatButtonImg}
+                src={isVClicked ? WhiteChatIcon : vIcon}
+                alt="chat icon"
+              />
+            </button>
+            <button
+              className={`${style.actionButton} ${isXClicked ? style.redBg : ''}`}
+              onClick={() => {
+                if (!isVClicked) {
+                  moveToLast(placeId);
+                  setIsXClicked(!isXClicked);
+                } else setIsXClicked(false);
+                setIsVClicked(false);
+              }}
+            >
+              <img className={`${style.buttonsImg}`} src={xIcon} alt="X icon" />
+            </button>
+          </div>
         </div>
       </Link>
-
-      <div className={style.btnsContainer}>
-        <button
-          className={`${style.actionButton} ${isVClicked ? style.bgGreen : ''}`}
-          onClick={() => {
-            if (isVClicked) {
-              history.push(`/chat/${placeUserId}`);
-            }
-            setIsVClicked(true);
-          }}
-        >
-          <img
-            className={style.chatButtonImg}
-            src={isVClicked ? WhiteChatIcon : vIcon}
-            alt="chat icon"
-          />
-        </button>
-        <button
-          className={`${style.actionButton} ${isXClicked ? style.redBg : ''}`}
-          onClick={() => {
-            if (!isVClicked) {
-              moveToLast(placeId);
-              setIsXClicked(!isXClicked);
-            } else setIsXClicked(false);
-            setIsVClicked(false);
-          }}
-        >
-          <img className={`${style.buttonsImg}`} src={xIcon} alt="X icon" />
-        </button>
-      </div>
 
       <div className={style.placeInfo}>
         <img
