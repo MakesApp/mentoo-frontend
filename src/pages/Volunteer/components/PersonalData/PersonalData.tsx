@@ -14,7 +14,7 @@ const PersonalData: React.FC = () => {
           </p>
         </div>
         <div>
-          <p className={style.project}>{'TEALS'}</p>
+          <p className={style.project}>{'Alliance'}</p>
         </div>
       </div>
     </div>
